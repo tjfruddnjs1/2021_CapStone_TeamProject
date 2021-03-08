@@ -1,0 +1,9 @@
+# ignore node_modules
+/node_modules
+
+# ignore env file
+.env
+
+# personal local database settings - for development
+/config
+

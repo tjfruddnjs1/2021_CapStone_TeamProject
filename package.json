@@ -1,0 +1,42 @@
+{
+  "name": "2021_capstone_teamproject",
+  "version": "0.0.1",
+  "description": "capstone project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjfruddnjs1/2021_CapStone_TeamProject.git"
+  },
+  "author": "seol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/issues"
+  },
+  "homepage": "https://github.com/tjfruddnjs1/2021_CapStone_TeamProject#readme",
+  "dependencies": {
+    "bcrypt": "5.0.0",
+    "dotenv": "8.2.0",
+    "ejs": "3.1.5",
+    "express": "4.17.1",
+    "express-session": "1.17.1",
+    "method-override": "3.0.0",
+    "morgan": "1.10.0",
+    "multer": "1.4.2",
+    "mysql2": "2.2.5",
+    "nodemailer": "6.4.18",
+    "passport": "0.4.1",
+    "passport-kakao": "1.0.0",
+    "passport-local": "1.0.0",
+    "passport-naver": "1.0.6",
+    "sequelize": "6.4.0",
+    "sequelize-cli": "6.2.0",
+    "strategy": "1.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.7"
+  }
+}
