@@ -5,43 +5,43 @@
   </head>
   <style>
     .one_half {
-      margin: 0 0 0 40%;
-    }
-
-    #mail {
-      background-color: #8fdfff;
-    }
-
-    #kakao {
-      background-color: yellow;
-    }
-
-    #kakao a:hover {
-      color: rgb(66, 90, 1);
-    }
-
-    #naver {
-      background-color: #3cbf3c;
+      margin: 0 0 0 37%;
     }
 
     #searchPw {
       width: 14%;
     }
 
-    .btn {
-      width: 330px;
-      padding: 10px 12px 12px;
+    #pageintro{
+      background-color: rgb(245, 243, 242);
     }
 
-    body input,
+    .btn {
+      width: 53%;
+      padding: 1.5%;
+      margin-bottom : 20px;
+      background-color : rgb(255, 248, 189);
+      border : 1px solid rgb(255, 249, 199);
+    }
+
+    #login{
+      background-color: rgb(40, 87, 209);
+    }
+
+    .btn:hover {
+      border : 1px solid white;
+      background-color: white;
+      color : black;
+    }
+
+    input,
     button {
-      color: #ffffff;
+      color: #1a1111;
       border-color: transparent;
-      background-color: #829da2;
       display: block;
       widows: 100%;
-      padding: 14px;
-      width: 330px;
+      padding: 2.5%;
+      width: 53%;
       border: 1px solid;
     }
 
@@ -54,6 +54,13 @@
       height: 30px;
       float: left;
     }
+
+    .btmspace-15 {
+    margin-bottom: 40px;
+    }
+    
+    .btn{}
+
   </style>
   <body>
     <div
@@ -61,87 +68,85 @@
       style="background-image: url('images/lighthouse.jpg')"
     >
       <%- include('../partials/nav') %>
-      <div id="pageintro" class="wrapper clear">
-        <div class="one_half">
-          <h6 class="heading">로그인</h6>
-          <form id="login-form" action="/login" method="post">
-            <fieldset>
-              <label for="email">이메일</label>
-              <input
-                class="btmspace-15"
-                type="email"
-                name="email"
-                value
-                placeholder="이메일을 입력해주세요"
-                required
-                autofocus
-              />
+    </div>
 
-              <label for="password">비밀번호</label>
-              <input
-                class="btmspace-15"
-                type="password"
-                name="password"
-                value
-                placeholder="비밀번호를 입력해주세요"
-                required
-              />
+    <div id="pageintro" class="wrapper clear">
+      <div class="one_half">
+        <h6 class="heading" style="color : black; font-family: sans-serif; margin-bottom: 40px;">로그인</h6>
+        <form id="login-form" action="/login" method="post">
+          <fieldset>
+            <input
+              class="btmspace-15"
+              type="email"
+              name="email"
+              value
+              placeholder="이메일을 입력해주세요"
+              required
+              autofocus
+            />
+            <input
+              class="btmspace-15"
+              type="password"
+              name="password"
+              value
+              placeholder="비밀번호를 입력해주세요"
+              required
+            />
 
-              <button
-                id="login"
-                type="submit"
-                class="btn"
-                style="font-weight: bold"
+            <button
+              id="login"
+              type="submit"
+              class="btn"
+              style="font-weight: bold; color:white; padding:2.5%"
+            >
+              로그인
+            </button>
+
+            <div>
+              <a href="#" id="searchPw" style="color: black"
+                >비밀번호를 잊으셨나요?</a
               >
-                로그인
-              </button>
+            </div>
 
-              <div>
-                <a href="#" id="searchPw" style="color: beige"
-                  >비밀번호를 잊으셨나요?</a
-                >
-              </div>
-
-              <footer>
-                <a
-                  href="#"
-                  id="mail"
-                  class="btn"
-                  style="text-align: right; font-weight: bold"
-                  ><img
-                    src="/images/login/mail.png"
-                    alt="메일가입"
-                    title="메일가입"
-                  />회원가입</a
-                >
-                <br />
-                <a
-                  href="#"
-                  id="kakao"
-                  class="btn"
-                  style="text-align: right; font-weight: bold"
-                  ><img
-                    src="/images/login/kakao.png"
-                    alt="카카오톡"
-                    title="카카오톡"
-                  />카카오톡 로그인</a
-                >
-                <br />
-                <a
-                  href="#"
-                  id="naver"
-                  class="btn"
-                  style="text-align: right; font-weight: bold"
-                  ><img
-                    src="/images/login/naver.png"
-                    alt="네이버"
-                    title="네이버"
-                  />네이버 로그인</a
-                >
-              </footer>
-            </fieldset>
-          </form>
-        </div>
+            <footer>
+              <a
+                href="#"
+                id="mail"
+                class="btn"
+                style="text-align: center; font-weight: bold"
+                ><img
+                  src="/images/login/mail.png"
+                  alt="메일가입"
+                  title="메일가입"
+                />이메일로 가입하기</a
+              >
+              <br />
+              <a
+                href="#"
+                id="kakao"
+                class="btn"
+                style="text-align: center; font-weight: bold"
+                ><img
+                  src="/images/login/kakao.png"
+                  alt="카카오톡"
+                  title="카카오톡"
+                />KakaoTalk 로그인</a
+              >
+              <br />
+              <a
+                href="#"
+                id="naver"
+                class="btn"
+                style="text-align: center; font-weight: bold"
+                ><img
+                  src="/images/login/naver.png"
+                  alt="네이버"
+                  title="네이버"
+                />Naver 로그인</a
+              >
+            </footer>
+          </fieldset>
+        </form>
       </div>
     </div>
 
