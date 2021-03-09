@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <style>
+    .one_half {
+        margin: 0 0 0 37%;
+    }
+
+    #pageintro{
+      background-color: rgb(245, 243, 242);
+    }
+
+    .btn {
+      width: 53%;
+      padding: 1.5%;
+      margin-bottom : 20px;
+      background-color: #dbe5e7;
+      border: 1px solid #8080805c;
+    }
+
+    #mail{
+      background-color: rgb(40, 87, 209);
+    }
+
+    .btn:hover {
+      border : 1px solid white;
+      background-color: white;
+      color : black;
+    }
+
+    
+
+    input,
+    button {
+      color: #1a1111;
+      border-color: transparent;
+      display: block;
+      widows: 100%;
+      padding: 2.5%;
+      width: 53%;
+      border: 1px solid;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      width: 30px;
+      height: 30px;
+      float: left;
+    }
+
+    .btmspace-15 {
+    margin-bottom: 40px;
+    }
+
+  </style>
+
+  <body>
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    >
+      <%- include('../partials/nav') %>
+    </div>
+
+    <div id="pageintro" class="wrapper clear">
+        <div class="one_half">
+            <h6 class="heading" style="color : black; font-family: sans-serif; margin-bottom: 40px;">회원가입</h6>
+          <form id="authForm" action="/auth" method="post">
+            <fieldset>
+              <input
+                class="btmspace-15"
+                type="name"
+                name="username"
+                id="nickname"
+                placeholder="닉네임을 입력해주세요"
+                autofocus
+              />
+
+              <input
+                class="btmspace-15"
+                type="email"
+                name="email"
+                id="email"
+                placeholder="이메일을 입력해주세요"
+              />
+
+              <div id="emailCertified">
+                <input
+                  type="submit"
+                  value="인증번호 전송"
+                  class="btn"
+                  id="certified"
+                  formaction="/auth/sendEmail"
+                  style="font-weight: bold; cursor: pointer;"
+                  onclick="javascript:btn()"
+                />
+                <h5
+                  style="
+                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                    font-weight: bold;
+                    color : black;
+                    margin: auto;
+                  "
+                >
+                  '인증번호 전송' 버튼을 통해 이메일로 전송된 인증번호를 확인해주세요 
+                </h5>
+              </div>
+
+              <br />
+
+              <input
+                class="btmspace-15"
+                type="number"
+                name="certified"
+                id="emailConfirm"
+                placeholder="이메일로 발송된 인증번호를 입력해주세요"
+              />
+
+              <input
+                class="btmspace-15"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="비밀번호를 입력해주세요"
+              />
+
+              <button id="mail" type="submit" class="btn" style="font-weight: bold; color:white; padding:2.5%">
+                가입하기
+              </button>
+
+              <footer>
+                <a
+                  href="/auth/kakao"
+                  id="kakao"
+                  class="btn"
+                  style="text-align: center; font-weight: bold"
+                  ><img
+                    src="/images/login/kakao.png"
+                    alt="카카오톡"
+                    title="카카오톡"
+                  />KakaoTalk으로 가입하기</a
+                >
+                <br />
+                <a
+                  href="/auth/naver"
+                  id="naver"
+                  class="btn"
+                  style="text-align: center; font-weight: bold"
+                  ><img
+                    src="/images/login/naver.png"
+                    alt="네이버"
+                    title="네이버"
+                  />Naver로 가입하기</a
+                >
+              </footer>
+
+              <input type="number" name="randomNumber" style="display: none" />
+            </fieldset>
+          </form>
+        </div>
+      </div>
+
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+  <script>
+    let randomNumber = Math.floor(Math.random() * 1000000) + 100000;
+    if (randomNumber > 1000000) {
+      randomNumber -= 100000;
+    }
+
+    $("input[name=randomNumber]").attr("value", randomNumber);
+
+    function btn() {
+      alert("입력하신 이메일로 인증번호가 전송되었습니다");
+    }
+
+    let authForm = document.getElementById("authForm");
+    let nickname = document.getElementById("nickname");
+    let email = document.getElementById("email");
+    let emailConfirm = document.getElementById("emailConfirm");
+
+    let password = document.getElementById("password");
+
+    function submit() {
+      document.getElementById("mail").addEventListener("click", function (e) {
+        if (!nickname.value) {
+          alert("닉네임을 입력해주세요");
+          e.preventDefault();
+          return false;
+        } else if (!email.value) {
+          alert("이메일을 입력해주세요");
+          e.preventDefault();
+          return false;
+        } else if (!emailConfirm.value) {
+          alert("이메일 인증번호를 입력해주세요");
+          e.preventDefault();
+          return false;
+        } else if (!password.value) {
+          alert("비밀번호를 입력해주세요");
+          e.preventDefault();
+          return false;
+        } else if (emailConfirm.value != randomNumber) {
+          alert("이메일 인증번호를 확인해주세요");
+          e.preventDefault();
+          return false;
+        }
+        authForm.submit();
+      });
+    }
+    submit();
+  </script>
+</html>
