@@ -9,7 +9,16 @@
       <ul class="clear">
         <li><a  href="#">유치원/어린이집 검색</a></li>
         <li><a href="#">나의 유치원/어린이집</a></li>
+        <% if(!(user && user.id)) { %>
         <li><a href="/login">로그인</a></li>
+        <% }else { %>
+          <li><a class="drop">마이페이지</a>
+            <ul>
+              <li><a href="/mypage/account">나의 계정</a></li>
+              <li><a href="/login/logout">로그아웃</a></li>
+            </ul>
+          </li>
+        <% } %>
       </ul>
     </nav> 
   </header>

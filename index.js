@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const passport = require('passport');
 const dotenv = require('dotenv');
 
 const { sequelize } = require('./models');
@@ -9,8 +10,11 @@ const { sequelize } = require('./models');
 const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
 
+const passportConfig = require('./passport');
+
 const app = express();
 dotenv.config();
+passportConfig();
 
 app.set('port', process.env.PORT || 8000);
 app.set('view engine', 'ejs');
@@ -37,6 +41,9 @@ app.use(session({
   },
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(methodOverride('_method'));
 
 app.use('/',homeRouter);
@@ -55,6 +62,6 @@ app.use((err, req, res, next) => {
   console.log(err.status +' error 발생')
 })
 
-let server = app.listen(app.get('port'), ()=> {
+app.listen(app.get('port'), ()=> {
   console.log(app.get('port'), '번 포트에서 대기중');
 });

@@ -2,6 +2,12 @@ const express = require('express');
 
 const router = express.Router();
 
+//session 유지를 위한 > passport module
+router.use((req,res,next)=>{
+  res.locals.user = req.user;
+  next();
+});
+
 //메인 페이지
 router.get('/', (req,res)=>{
   try{
