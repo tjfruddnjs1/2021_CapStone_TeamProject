@@ -2,6 +2,131 @@
   <html lang="">
 <haed>
   <%- include('../partials/head') %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <style>
+    .button{
+  text-align : center;
+}
+.box{
+  width : 400px;
+  height : 400px;
+  border : 1px solid white;
+  display : inline-block;
+  line-height : 400px;
+}
+.navbutton{
+  width : 100%;
+  font-size : 20px;
+  font-weight : bold;
+}
+.navbutton:hover .box{
+  color : white;
+  transition: 0.3s;
+
+  filter: brightness(120%);
+}
+
+.leftbox{
+  margin-right : 30px;
+}
+.rightbox{
+
+}
+.title{
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.section{
+  border : 1px solid black;
+}
+.morebutton{
+  text-align: right;
+  border : 1px solid red;
+}
+.title{
+
+}
+.title_link{
+  cursor: pointer;
+}
+.head{
+  font-family : sans-serif;
+  font-size : 30px;
+  font-weight : bold;
+}
+.sub_title{
+  margin : 30px 10px;
+  display: inline-block;
+  width : 20%;
+  padding: 10px;
+  border : 1px solid #ffffff78;
+}
+.statistic{
+  text-align : center;
+}
+.desc{
+  font-size : 18px;
+}
+.articles{
+  width : 100%;
+}
+.article{
+  display : inline-block;
+  width : 48%;
+  padding : 10px;
+  margin : 10px 5px;
+}
+.image{
+  border : 1px solid black;
+  width : 200px;
+  height : 200px;
+  float : right;
+}
+.img{
+  top : 0;
+  width : 100%;
+  border : 1px solid black;
+  float : right;
+}
+/* .desc{
+  font-size : 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
+.name{
+  font-size: 24px;
+  font-weight : bold;
+}
+.info{
+  display : inline-block;
+  width : 60%;
+  font-weight : bold;
+}
+.link{
+  color : black;
+}
+.address{
+  margin-top : 20px;
+}
+.phone{
+  margin-top : 10px;
+}
+.name{
+  font-size : 20px;
+  font-family: sans-serif;
+}
+.fa-star{
+  color : #F6EC11;
+  font-size : 20px;
+}
+.star{
+  margin-top : 30px;
+}
+.score{
+  font-weight : bold;
+}
+  </style>
 </haed>
 
 <body id="top">
@@ -11,166 +136,250 @@
   <%- include('../partials/nav') %>
   
   <div id="pageintro" class="hoc clear">
-  
+    <!-- ################################################################################################ -->
     <article>
-      <h1 class="heading">멘토링 및 진로 서비스</h1>
-      <p id = "story">아직 자신의 진로를 정하지 못하셨나요? <br>등대에서 원하는 멘토를 만나 학습전략를 세워보세요!</p>
-      <footer>
-
-      </footer>
+      <h1 class="heading">어린이집 안전 서비스</h1>
+      <p id = "story">우리 아이가 유치원에서 잘 지내는지 궁금하신가요? <br>키즈가든에서 안전한 유치원을 골라 확인하세요!</p>
+      <footer></footer>
     </article>
-  
+    <div class="button">
+      <a href="#" class = "navbutton">
+        <div class="box leftbox">
+          유치원 검색
+        </div>
+      </a>
+      <a href="#" class = "navbutton">
+        <div class="box rightbox">
+          나의 유치원
+        </div>
+      </a>
+    </div>
+
+    <!-- ################################################################################################ -->
   </div>
 
 </div>
 <!-- End Top Background Image Wrapper -->
+<div class="wrapper row4 statistic">
+
+  <!-- ################################################################################################ -->
+  <div class="sub_title">
+      <h2 class = "head">20000</h2>
+      <span class = "desc">등록된 유치원 수</span>
+  </div>
+  <div class="sub_title">
+      <h2 class = "head">20000</h2>
+      <span class = "desc">등록된 사용자 수</span>
+  </div>
+  <div class="sub_title">
+      <h2 class = "head">20000</h2>
+      <span class = "desc">등록된 리뷰 수</span>
+  </div>
+
+  <!-- ################################################################################################ -->
+
+</div>
 <div class="wrapper row3">
-  <main class="hoc container clear">
-    <!-- main body -->
-  
-    <section id="introblocks">
-      <div class="sectiontitle">
-        <h6 class="heading">Quisque adipiscing</h6>
-        <p>Urna sed augue class aptent taciti sociosqu ad litora torquent</p>
+<section class="hoc container clear">  
+  <div class="title">
+      <span class = "head">주위에 유치원을 찾아보세요</span>
+      <a class = "title_link">++더 보기</a>
+  </div>
+  <hr>
+
+  <div class="articles">
+    <a href="" class = "link">
+      <div class="article">
+        <div class="info">
+          <h2 class = "name">전주 유치원</h2>
+          <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
+          <div class="address">전주시 덕진구 금암동 1273-28</div>
+          <div class="phone">031-286-1482</div>
+        </div>
+        <div class="image">
+          <img src="" alt="" class = "img">
+        </div>
+        <div class="star">
+          <i class="fas fa-star"></i>
+          <span class = "score">X 4.7</span>
+        </div>
+
       </div>
-      <ul class="nospace group">
-        <li class="one_quarter first">
-          <article><a href="#"><i class="fas fa-golf-ball"></i></a>
-            <h6 class="heading">Suspendisse</h6>
-            <p>Per conubia nostra per mauris aliquet massa nulla facilisi porta ligula non elementum</p>
-            <footer><a class="btn" href="#">More Details</a></footer>
-          </article>
-        </li>
-        <li class="one_quarter">
-          <article><a href="#"><i class="fas fa-ribbon"></i></a>
-            <h6 class="heading">Inceptos</h6>
-            <p>Ultricies justo urna egestas metus ut ornare leo augue pharetra risus morbi tincidunt massa</p>
-            <footer><a class="btn" href="#">More Details</a></footer>
-          </article>
-        </li>
-        <li class="one_quarter">
-          <article><a href="#"><i class="fas fa-tablets"></i></a>
-            <h6 class="heading">Himenaeos</h6>
-            <p>Ac vestibulum rutrum orci augue iaculis nibh quis porta nunc nisi suscipit leo nam ac lacus</p>
-            <footer><a class="btn" href="#">More Details</a></footer>
-          </article>
-        </li>
-        <li class="one_quarter">
-          <article><a href="#"><i class="fas fa-wine-glass"></i></a>
-            <h6 class="heading">Facilisis</h6>
-            <p>Cras tempor ultricies urna aliquam massa sapien posuere in iaculis adipiscing vulputate</p>
-            <footer><a class="btn" href="#">More Details</a></footer>
-          </article>
-        </li>
-      </ul>
-    </section>
-  
-    <!-- / main body -->
-    <div class="clear"></div>
-  </main>
+    </a>
+    <a href="" class = "link">
+      <div class="article">
+        <div class="info">
+          <h2 class = "name">전주 유치원</h2>
+          <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
+          <div class="address">전주시 덕진구 금암동 1273-28</div>
+          <div class="phone">031-286-1482</div>
+        </div>
+        <div class="image">
+          <img src="" alt="" class = "img">
+        </div>
+        <div class="star">
+          <i class="fas fa-star"></i>
+          <span class = "score">X 4.7</span>
+        </div>
+
+      </div>
+    </a>
+    <hr>
+    <a href="" class = "link">
+      <div class="article">
+        <div class="info">
+          <h2 class = "name">전주 유치원</h2>
+          <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
+          <div class="address">전주시 덕진구 금암동 1273-28</div>
+          <div class="phone">031-286-1482</div>
+        </div>
+        <div class="image">
+          <img src="" alt="" class = "img">
+        </div>
+        <div class="star">
+          <i class="fas fa-star"></i>
+          <span class = "score">X 4.7</span>
+        </div>
+
+      </div>
+    </a>
+    <a href="" class = "link">
+      <div class="article">
+        <div class="info">
+          <h2 class = "name">전주 유치원</h2>
+          <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
+          <div class="address">전주시 덕진구 금암동 1273-28</div>
+          <div class="phone">031-286-1482</div>
+        </div>
+        <div class="image">
+          <img src="" alt="" class = "img">
+        </div>
+        <div class="star">
+          <i class="fas fa-star"></i>
+          <span class = "score">X 4.7</span>
+        </div>
+
+      </div>
+    </a>
+
+  </div>
+  <!-- <div id="latest" class="group">
+    <article>
+
+    </article>
+  </div> -->
+  <!-- ################################################################################################ -->
+</section>
 </div>
 <div class="wrapper row2">
-  <section id="references" class="hoc container clear">
-  
+<main class="hoc container clear">
+  <!-- main body -->
+  <!-- ################################################################################################ -->
+  <section id="introblocks">
     <div class="sectiontitle">
-      <h6 class="heading">Aliquet vestibulum</h6>
-      <p>Eget magna eget sem imperdiet tincidunt vestibulum fringilla nulla</p>
+      <h6 class="heading">Quisque adipiscing</h6>
+      <p>Urna sed augue class aptent taciti sociosqu ad litora torquent</p>
     </div>
-    <nav class="ref-sort">
-      <ul>
-        <li class="current"><a href="#">Ultricies</a></li>
-        <li><a href="#">Curabitur</a></li>
-        <li><a href="#">Porttitor</a></li>
-        <li><a href="#">Pulvinar</a></li>
-      </ul>
-    </nav>
-    <ul class="nospace group ref-img">
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-      <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
+    <ul class="nospace group">
+      <li class="one_quarter first">
+        <article><a href="#"><i class="fas fa-golf-ball"></i></a>
+          <h6 class="heading">Suspendisse</h6>
+          <p>Per conubia nostra per mauris aliquet massa nulla facilisi porta ligula non elementum</p>
+          <footer><a class="btn" href="#">More Details</a></footer>
+        </article>
+      </li>
+      <li class="one_quarter">
+        <article><a href="#"><i class="fas fa-ribbon"></i></a>
+          <h6 class="heading">Inceptos</h6>
+          <p>Ultricies justo urna egestas metus ut ornare leo augue pharetra risus morbi tincidunt massa</p>
+          <footer><a class="btn" href="#">More Details</a></footer>
+        </article>
+      </li>
+      <li class="one_quarter">
+        <article><a href="#"><i class="fas fa-tablets"></i></a>
+          <h6 class="heading">Himenaeos</h6>
+          <p>Ac vestibulum rutrum orci augue iaculis nibh quis porta nunc nisi suscipit leo nam ac lacus</p>
+          <footer><a class="btn" href="#">More Details</a></footer>
+        </article>
+      </li>
+      <li class="one_quarter">
+        <article><a href="#"><i class="fas fa-wine-glass"></i></a>
+          <h6 class="heading">Facilisis</h6>
+          <p>Cras tempor ultricies urna aliquam massa sapien posuere in iaculis adipiscing vulputate</p>
+          <footer><a class="btn" href="#">More Details</a></footer>
+        </article>
+      </li>
     </ul>
-    <footer class="block center"><a class="btn" href="#">View more here</a></footer>
-  
   </section>
+  <!-- ################################################################################################ -->
+  <!-- / main body -->
+  <div class="clear"></div>
+</main>
 </div>
 <div class="wrapper row3">
-  <section class="hoc container clear">
-  
-    <div class="sectiontitle">
-      <h6 class="heading">Pellentesque consectetuer</h6>
-      <p>Felis vitae sapien gravida interdum curabitur eu quam nec est</p>
-    </div>
-    <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-03T08:15+00:00"><i class="far fa-calendar-alt"></i> 03<sup>rd</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Aliquam volutpat donec posuere</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Ornare dolor phasellus ornare dui vel euismod ultrices orci libero pulvinar justo quis condimentum quam.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-      <article class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-02T08:15+00:00"><i class="far fa-calendar-alt"></i> 02<sup>nd</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Nisl id ligula pellentesque</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Felis nunc interdum vitae pretium ac bibendum vel velit phasellus commodo nullam vitae quam cras auctor.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-      <article class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-01T08:15+00:00"><i class="far fa-calendar-alt"></i> 01<sup>st</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Commodo metus proin blandit</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Quam molestie luctus vehicula orci massa interdum justo nec rutrum risus augue ut nisl suspendisse elit.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-    </div>
-  
-  </section>
+<section id="references" class="hoc container clear">
+  <!-- ################################################################################################ -->
+  <div class="sectiontitle">
+    <h6 class="heading">Aliquet vestibulum</h6>
+    <p>Eget magna eget sem imperdiet tincidunt vestibulum fringilla nulla</p>
+  </div>
+  <nav class="ref-sort">
+    <ul>
+      <li class="current"><a href="#">Ultricies</a></li>
+      <li><a href="#">Curabitur</a></li>
+      <li><a href="#">Porttitor</a></li>
+      <li><a href="#">Pulvinar</a></li>
+    </ul>
+  </nav>
+  <ul class="nospace group ref-img">
+    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
+    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
+    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
+    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
+    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
+    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
+  </ul>
+  <footer class="block center"><a class="btn" href="#">View more here</a></footer>
+  <!-- ################################################################################################ -->
+</section>
 </div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
 <div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
-  <section id="testimonials" class="hoc container clear">
-  
-    <div class="sectiontitle">
-      <h6 class="heading">Donec condimentum</h6>
-      <p>Adipiscing justo nulla mollis iaculis tortor in mauris integer</p>
-    </div>
-    <div class="group">
-      <article class="one_half first"><img src="images/demo/80x80.png" alt="">
-        <blockquote>Pretium duis viverra malesuada mi proin iaculis mauris eu sodales cursus sapien erat pharetra justo vitae volutpat eros magna et magna mauris hendrerit pellentesque.</blockquote>
-        <h6 class="heading font-x1">A. Doe</h6>
-        <em>Et ipsum mattis ipsum</em></article>
-      <article class="one_half"><img src="images/demo/80x80.png" alt="">
-        <blockquote>Pellentesque pretium proin molestie erat in rhoncus posuere nibh quam consectetuer lectus ac vulputate ligula lorem ut dolor duis tempus mauris nunc et ligula ut.</blockquote>
-        <h6 class="heading font-x1">B. Doe</h6>
-        <em>Tortor suscipit convallis</em></article>
-    </div>
-  
-  </section>
+<section id="testimonials" class="hoc container clear">
+  <!-- ################################################################################################ -->
+  <div class="sectiontitle">
+    <h6 class="heading">Donec condimentum</h6>
+    <p>Adipiscing justo nulla mollis iaculis tortor in mauris integer</p>
+  </div>
+  <div class="group">
+    <article class="one_half first"><img src="images/demo/80x80.png" alt="">
+      <blockquote>Pretium duis viverra malesuada mi proin iaculis mauris eu sodales cursus sapien erat pharetra justo vitae volutpat eros magna et magna mauris hendrerit pellentesque.</blockquote>
+      <h6 class="heading font-x1">A. Doe</h6>
+      <em>Et ipsum mattis ipsum</em></article>
+    <article class="one_half"><img src="images/demo/80x80.png" alt="">
+      <blockquote>Pellentesque pretium proin molestie erat in rhoncus posuere nibh quam consectetuer lectus ac vulputate ligula lorem ut dolor duis tempus mauris nunc et ligula ut.</blockquote>
+      <h6 class="heading font-x1">B. Doe</h6>
+      <em>Tortor suscipit convallis</em></article>
+  </div>
+  <!-- ################################################################################################ -->
+</section>
 </div>
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
+<!-- ################################################################################################ -->
 <div class="wrapper row3">
-  <article class="hoc cta clear">
-  
-    <h6 class="three_quarter first">Sed ullamcorper arcu eu ante ut sollicitudin sem sit amet</h6>
-    <footer class="one_quarter"><a class="btn" href="#">Ipsum fusce non pede</a></footer>
-  
-  </article>
+<article class="hoc cta clear">
+  <!-- ################################################################################################ -->
+  <h6 class="three_quarter first">Sed ullamcorper arcu eu ante ut sollicitudin sem sit amet</h6>
+  <footer class="one_quarter"><a class="btn" href="#">Ipsum fusce non pede</a></footer>
+  <!-- ################################################################################################ -->
+</article>
 </div>
 
 <%- include('../partials/foot') %>
