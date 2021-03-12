@@ -9,6 +9,7 @@ const { sequelize } = require('./models');
 
 const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
+const mypageRouter = require('./routes/mypage');
 
 const passportConfig = require('./passport');
 
@@ -48,6 +49,7 @@ app.use(methodOverride('_method'));
 
 app.use('/',homeRouter);
 app.use('/login', loginRouter);
+app.use('/mypage', mypageRouter);
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
