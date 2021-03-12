@@ -1,13 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-const User = require('../models/user');
-const Drop = require('../models/drop');
-
 const bcrypt = require('bcrypt');
 const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const accountSid = process.env.TWILIO_SID;
+const authToken = process.env.TWILIO_AT;
+const client = require('twilio')(accountSid, authToken);
+
+const User = require('../models/user');
+const Drop = require('../models/drop');
+
+//session 유지를 위한 > passport module
+router.use((req,res,next)=>{
+    res.locals.user = req.user;
+    next();
+});
 
 // upload 폴더 생성
 try{
@@ -78,6 +90,23 @@ router.post('/account',isLoggedIn, upload.single('upload'), async(req,res,next)=
     }
 });
 
+//핸드폰 인증번호 발송
+router.post('/sendPhone', upload.any(), isLoggedIn, async (req,res,next)=>{
+    try{
+        let phone = req.body.phone;
+        let phoneToKor = '+82'+phone.substring(1,11);
+
+        await client.messages.create({
+            body: '[키즈가든] 인증번호 '+req.body.randomNumber+'를 입력해주세요.',
+            from : process.env.TWILIO_FROM,
+            to: phoneToKor
+        })
+            .then(message=>console.log(message.sid));
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
 
 //계정 삭제 get,post
 router.get('/delete',isLoggedIn,(req,res,next)=>{

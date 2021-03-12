@@ -8,15 +8,20 @@
     #email,
     #username,
     #phone,
+    #phoneCertified,
     #gender {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       margin: 20px auto;
       border: 1px solid #8080805c;
       padding: 12px 5px 17px;
-      width: 95%;
+      width: 100%;
       float: left;
       color: #829da2;
       widows: 100%;
+    }
+
+    #phone{
+        width : 60%;
     }
 
     .info {
@@ -34,8 +39,8 @@
       text-align: center;
       border: 1px solid #8080805c;
       width: 100%;
-      padding: 12px 5px;
-      margin: 20px auto;
+      padding: 12px 5px 17px;
+      margin: 20px 0px;
       text-transform: uppercase;
       transition: all 0.3s ease-in-out;
       cursor: pointer;
@@ -49,6 +54,11 @@
     input[type="file"] {
       background-color: #f5f5f5;
       width: 100%;
+    }
+
+    #certified{
+        margin : 20px 0px;
+        padding: 12px 5px 12px;
     }
 
     .content {
@@ -85,6 +95,10 @@
       background-color: rgb(40, 87, 209);
       border: 1px solid #8080805c;
     }
+
+    h5{
+        font-weight: bold;
+    }
   </style>
 
   <body id="top">
@@ -118,10 +132,11 @@
           </h2>
           <form
             action="/mypage/account"
-            enctype="multipart/form-data"
+            enctype="multipart/form-data" 
             method="post"
             id="mypageForm"
           >
+          <fieldset>
             <div class="profile">
               <div class="one_two first">
                 <label for="name">이메일<span>*</span></label>
@@ -155,14 +170,14 @@
                 />
               </div>
               <div class="one_two">
-                <label for="phone">핸드폰 번호</label>
+                <label for="phone">핸드폰 번호<span>*</span></label>
                 <% if(!(user.phone)){ %>
                 <input
                   type="text"
                   name="phone"
                   id="phone"
                   size="22"
-                  value="010"
+                  placeholder="핸드폰 번호를 입력해주세요"
                 />
                 <% }else{%>
                 <input
@@ -173,7 +188,16 @@
                   size="22"
                 />
                 <% } %>
-                <label class="info" for="info">* 번호 등록 안내</label>
+                <input
+                  type="submit"
+                  value="인증번호 전송"
+                  class="btn"
+                  id="certified"
+                  formaction="/mypage/sendPhone"
+                  style="cursor: pointer; width : 30%; margin-left : 10%;"
+                  onclick="javascript:alert('입력하신 핸드폰으로 인증번호가 전송되었습니다')"
+                />
+                <label class="info" for="info">* 핸드폰 번호 등록 안내</label>
                 <h5
                   style="
                     text-align: left;
@@ -182,6 +206,15 @@
                 >
                   '-'를 제외한 번호를 입력해주세요
                 </h5>
+            
+                <input
+                  type="number"
+                  name="phoneCertified"
+                  id="phoneCertified"
+                  size="22"
+                  placeholder="핸드폰 인증번호를 입력해주세요"
+                />
+
               </div>
               <div class="one_two">
                 <label for="gender">성 별</label>
@@ -215,7 +248,7 @@
                     font-family: Verdana, Geneva, Tahoma, sans-serif;
                   "
                 >
-                  통게 목적으로 사용되며 회원들에게 공개되지 않습니다.
+                  통계 목적으로 사용되며 회원들에게 공개되지 않습니다.
                 </h5>
               </div>
             </div>
@@ -267,6 +300,8 @@
             <div class="button">
               <input type="submit" id="btn" name="submit" value="변경 하기" />
             </div>
+            <input type="number" name="randomNumber" style="display: none" />
+            </fieldset>
           </form>
         </div>
         <div class="clear"></div>
@@ -277,6 +312,13 @@
   </body>
 
   <script>
+    let randomNumber = Math.floor(Math.random() * 1000000) + 100000;
+    if (randomNumber > 1000000) {
+      randomNumber -= 100000;
+    }
+
+    $("input[name=randomNumber]").attr("value", randomNumber);
+
     const preview = document.querySelector("#preview");
     const upload = document.querySelector("#upload");
 
@@ -316,17 +358,25 @@
     let has_image = document.getElementById("user_image");
     let image = document.getElementById("upload");
     let mypageForm = document.getElementById("mypage");
+    let phoneCertified = document.getElementById("phoneCertified");
 
     function submit() {
       document.getElementById("btn").addEventListener("click", function (e) {
         let imgsrc = has_image.src.replace(/^.*\//, "");
-        console.log(imgsrc);
 
         if (imgsrc == "no_image.png") {
           if (!image.value) {
             alert("이미지를 첨부해주세요");
             e.preventDefault();
+            return false;
           }
+        }
+
+        console.log(phoneCertified.value+"?"+randomNumber);
+        if(phoneCertified.value != randomNumber){
+            alert("핸드폰 인증번호를 확인해주세요.");
+            e.preventDefault();
+            return false;
         }
         mypageForm.submit();
       });
