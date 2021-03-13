@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/tjfruddnjs1/2021_CapStone_TeamProject#readme",
   "dependencies": {
+    "axios": "0.21.1",
     "bcrypt": "5.0.0",
     "dotenv": "8.2.0",
     "ejs": "3.1.5",

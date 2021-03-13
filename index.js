@@ -8,6 +8,7 @@ const { sequelize } = require('./models');
 
 const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
+const gardenRouter =require('./routes/garden');
 
 const app = express();
 dotenv.config();
@@ -41,6 +42,7 @@ app.use(methodOverride('_method'));
 
 app.use('/',homeRouter);
 app.use('/login', loginRouter);
+app.use('/garden', gardenRouter);
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
