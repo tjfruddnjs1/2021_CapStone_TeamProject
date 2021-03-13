@@ -67,8 +67,6 @@ router.post('/searchPassword',isNotLoggedIn, async(req,res,next)=>{
     const hash = await bcrypt.hash(random,12);
     const isUser = await User.findOne({where:{email : req.body.email}});
 
-    console.log(isUser);
-
     if(!isUser){
       res.send(
         "<script>alert('존재하지 않는 이메일입니다.'); history.back();</script>"
@@ -176,7 +174,7 @@ router.post('/sendEmail', isNotLoggedIn, async(req,res,next)=>{
     from: '키즈가든(KidsGarden)',                      
     to: email,                              
     subject: '[키즈가든] 이메일 인증 요청',                 
-    html : "<p>회원 가입을 위한 인증번호 입니다.</p><p>아래의 인증 번호를 입력하여 인증을 완료해주세요.</p><h2>"+randomNumber+"</h2>"        
+    html : "<p>회원 가입을 위한 인증번호 입니다.</p><p>아래의 인증 번호를 입력하여 인증을 완료해주세요.</p><h2>"+randomNumber+"</h2>"                 
   });
 });
 
