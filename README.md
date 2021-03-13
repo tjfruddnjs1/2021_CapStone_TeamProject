@@ -1,2 +1,195 @@
 # 2021_CapStone_TeamProject
-CapstoneProject
+
+## 프로젝트 명 : 키즈가든(kidsGarden)
+
+> 프로젝트 주제 : 
+
+-
+-
+
+> 프로젝트 팀원 및 역할
+
+- 
+-
+
+## 목차
+
+- [템플릿,언어,프레임워크,모듈](#템플릿,-언어,-프레임워크-&-모듈)
+- [개발 기능](#개발-기능)
+- [개발 결과](#개발-결과)
+- [데이터베이스 ERD](#데이터베이스-ERD)
+- [개발 규칙](#개발-규칙)
+- [회의록 요약](#회의록-요약)
+
+## 템플릿, 언어, 프레임워크 & 모듈
+
+> 템플릿
+
+- https://www.free-css.com/free-css-templates/page261/yeinydd
+- HTML + CSS + JavaScript & JQuery
+
+> 언어
+
+- Front End : HTML(EJS) + CSS + JavaScript
+- Back End : Node JS
+
+> 프레임워크 및 모듈(미들웨어) `추가 시 업데이트`
+
+- Express : 내부에 http 모듈이 내장되어 서버 역할을 해주는 모듈
+  - static : Express 내부에 내장되어 정적인 파일들을 제공하는 라우터 역할, 프로젝트에서 `public`폴더로 지정
+  - body-parser : 요청의 본문에 있는 데이터를 해석하여 req.body 객체로 만들어주는 미들웨어, **Express 4.16.0**부터 내장되어 사용
+  - express-session : 세션 관리용 미들웨어, 세션을 구현하거나 특정 사용자를 위한 데이터를 임시적으로 저장할때 유용 > 사용자별로 req.session 객체 안에 유지
+- Sequelize : DataBase(MySQl, Maria DB 등)을 Node에서 쉽게 할 수 있도록 돕는 라이브러리
+  - Sequelize-cli : 시퀄라이즈 명령어를 실행하기 위한 패키지
+- Passport : 로그인을 구현하기 위해 세션과 쿠키 처리등 복잡한 작업을 위한 검증된 모듈
+  - Passport-local : 로컬 로그인을 위한
+  - Passport-kakao : 카카오 로그인을 위한
+  - Passport-naver : 네이버 로그인을 위한
+- bcrypt : 비밀번호를 암호화(hash)하기 위해 사용
+- dotenv : `.env`파일로 유출되면 안되는 비밀키를 관리
+- ejs : `embedded javascript templating`, HTML markup과 함께 자바스크립트 코드를 사용하여 서버와 클라이언트 간 데이터 상호작용을 편리하게 해줌
+- multer : 이미지, 동영상 등을 비롯한 여러 파일들을 `멀티파트(multipart/form-data)` 형식으로 업로드할 때 사용하는 미들웨어
+- nodemon : 소스 코드가 바뀔 때마다 노드를 재실행
+- morgan : 사용시 기존 로그외에 추가적인 로그를 확인 가능 > [HTTP 메서드] [주소] [HTTP 상태 코드] [응답 속도]- [응답 바이트] > 요청과 응답을 한눈에 볼수 있어 편리  
+- nodemailer : 회원가입/비밀번호 찾기 기능에 이메일 정보 인증을 위한 모듈 사용
+- twilio :
+- **[package.json](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/package.json)** : 사용 모듈(미들웨어) json 파일
+
+## 개발 기능 
+
+기능 분리 : header navigation를 정하고 해당 기능 구현 `추가 시 업데이트`
+
+>  **header navigation 항목**  
+- `연도-월-일` : header navigation 상태 & 이미지
+- `2021-03-09` : header navigation 상태
+  <br>
+  비로그인 상태
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/111044832-35eed880-848e-11eb-882c-333a730962cc.png">
+  
+  로그인된 상태
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/111044963-f4126200-848e-11eb-8f6a-cd2595d0f4cf.png">
+  <br>
+- `2021-03-14` : header naviagtion 상태
+<br>
+<img width=100% src="https://user-images.githubusercontent.com/41010744/111051999-997f0300-849a-11eb-988b-aae6eb1c00f5.png">
+<br>
+- 유치원/어린이집 검색
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
+- 나의 유치원/어린이집
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
+- 로그인 : [routes/login.js](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/routes/login.js)
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+헤더 변경 | 로그인 상태라면 헤더 로그인 → 마이페이지 | `구현 완료`
+local login | passport , session 유지, database CRUD 중 Read, 비밀번호(hash) 비교 | `구현 완료`
+kakaotalk login | passport-kakao, session 유지, database CRUD 중 Read  | `구현 완료`
+naver login | passport-naver, session 유지, database CRUD 중 Read | `구현 완료`
+비밀번호 찾기 | nodemailer(gmail) , 이메일 인증키(env), database CRUD 중 Read & Update | `구현 완료`
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
+- 회원가입 : [routes/login.js](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/routes/login.js)
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+이메일 인증번호 전송| nodemailer(gmail), 이메일 인증키(env), 클라이언트 ↔ 서버 간의 난수 비교  | `구현완료`
+local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash) 전송  | `구현 완료`
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
+- 마이페이지 : [routes/mypage.js](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/routes/mypage.js)
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+로그아웃 | session 소멸, 로그아웃 전에는 session 유지 , session.destroy() | `구현 완료`
+이미지 첨부 및 미리보기 | multer, req.file.path , fs , accept="image/*", database CRUD 중 Create, Read, Upadate | `구현 완료`
+핸드폰 인증하기 | twilio,  Token, 난수 생성 | `구현 완료`
+비밀번호 변경하기 | database CRUD 중 Read & Update , brycpt(hash 비교 및 저장) | `구현 완료`
+회원 탈퇴 | database CRUD 중 Create & Delete | `구현 완료`
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
+## 개발 결과
+- 메인페이지
+<br>
+<img width=70% src="https://user-images.githubusercontent.com/41010744/111051642-0644ce00-8498-11eb-8e12-76d20115bb81.png">
+<img width=70% src="https://user-images.githubusercontent.com/41010744/111051653-26748d00-8498-11eb-858d-e7df16f747d4.png">
+
+- 유치원/어린이집 검색
+
+- 나의 유치원/어린이집
+
+- 로그인
+<br>
+<img width=70% src="https://user-images.githubusercontent.com/41010744/111050670-61bf8d80-8491-11eb-81e2-9c62e5bddadc.png">
+<br>
+<img width=70% src="https://user-images.githubusercontent.com/41010744/111050746-ce3a8c80-8491-11eb-8f1b-d52e85c8eb65.png">
+
+- 회원가입
+<br>
+<img width=70% src="https://user-images.githubusercontent.com/41010744/111050767-ef02e200-8491-11eb-850d-60ff715cf0e8.png">
+
+- 마이페이지
+<br>
+<img width=70% src="https://user-images.githubusercontent.com/41010744/111050851-65074900-8492-11eb-8fed-44e7734171c1.png">
+<br>
+<img width="70%" src="https://user-images.githubusercontent.com/41010744/111050993-45bceb80-8493-11eb-9831-0927677df228.png">
+<br>
+<img width="70%" src="https://user-images.githubusercontent.com/41010744/111051001-53727100-8493-11eb-93fb-892e3541c5eb.png">
+<br>
+
+## 데이터베이스 ERD
+
+- `연도-월-일` : ERD 상태 
+- `2021-03-11` : 초기 ERD
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111051572-6b4bf400-8497-11eb-9698-d43f54af2071.png">
+<br>
+
+## 개발 규칙
+
+> Github Commit 규칙 및 README.md 작성 
+
+- `각자의 branch 사용`
+  - 각자의 기능을 branch 별로 만들어 master branch에 merge시 pull request
+  - request 내용은 `commit 규칙`과 동일
+- `Commit 규칙` : [기능명] Commit 내용
+- ex. [로그인] 로그아웃 기능 오류 수정
+- `README.md작성 규칙`
+  - 작성법 : 자신이 맡은 기능에 관련한 `설명,사진` 작성
+  - 요청 사항 : 이후 회의에서 이야기 해볼만한 사항들이 있다면 상대방이 작성한 부분에 ` ` 을 통해 작성 > 회의후 삭제
+  - 작성 기간 : 다음 회의 이전 자신이 구현한 부분에 관해 작성 완료
+  - `README.md Commit 규칙` : [README.md] [기능명] Commit 내용
+
+## 회의록 요약
+> 회의 내용 중 개발 관련 내용 요약
+
+> `2021-03-07` : 로고 필요, 기능 도출 → 로그인, 회원가입, 로그아웃, 마이페이지, 유치원 인증 방식, 학부모 인증 방식 
+
+> `2021-03-09` : 메인페이지, cctv 열람 권한, 유치원 검색, 나의 유치원 기능 상세 기능
+<br>
+- 메인 페이지
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111051479-a00b7b80-8496-11eb-81ae-845395bc59af.png">
+<br>
+- cctv 열람 권한
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111051491-c16c6780-8496-11eb-918b-b10a7c3d1afc.png">
+<br>
+- 유치원 검색, 나의 유치원 기능 상세 기능
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111051519-fa0c4100-8496-11eb-98ea-7a37ce050c2d.png">
+
+> `2021-03-11` : 초기 ERD 
+<br>
+- 초기 ERD
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111051572-6b4bf400-8497-11eb-9698-d43f54af2071.png">
+
+> `2021-03-14` : 헤더 기능 상세 도출 > 키즈가든 검색(유치원/어린이집 찾기), 마이 키즈가든(나의 유치원/어린이집), 이벤트, 키즈톡(자유게시판), 쪽지, 마이페이지

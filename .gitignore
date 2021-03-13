@@ -7,3 +7,5 @@
 # personal local database settings - for development
 /config
 
+# ignore personal user image
+/public/images/user_image

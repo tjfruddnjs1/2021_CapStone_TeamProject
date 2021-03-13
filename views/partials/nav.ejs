@@ -1,15 +1,35 @@
+<style>
+  #mainav li li {
+    text-align: center;
+    width: 70%; 
+    margin: 0;
+    }
+</style>
+
 <div class="wrapper row1">
   <header id="header" class="hoc clear">
   
     <div id="logo" class="fl_left">
-      <h1><a href="/index" style="font-family: sans-serif;">킨더가든</a></h1>
+      <h1><a href="/index" style="font-family: sans-serif;">키즈가든</a></h1>
     </div>
 
     <nav id="mainav" class="fl_right">
       <ul class="clear">
-        <li><a  href="#">유치원/어린이집 검색</a></li>
-        <li><a href="#">나의 유치원/어린이집</a></li>
+        <li><a  href="#">키즈가든 검색</a></li>
+        <li><a href="#">마이 키즈가든</a></li>
+        <li><a href="#">이벤트</a></li>
+        <li><a href="#">키즈톡</a></li>
+        <li><a href="#">쪽지</a></li>
+        <% if(!(user && user.id)) { %>
         <li><a href="/login">로그인</a></li>
+        <% }else { %>
+          <li><a class="drop">마이페이지</a>
+            <ul>
+              <li><a href="/mypage/account">나의 계정</a></li>
+              <li><a href="/login/logout">로그아웃</a></li>
+            </ul>
+          </li>
+        <% } %>
       </ul>
     </nav> 
   </header>

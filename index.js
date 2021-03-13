@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const passport = require('passport');
 const dotenv = require('dotenv');
 
 const { sequelize } = require('./models');
@@ -9,9 +10,12 @@ const { sequelize } = require('./models');
 const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
 const gardenRouter =require('./routes/garden');
+const mypageRouter = require('./routes/mypage');
+const passportConfig = require('./passport');
 
 const app = express();
 dotenv.config();
+passportConfig();
 
 app.set('port', process.env.PORT || 8000);
 app.set('view engine', 'ejs');
@@ -38,11 +42,15 @@ app.use(session({
   },
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(methodOverride('_method'));
 
 app.use('/',homeRouter);
 app.use('/login', loginRouter);
 app.use('/garden', gardenRouter);
+app.use('/mypage', mypageRouter);
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
@@ -57,6 +65,6 @@ app.use((err, req, res, next) => {
   console.log(err.status +' error 발생')
 })
 
-let server = app.listen(app.get('port'), ()=> {
+app.listen(app.get('port'), ()=> {
   console.log(app.get('port'), '번 포트에서 대기중');
 });

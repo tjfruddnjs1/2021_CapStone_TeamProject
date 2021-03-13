@@ -70,12 +70,12 @@
     <div id="pageintro" class="wrapper clear">
         <div class="one_half">
             <h6 class="heading" style="color : black; font-family: sans-serif; margin-bottom: 40px;">회원가입</h6>
-          <form id="authForm" action="/auth" method="post">
+          <form id="authForm" action="/login/regist" method="post">
             <fieldset>
               <input
                 class="btmspace-15"
                 type="name"
-                name="username"
+                name="nickname"
                 id="nickname"
                 placeholder="닉네임을 입력해주세요"
                 autofocus
@@ -95,13 +95,13 @@
                   value="인증번호 전송"
                   class="btn"
                   id="certified"
-                  formaction="/auth/sendEmail"
-                  style="font-weight: bold; cursor: pointer;"
+                  formaction="/login/sendEmail"
+                  style="cursor: pointer;"
                   onclick="javascript:btn()"
                 />
                 <h5
                   style="
-                    font-family: Verdana, Geneva, Tahoma, sans-serif;
+                    font-family: sans-serif;
                     font-weight: bold;
                     color : black;
                     margin: auto;
@@ -135,7 +135,7 @@
 
               <footer>
                 <a
-                  href="/auth/kakao"
+                  href="/login/kakao"
                   id="kakao"
                   class="btn"
                   style="text-align: center; font-weight: bold"
@@ -147,7 +147,7 @@
                 >
                 <br />
                 <a
-                  href="/auth/naver"
+                  href="/login/naver"
                   id="naver"
                   class="btn"
                   style="text-align: center; font-weight: bold"
@@ -184,7 +184,6 @@
     let nickname = document.getElementById("nickname");
     let email = document.getElementById("email");
     let emailConfirm = document.getElementById("emailConfirm");
-
     let password = document.getElementById("password");
 
     function submit() {
