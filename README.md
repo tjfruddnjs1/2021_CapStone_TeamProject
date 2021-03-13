@@ -69,7 +69,7 @@
   로그인된 상태
   <img width=100% src="https://user-images.githubusercontent.com/41010744/111044963-f4126200-848e-11eb-8f6a-cd2595d0f4cf.png">
   <br>
-  
+
 - `2021-03-14` : header naviagtion 상태
   <br>
   <img width=100% src="https://user-images.githubusercontent.com/41010744/111051999-997f0300-849a-11eb-988b-aae6eb1c00f5.png">
@@ -194,3 +194,5 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <img src="https://user-images.githubusercontent.com/41010744/111051572-6b4bf400-8497-11eb-9698-d43f54af2071.png">
 
 > `2021-03-14` : 헤더 기능 상세 도출 > 키즈가든 검색(유치원/어린이집 찾기), 마이 키즈가든(나의 유치원/어린이집), 이벤트, 키즈톡(자유게시판), 쪽지, 마이페이지
+
+> `2021-03-15` : 현호 > 검색 기능(지도 포함) + 페이징 기능 , 경원 > 키즈톡(게시판) + 페이징 기능 `2021-03-21` 까지 구현 예정
