@@ -69,10 +69,11 @@
   로그인된 상태
   <img width=100% src="https://user-images.githubusercontent.com/41010744/111044963-f4126200-848e-11eb-8f6a-cd2595d0f4cf.png">
   <br>
+  
 - `2021-03-14` : header naviagtion 상태
-<br>
-<img width=100% src="https://user-images.githubusercontent.com/41010744/111051999-997f0300-849a-11eb-988b-aae6eb1c00f5.png">
-<br>
+  <br>
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/111051999-997f0300-849a-11eb-988b-aae6eb1c00f5.png">
+  <br>
 - 유치원/어린이집 검색
 
 기능명 | 주요 키워드 | 구현 상태
@@ -118,7 +119,7 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 ## 개발 결과
 - 메인페이지
 <br>
-<img width=70% src="https://user-images.githubusercontent.com/41010744/111051642-0644ce00-8498-11eb-8e12-76d20115bb81.png">
+<img src="https://user-images.githubusercontent.com/41010744/111051642-0644ce00-8498-11eb-8e12-76d20115bb81.png">
 <img width=70% src="https://user-images.githubusercontent.com/41010744/111051653-26748d00-8498-11eb-858d-e7df16f747d4.png">
 
 - 유치원/어린이집 검색
@@ -127,21 +128,21 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 
 - 로그인
 <br>
-<img width=70% src="https://user-images.githubusercontent.com/41010744/111050670-61bf8d80-8491-11eb-81e2-9c62e5bddadc.png">
+<img src="https://user-images.githubusercontent.com/41010744/111050670-61bf8d80-8491-11eb-81e2-9c62e5bddadc.png">
 <br>
-<img width=70% src="https://user-images.githubusercontent.com/41010744/111050746-ce3a8c80-8491-11eb-8f1b-d52e85c8eb65.png">
+<img src="https://user-images.githubusercontent.com/41010744/111050746-ce3a8c80-8491-11eb-8f1b-d52e85c8eb65.png">
 
 - 회원가입
 <br>
-<img width=70% src="https://user-images.githubusercontent.com/41010744/111050767-ef02e200-8491-11eb-850d-60ff715cf0e8.png">
+<img src="https://user-images.githubusercontent.com/41010744/111050767-ef02e200-8491-11eb-850d-60ff715cf0e8.png">
 
 - 마이페이지
 <br>
-<img width=70% src="https://user-images.githubusercontent.com/41010744/111050851-65074900-8492-11eb-8fed-44e7734171c1.png">
+<img src="https://user-images.githubusercontent.com/41010744/111050851-65074900-8492-11eb-8fed-44e7734171c1.png">
 <br>
-<img width="70%" src="https://user-images.githubusercontent.com/41010744/111050993-45bceb80-8493-11eb-9831-0927677df228.png">
+<img src="https://user-images.githubusercontent.com/41010744/111050993-45bceb80-8493-11eb-9831-0927677df228.png">
 <br>
-<img width="70%" src="https://user-images.githubusercontent.com/41010744/111051001-53727100-8493-11eb-93fb-892e3541c5eb.png">
+<img src="https://user-images.githubusercontent.com/41010744/111051001-53727100-8493-11eb-93fb-892e3541c5eb.png">
 <br>
 
 ## 데이터베이스 ERD
