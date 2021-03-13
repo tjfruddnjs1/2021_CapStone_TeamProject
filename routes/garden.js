@@ -8,7 +8,7 @@ const requestApi = async (sidoCode = '11', sggCode= '11680', currentPage = '1') 
     let array = [];
     let result;
     const url = 'https://e-childschoolinfo.moe.go.kr/api/notice/basicInfo.do';
-    const key = process.env.KEY;
+    const key = process.env.KINDERGARDEN_KEY;
 
     const totalUrl = url + '?key=' + key + '&sidoCode=' + sidoCode + '&sggCode='+sggCode;
     result = await axios.get(totalUrl);
