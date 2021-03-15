@@ -54,6 +54,7 @@
 - nodemailer : 회원가입/비밀번호 찾기 기능에 이메일 정보 인증을 위한 모듈 사용
 - twilio :
 - **[package.json](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/package.json)** : 사용 모듈(미들웨어) json 파일
+- axios : Promise를 사용하는 HTTP 비동기 통신 모듈로 공공 api와 통신하기 위함
 
 ## 개발 기능 
 
@@ -78,6 +79,10 @@
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
+`어린이집 리스트 출력 1`| `api` | `구현 완료`
+`검색기능`| `어린이집 이름` | `구현 중`
+`지도`| `뤼도, 경도` | `구현 중`
+`페이징`| `갯수, 리스트` | `구현 중`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
 - 나의 유치원/어린이집
@@ -123,7 +128,8 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <img width=70% src="https://user-images.githubusercontent.com/41010744/111051653-26748d00-8498-11eb-858d-e7df16f747d4.png">
 
 - 유치원/어린이집 검색
-
+<br/>
+<img src = "https://user-images.githubusercontent.com/57825856/111155455-d270c200-85d7-11eb-95d1-9e467c9c81fe.png">
 - 나의 유치원/어린이집
 
 - 로그인
