@@ -6,7 +6,9 @@ exports.isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {
       next();
     } else {
-      res.status(403).redirect('/login');
+      res.send(
+        "<script>alert('로그인이 필요한 작업입니다.'); window.location='/login';</script>"
+      )
     }
   };
 

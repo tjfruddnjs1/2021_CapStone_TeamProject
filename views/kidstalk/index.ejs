@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/kidstalk.css">
+  </head>
+  <style>
+    #post_id, #post_hit{
+      width : 7%;
+    }
+
+    #post_writer, #post_date{
+      width : 14%;
+    }
+
+    #post_title_content{
+      text-align : left;
+      padding-left : 2%;
+    }
+
+    #btn{
+      width: 17%;
+      color: white;
+      background-color: rgb(40, 87, 209);
+      border: 1px solid #8080805c;
+      padding-left : 3%;
+      padding-right : 3%;
+      margin-top : 2%;
+      font-weight: bold;
+      float : right;
+      text-align: center;
+    }
+
+    th, td{
+      border : none;
+      font-weight: bold;
+      text-align : center;
+    }
+
+    #paging{
+      float : right;
+    }
+
+    #numberOfPage{
+      margin-top : 10%;
+    }
+
+  </style>
+
+  <body id="top">
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    > 
+
+    <%- include('../partials/nav') %>
+    </div>
+
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+
+      <h1 style="font-family: sans-serif; margin-bottom : 5%">
+        <a href="/kidstalk">키즈맘TALK</a>
+      </h1>
+
+      <h5 style="margin-bottom: 2%; font-weight: bold;">
+        전체 게시글 수 : <%= count.count %>
+      </h5>
+      
+      <table class="board-table table table-sm border-bottom">
+
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" id="post_id">번호</th>
+            <th scope="col" id="post_title">제목</th>
+            <th scope="col" id="post_writer">작성자</th>
+            <th scope="col" id="post_date">등록일</th>
+            <th scope="col" id="post_hit">조회수</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if(posts == null || posts.length == 0){ %>
+                <tr>
+                  <td colspan="5">등록된 글이 없습니다.</td>
+                </tr>
+          <% } %>
+          <% posts.forEach(function(post) { %>
+            <tr>
+              <td><%= post.id %></td>
+              <td id="post_title_content">
+                <a href="/kidstalk/<%= post.id %>"><div class="post_title"><%= post.title %></div></a>
+              </td>
+              <td><%= post.User.nickname %></td>
+              <td id="post_date">
+                <span data-date="<%= post.createdAt %>"></span>
+              </td>
+              <td><%= post.hits %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <div>
+        <a id="btn" class="btn btn-primary" href="/kidstalk/new">글쓰기</a>
+      </div>
+
+      <nav>
+        <%
+          var offset = 2;
+          var previousBtnEnabled = currentPage > 1;
+          var nextBtnEnabled = currentPage < maxPage;
+        %>
+          <ul id="paging" class="pagination pagination justify-content-center align-items-center">            
+            <li class="page-item <%= previousBtnEnabled?'':'disabled' %>">
+              <a class="page-link" href="/kidstalk?page=<%= currentPage-1 %>&limit=<%= limit %>" <%= previousBtnEnabled?'':'tabindex=-1' %>>«</a>
+            </li>
+
+          <% for(i=1;i<=maxPage;i++){ %>
+            <% if(i==1 || i==maxPage || (i>=currentPage-offset && i<=currentPage+offset)){ %>
+              <li class="page-item <%= currentPage==i?'active':'' %>"><a class="page-link" href="/kidstalk?page=<%= i %>&limit=<%= limit %>"> <%= i %> </a></li>
+            <% } else if(i==2 || i==maxPage-1){ %>
+              <li><a class="page-link">...</a></li>
+            <% } %>
+          <% } %>
+          <li class="page-item <%= nextBtnEnabled?'':'disabled' %>">
+            <a class="page-link" href="/kidstalk?page=<%= currentPage+1 %>&limit=<%= limit %>" <%= nextBtnEnabled?'':'tabindex=-1' %>>»</a>
+          </li>
+        </ul>
+      </nav>
+
+      <form id="numberOfPage" action="/kidstalk" method="get">
+        <div class="form-row">
+
+          <div class="form-group col-3">
+            <label>게시글 수</label>
+            <select name="limit" class="custom-select" onchange="this.parentElement.parentElement.parentElement.submit()">
+              <option value="5" <%= limit==5?'selected':'' %>>5 개</option>
+              <option value="10" <%= limit==10?'selected':'' %>>10 개</option>
+              <option value="20" <%= limit==20?'selected':'' %>>20 개</option>
+            </select>
+          </div>
+
+        </div>
+      </form>
+
+    </main>
+    </div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="js/kidstalk.js"></script>
+</html>
