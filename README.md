@@ -9,32 +9,20 @@
 
 > 프로젝트 팀원 및 역할
 
-- 임종묵
-  - 프로젝트 관리파트
-    - Scrum Master
-    - 프로젝트 문서관리
-    - 디자인 신청
-  - 서비스개발 파트
-    - CCTV연동
-    - CCTV열람 페이지
+### Contributor
 
-- 문현호
-  - 프로젝트 관리파트
-    - 아이디어 시장조사
-    - PO(Product Owner)
-  - 서비스개발 파트
-    - 리뷰 페이지
-    - 어린이집/유치원 검색
-    - 각종 API를 활용한 보육기관 정보 제공
+[<img alt="tjfruddnjs1" src="https://avatars.githubusercontent.com/u/41010744?v=4" width="110">](https://github.com/tjfruddnjs1) |[<img alt="unn04012" src="https://avatars.githubusercontent.com/u/57825856?v=4&s=11" width="110">](https://github.com/unn04012) |[<img alt="IOUIOU50" src="https://avatars.githubusercontent.com/u/57579709?v=4&s=117" width="110">](https://github.com/IOUIOU50) |
+:---:|:---:|:---:| 
+[tjfruddnjs1](https://github.com/tjfruddnjs1)|[unn04012](https://github.com/unn04012)|[IOUIOU50](https://github.com/IOUIOU50)|
 
-- 설경원
-  - 프로젝트 관리파트
-    - Develop Leader(PM)
-    - 스프린트 관련 계획관리
-  - 서비스개발 파트
-    - 로그인/로그아웃
-    - 마이페이지
-    - 커뮤니티 게시판
+### 역할
+
+
+|이름|프로젝트관리 파트|서비스개발 파트|
+|:---:|:---|:---|
+|임종묵|-Scrum Master <br> -프로젝트 문서 관리 <br> -프로젝트 수행 관련 각종 신청|-CCTV 연동<br>-CCTV열람 페이지|
+|문현호|-아이디어 세부조사<br>-Product Owner|-리뷰페이지<br>-어린이집/유치원검색<br>-API정보가공|
+|설경원|-Develope Leader(PM)<br>-스프린트 관련 계획관리<br>-형상관리|-로그인/로그아웃<br>-마이페이지<br>-커뮤니티 게시판|
 
 ## 목차
 
