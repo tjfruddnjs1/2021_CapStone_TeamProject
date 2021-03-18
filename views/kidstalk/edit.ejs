@@ -84,11 +84,11 @@
       <form action="/kidstalk/<%= post.id %>?_method=put" method="post">
 
         <div class="one_two">
-          <input type="text" id="title" name="title" value="<%= post.title %>">
+          <input type="text" id="title" class="form-control" name="title" value="<%= post.title %>">
         </div>
 
         <div class="one_two">
-            <textarea id="body" name="body" rows="15"><%= post.body %></textarea>
+            <textarea id="body" name="body" class="form-control" rows="15"><%= post.body %></textarea>
         </div>
 
         <div>

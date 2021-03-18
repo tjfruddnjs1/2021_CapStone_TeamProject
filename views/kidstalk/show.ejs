@@ -78,6 +78,33 @@
         margin-right : 1%;
     }
 
+    #comment{
+      margin-top : 10%;
+    }
+
+    #comment-form{
+      margin-top : 4%;
+    }
+
+    #comment-button{
+      width : 8em;
+    }
+
+    #nickname{
+      margin : 1.5%;
+      font-weight: bold;
+    }
+
+    #layer{
+      margin-top: 2%;
+      margin-bottom: 2%;
+      padding : auto;
+    }
+
+    #deleteComment{
+      margin-left : 70%;
+      font-weight: bold;
+    }
 
   </style>
 
@@ -118,8 +145,45 @@
           <a id="delete" class="btn" href="javascript:void(0)" onclick="confirm('글을 삭제하시겠습니까?')?this.parentElement.submit():null;">글 삭제</a>
         </form>
       </div>
+
+    <div class="hoc container clear">
+      <% if(comments.length){ %>
+        <div>
+          <% comments.forEach(function(comment) { %> 
+            <div id="layer" class="border-top pt-2 pb-2">
+              <div class="row">
+                <div id="nickname" class="col-3 col-md-2 col-lg-1 pl-4"><%= comment.userNickname %></div>
+                  <div>
+                    <div><%= comment.text %></div>
+                    <small>
+                      <div style="margin-top: 30px; margin-bottom:0%;" data-date-time="<%= comment.createdAt %>"></div>
+                    </small>
+                  </div>  
+              </div>
+                <form action="/kidstalk/<%= post.id %>/comment/<%= comment.id %>?_method=delete" method="post" class="d-inline">
+                    <a id="deleteComment" href="javascript:void(0)" onclick="confirm('댓글을 삭제하시겠습니까?')?this.parentElement.submit():null;">댓글 삭제</a>
+                </form>
+              </div>
+          <% }) %>
+        </div>
+    <% } %>
+
+      <form id="comment-form" action="/kidstalk/<%= post.id %>/comment" method="post">
+        <fieldset>
+          <div class="row">
+            <div class="col-lg-9 m-auto">
+              <textarea id="comment_form" name="text" rows="3" class="form-control" required></textarea>
+            </div>
+            <div class="col-lg-auto m-lg-auto">
+              <button id="comment-button" type="submit" class="btn btn-primary">댓글 작성</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+  </div>
     </main>
-    </div>
+
+  </div>
     <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
     <%- include('../partials/top') %>
   </body>

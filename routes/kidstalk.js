@@ -3,6 +3,7 @@ const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const Post = require('../models/post');
 const User = require('../models/user');
+const Comment = require('../models/comment');
 
 const router = express.Router();
 
@@ -23,10 +24,8 @@ router.get('/', async (req,res)=>{
     let offset = (page-1)*limit;
     let count = await Post.findAndCountAll({});
     //count.count 로 사용 > 전체 개시물 수
-    console.log(page, limit, offset);
 
     let maxPage = Math.ceil(count.count/limit);
-    console.log(maxPage);
 
     const posts = await Post.findAll({
         include : [
@@ -41,7 +40,19 @@ router.get('/', async (req,res)=>{
         limit : limit,
     });
 
-    res.render('kidstalk/index', {posts:posts, currentPage:page, maxPage:maxPage, limit:limit, count:count});
+    let comment = await Comment.findAll({});
+
+    console.log(comment);
+    console.log(posts);
+
+    res.render('kidstalk/index', {
+      posts:posts, 
+      currentPage:page, 
+      maxPage:maxPage, 
+      limit:limit, 
+      count:count,
+      comment:comment,
+    });
   }catch(err){
     console.error(err);
     next(err);
@@ -91,6 +102,46 @@ router.get('/:id/edit', isLoggedIn , async(req,res,next)=>{
   }
 });
 
+router.route('/:id/comment')
+  .post(isLoggedIn, async(req, res, next)=>{
+    try{     
+      await Comment.create({
+        text : req.body.text,
+        userNickname : req.user.nickname,
+        post : req.params.id
+      });
+      res.redirect('/kidstalk/'+req.params.id);
+    }catch(err){
+      console.error(err);
+      next(err);
+    }
+  })
+
+router.route('/:id/comment/:commentId')
+  .delete(isLoggedIn, async(req, res, next)=>{
+    try{
+      const comment = await Comment.findOne({
+        where : {id : req.params.commentId}
+      });
+
+      if(comment.userNickname == req.user.nickname){
+        
+        comment.destroy({
+          where : {id : req.params.commentId},
+        });
+
+        res.redirect('/kidstalk/'+req.params.id);
+      }else{
+        res.send(
+          "<script>alert('댓글 삭제 권한은 작성자에게 있습니다.'); history.back();</script>"
+        );
+      }
+  }catch(err){
+      console.error(err);
+      next(err);
+  }
+  });
+
 //게시글 get 요청
 router.route('/:id')
     //게시글 show
@@ -108,13 +159,18 @@ router.route('/:id')
             where : {id : req.params.id}
           });
 
+        const comments = await Comment.findAll(
+          {
+            where : {post : post.id}
+          });
+
         Post.update({
           hits : ++post.hits,
         },{
           where : {id:req.params.id},
         });
 
-        res.render('kidstalk/show', {post:post});
+        res.render('kidstalk/show', {post:post, comments:comments});
       }catch(err){
         console.error(err);
         next(err);
@@ -150,6 +206,7 @@ router.route('/:id')
           Post.destroy({
             where : {id:req.params.id},
           });
+
           res.send(
             "<script>alert('글이 삭제되었습니다.'); window.location='/kidstalk';</script>"
           );
@@ -163,6 +220,5 @@ router.route('/:id')
         next(err);
     }
     });
-
 
 module.exports = router;

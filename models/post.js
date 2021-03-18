@@ -22,7 +22,7 @@ module.exports = class Post extends Sequelize.Model {
       hits : {
         type : Sequelize.INTEGER,
         defaultValue : '0',
-      }, 
+      },
       }, {
       sequelize,
       timestamps: false,
@@ -37,5 +37,6 @@ module.exports = class Post extends Sequelize.Model {
 
   static associate(db) {
     db.Post.belongsTo(db.User, {foreignKey : 'writer', targetKey : 'id'});
+    db.Post.hasMany(db.Comment, { foreignKey : 'post', sourceKey : 'id'});
   }
 };
