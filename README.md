@@ -87,7 +87,13 @@
   <br>
   <img width=100% src="https://user-images.githubusercontent.com/41010744/111051999-997f0300-849a-11eb-988b-aae6eb1c00f5.png">
   <br>
-- 유치원/어린이집 검색
+
+- `2021-03-18` : header navigation 상태
+  <br>
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/111613555-fc1d2980-8821-11eb-93e0-30963a8ee42e.png">
+  <br>
+
+- 유치원/어린이집 검색 : 현호
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
@@ -103,7 +109,17 @@
 -------| ------- | -------
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
-- 로그인 : [routes/login.js](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/routes/login.js)
+- 키즈맘TALK : 경원
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+게시판 CRUD | 게시물 업로드 및 수정 및 삭제 읽기  | `구현완료`
+페이징 | sequelize Offset & Limit & Join   | `구현완료`
+댓글 | /:id/edit , sequelize Join, 1:N  | `구현완료`
+검색 | Op.like , createSearchQuery(quries), searchType, searchText  | `구현완료`
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
+- 로그인 : 경원
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
@@ -114,7 +130,7 @@ naver login | passport-naver, session 유지, database CRUD 중 Read | `구현 �
 비밀번호 찾기 | nodemailer(gmail) , 이메일 인증키(env), database CRUD 중 Read & Update | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
-- 회원가입 : [routes/login.js](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/routes/login.js)
+- 회원가입 : 경원
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
@@ -122,7 +138,7 @@ naver login | passport-naver, session 유지, database CRUD 중 Read | `구현 �
 local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash) 전송  | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
-- 마이페이지 : [routes/mypage.js](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/routes/mypage.js)
+- 마이페이지 : 경원
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
@@ -143,6 +159,28 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br/>
 <img src = "https://user-images.githubusercontent.com/57825856/111155455-d270c200-85d7-11eb-95d1-9e467c9c81fe.png">
 - 나의 유치원/어린이집
+
+- 키즈맘TALK
+<br>
+메인페이지 >
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111614869-74381f00-8823-11eb-8777-ed3742f824a0.png">
+<br>
+페이징 >
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111615332-f1fc2a80-8823-11eb-8170-7af9af2f3b1f.png">
+<br>
+검색 결과 >
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111614984-95007480-8823-11eb-9801-8ab1471361ab.png">
+<br>
+CRUD + 댓글 >
+<img src="https://user-images.githubusercontent.com/41010744/111615947-a8f8a600-8824-11eb-9229-26491f9670ac.png">
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111615591-456e7880-8824-11eb-9ef2-697699607230.png">
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111615629-50c1a400-8824-11eb-8f24-9129142f9378.png">
+<br>
 
 - 로그인
 <br>
@@ -170,6 +208,10 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111051572-6b4bf400-8497-11eb-9698-d43f54af2071.png">
 <br>
+
+- `2021-03-18` : ERD 중간 과정(user, drop, post, comment)
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/111616124-dfcebc00-8824-11eb-8f51-5d0f7a340ea5.png">
 
 ## 개발 규칙
 
