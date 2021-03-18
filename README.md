@@ -150,6 +150,7 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
 ## 개발 결과
+
 - 메인페이지
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111051642-0644ce00-8498-11eb-8e12-76d20115bb81.png">
@@ -158,23 +159,28 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 - 유치원/어린이집 검색
 <br/>
 <img src = "https://user-images.githubusercontent.com/57825856/111155455-d270c200-85d7-11eb-95d1-9e467c9c81fe.png">
+
 - 나의 유치원/어린이집
 
+
 - 키즈맘TALK
-<br>
-메인페이지 >
+
+> 게시판 index
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111614869-74381f00-8823-11eb-8777-ed3742f824a0.png">
 <br>
-페이징 >
+
+> 페이징
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111615332-f1fc2a80-8823-11eb-8170-7af9af2f3b1f.png">
 <br>
-검색 결과 >
+
+> 검색 결과
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111614984-95007480-8823-11eb-9801-8ab1471361ab.png">
 <br>
-CRUD + 댓글 >
+
+> CRUD + 댓글
 <img src="https://user-images.githubusercontent.com/41010744/111615947-a8f8a600-8824-11eb-9229-26491f9670ac.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111615591-456e7880-8824-11eb-9ef2-697699607230.png">
@@ -182,7 +188,7 @@ CRUD + 댓글 >
 <img src="https://user-images.githubusercontent.com/41010744/111615629-50c1a400-8824-11eb-8f24-9129142f9378.png">
 <br>
 
-- 로그인
+로그인
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111050670-61bf8d80-8491-11eb-81e2-9c62e5bddadc.png">
 <br>
