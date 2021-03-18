@@ -99,7 +99,7 @@
                     <% ++commentCount; %>
                   <% } %>
                 <% }) %>
-                <a href="/kidstalk/<%= post.id %>"><div class="post_title"><%= post.title %> <span style="color :coral;"> [<%= commentCount %>] </span></div></a>
+                <a href="/kidstalk/<%= post.id %>"><div class="post_title"><%= post.title %> <span style="color:darkslateblue;"> [<%= commentCount %>] </span></div></a>
               </td>
               <td><%= post.User.nickname %></td>
               <td id="post_date">
@@ -143,11 +143,25 @@
 
           <div class="form-group col-3">
             <label>게시글 수</label>
-            <select name="limit" class="custom-select" onchange="this.parentElement.parentElement.parentElement.submit()">
+            <select style="width:80%" name="limit" class="custom-select" onchange="this.parentElement.parentElement.parentElement.submit()">
               <option value="5" <%= limit==5?'selected':'' %>>5 개</option>
               <option value="10" <%= limit==10?'selected':'' %>>10 개</option>
               <option value="20" <%= limit==20?'selected':'' %>>20 개</option>
             </select>
+          </div>
+
+          <div style="margin-left : 40%;" class="form-group col-4">
+            <label>검색</label>
+            <div class="input-group">
+              <select style="margin-right : 7%;" name="searchType" class="custom-select">
+                <option value="title" <%= searchType=='title'?'selected':'' %>>제목</option>
+                <option value="body" <%= searchType=='body'?'selected':'' %>>본문</option>
+              </select>
+              <input minLength="3" type="text" name="searchText" value="">
+              <div class="input-group-append">
+                <button style="margin-left:30%;" class="btn btn-outline-primary" type="submit">검색</button>
+              </div>
+            </div>
           </div>
 
         </div>

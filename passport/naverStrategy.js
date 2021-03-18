@@ -19,7 +19,7 @@ module.exports = ()=> {
             }else{
                 const newUser = await User.create({
                     email : "NAVER"+ profile._json.email,
-                    nickname : profile._json.email,
+                    nickname : profile._json.nickname,
                     snsId:profile.id,
                     provider:'naver',
                 });

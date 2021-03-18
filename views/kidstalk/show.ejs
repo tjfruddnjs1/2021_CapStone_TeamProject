@@ -102,8 +102,13 @@
     }
 
     #deleteComment{
-      margin-left : 70%;
+      margin-left : 90%;
       font-weight: bold;
+    }
+
+    #text{
+      margin-left : 5%;
+      margin-top : 1%;
     }
 
   </style>
@@ -152,9 +157,9 @@
           <% comments.forEach(function(comment) { %> 
             <div id="layer" class="border-top pt-2 pb-2">
               <div class="row">
-                <div id="nickname" class="col-3 col-md-2 col-lg-1 pl-4"><%= comment.userNickname %></div>
-                  <div>
-                    <div><%= comment.text %></div>
+                <div id="nickname"><%= comment.userNickname %></div>
+                  <div id="text">
+                    <%= comment.text %>
                     <small>
                       <div style="margin-top: 30px; margin-bottom:0%;" data-date-time="<%= comment.createdAt %>"></div>
                     </small>
