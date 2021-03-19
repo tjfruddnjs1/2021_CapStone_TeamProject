@@ -64,7 +64,7 @@
 - nodemon : 소스 코드가 바뀔 때마다 노드를 재실행
 - morgan : 사용시 기존 로그외에 추가적인 로그를 확인 가능 > [HTTP 메서드] [주소] [HTTP 상태 코드] [응답 속도]- [응답 바이트] > 요청과 응답을 한눈에 볼수 있어 편리  
 - nodemailer : 회원가입/비밀번호 찾기 기능에 이메일 정보 인증을 위한 모듈 사용
-- twilio :
+- twilio : 마이페이지 > 핸드폰인증을 위한 모듈
 - **[package.json](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/package.json)** : 사용 모듈(미들웨어) json 파일
 - axios : Promise를 사용하는 HTTP 비동기 통신 모듈로 공공 api와 통신하기 위함
 
