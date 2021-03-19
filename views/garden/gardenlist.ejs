@@ -4,6 +4,7 @@
 <head>
   <%- include('../partials/head') %>    
   <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <style>
    .searchlist{
        border-top : 2px solid black;
@@ -49,7 +50,7 @@
         text-align : center;        
    }
    
-   select{
+   select, #name{
        display : inline;              
        padding : 10px 0;
        outline : none;
@@ -58,6 +59,14 @@
        border-bottom : 1px solid #80808033;
        margin-right : 20px;
        cursor : pointer;
+       font-weight : normal;
+   }
+   option{
+       padding : 10px 0;       
+       padding : 10px 0;
+       outline : none;
+       width : 200px;
+       border : none;
    }
 
    .search{
@@ -86,6 +95,31 @@
    .head{
        margin-top : 20px;
    }
+   .paging{
+       text-align : center;
+   }
+   .page{
+       color : black;
+       border : 1px solid black;
+       padding : 5px;
+       font-size : 16px;
+       font-weight : bold;
+       cursor : pointer;
+   }
+   .submit{
+       display : inline-block;
+       border : 2px solid #80808033;
+       padding : 10px 5px;
+       width : 100px;
+       background-color : white;
+       cursor : pointer;
+       font-weight : bold;
+   }   
+   option{
+       
+   }
+   select{       
+   }
   </style>      
 </head>
 
@@ -100,16 +134,30 @@
       <!-- main body -->
       <!-- ################################################################################################ -->
       <div class="search">
+          <div class="head">구분</div>
+          <form action="" method = "get">
+            <select name="type" id="">
+                <option value="유치원">유치원</option>
+                <option value="어린이집">어린이집</option>
+            </select>
+            <input type="text" name = "name" placeholder = "이름을 입력해주세요" id = "name">
+            <input type="submit" value = "검색" class = "submit">
+          </form>
+
           <div class="head">지역</div>
-          <select name="" id="">
-              <option value="">서울특별시</option>
-          </select>
-          <select name="" id="">
-            <option value="">강남구</option>
-        </select>
-        <select name="" id="">
-            <option value="">논현동</option>
-        </select>
+          <form action="">
+            <select name="" id="" class = "sidocode">                            
+                <% for(let i =0; i <sidos.length; i++) {%>
+                  <option value="<%= sidos[i].sidocode %>"><%= sidos[i].sidoname %></option>
+                <% } %>
+            </select>
+          
+          
+          <select name="" id="" class = "sggcode">
+            <option value="">시/군/구</option>
+            </select>        
+        <input type="submit" value = "검색" class = "submit">
+        </form>
       </div>
       <div id="map" style="width:100%;height:350px;"></div>
       <div class="searchlist">
@@ -125,36 +173,127 @@
       <div class="container">
         <% for(let i =0; i<info.length; i++) {%>
         <div class="head">
-            <span class="category">유치원</span>
-            <span class="field"><%= info[i].establish %></span>
-            <span class="name"><%= info[i].kindername %></span>            
+            <span class="category">어린이집</span>
+            <span class="field"><%= info[i].category %></span>
+            <span class="name"><%= info[i].name %></span>            
         </div>
         <div class="icons">                    
-            <span><a href="" class = "icon"><i class="fas fa-map-marker-alt"></i></a></span>
-            <span><a href="<%= info[i].hpaddr %>" class = "icon" target = '_blank'><i class="fas fa-home"></i></a></span>
+            <span class = "location"><a href="" class = "icon "><i class="fas fa-map-marker-alt"><input type="hidden" value = "<%= info[i].latitude %>" class = "la"><input type="hidden" value = "<%= info[i].longitude %>" class = "lo"></i></a></span>
+            <span><a href="<%= info[i].homepage %>" class = "icon" target = '_blank'><i class="fas fa-home"></i></a></span>
             <span><a href="" class = "icon"><i class="fas fa-star"></i></a></span>
         </div>
         <div class="body">
-            <span class="address"><%= info[i].addr %></span>           
+            <span class="address"><%= info[i].address %></span>           
             <br>            
-            <span class="phone"><%= info[i].telno %></span>
+            <span class="phone"><%= info[i].phone %></span>
         </div>
         <hr>
         <% } %>        
+      </div>
+      
+      <div class="paging">
+        <a href="<%= `garden?page=${page.startPage-1} `%>" >이전</a> 
+          <% for(let i =page.startPage; i<=page.endPage; i++) {%>
+             <a href="<%= `garden?page=${i} `%>" class = "page"><%= i %></a> 
+          <%} %>
+          <a href="<%= `garden?page=${page.endPage+1} `%>">다음</a> 
       </div>
       <div class="clear"></div>
     </main>
   </div>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28f2f70ef1f0ab3e87563b70d829d265"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+let locate = document.getElementsByClassName('location');
+let latitude = document.getElementsByClassName('la');
+let longtitue = document.getElementsByClassName('lo');
+let la, lo;
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
 
-// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+var marker;
+
+for(let i =0; i < locate.length; i++){
+    locate[i].addEventListener('click', function (e){        
+        e.preventDefault();
+        document.getElementById('map').scrollIntoView();
+        la = latitude[i].value;
+        lo = longtitue[i].value;
+        console.log(la);
+        console.log(lo);
+        // 마커가 표시될 위치입니다 
+        var markerPosition  = new kakao.maps.LatLng(lo, la); 
+        // 마커를 생성합니다
+        marker = new kakao.maps.Marker({
+            position: markerPosition,
+            clickable : true
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+        panTo(lo, la);
+        
+       
+    })
+}
+
+function setCenter(la, lo) {            
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new kakao.maps.LatLng(la, lo);
+    
+    // 지도 중심을 이동 시킵니다
+    map.setCenter(moveLatLon);
+}
+
+function panTo(la ,lo) {
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new kakao.maps.LatLng(la, lo);
+    
+    // 지도 중심을 부드럽게 이동시킵니다
+    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+    map.panTo(moveLatLon); 
+    
+    
+} 
+
+let sido = document.querySelector('.sidocode');
+let sgg = document.querySelector('.sggcode');   
+let optionTag;  
+let content;
+// Array.from(sido).foreach((sidocode) => {
+    sido.addEventListener('change', (e) => {                
+        axios({
+            method : "GET",
+            url : 'http://localhost:8000/garden/sggname',          
+            params : {
+                sidocode : e.target.value,
+            }
+          }).then((response) => {   
+            while ( sgg.hasChildNodes() ) { 
+                sgg.removeChild( sgg.firstChild ); 
+            }               
+              for(let i =0; i < response.data.length; i++){
+                optionTag = document.createElement("option");
+                content = document.createTextNode(response.data[i].sggname);                
+                optionTag.appendChild(content);                
+                optionTag.setAttribute("value", response.data[i].sggcode)                                
+                sgg.append(optionTag);
+              }
+            
+          }).catch(error => {
+            console.log(error);
+            throw new Error(error);
+          })
+    })
+// })
+
+
+
 </script>           
     <%- include('../partials/foot') %>
     <%- include('../partials/copyright') %>

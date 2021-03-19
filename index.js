@@ -11,8 +11,10 @@ const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
 const gardenRouter =require('./routes/garden');
 const mypageRouter = require('./routes/mypage');
+
 const kidstalkRouter = require('./routes/kidstalk');
 
+const inputdata = require('./routes/inputdata');
 const passportConfig = require('./passport');
 
 const app = express();
@@ -54,7 +56,11 @@ app.use('/',homeRouter);
 app.use('/login', loginRouter);
 app.use('/garden', gardenRouter);
 app.use('/mypage', mypageRouter);
+
 app.use('/kidstalk', kidstalkRouter);
+
+app.use('/inputdata', inputdata);
+
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
