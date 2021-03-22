@@ -7,19 +7,19 @@ module.exports = class Garden extends Sequelize.Model {
         type: Sequelize.STRING(100),
         primaryKey : true,                             
       },
-      category : {
+      gardencategory : {
         type: Sequelize.STRING(10),
         allowNull : false,
       },       
-      type : {
+      gardentype : {
         type: Sequelize.STRING(10),
         allowNull : false,
       },       
-      name : {
+      gardenname : {
         type: Sequelize.STRING(50),
         allowNull : false,
       },       
-      phone : {
+      gardentel : {
         type: Sequelize.STRING(50),
         allowNull : false,
       },       
@@ -30,11 +30,7 @@ module.exports = class Garden extends Sequelize.Model {
       homepage : {
         type: Sequelize.STRING(255),
         allowNull : true,
-      },
-      sggcode : {
-        type: Sequelize.INTEGER(10),
-        allowNull : false,
-      },         
+      },           
       cctvnum : {
         type: Sequelize.STRING(50),
         allowNull : true,
@@ -63,6 +59,13 @@ module.exports = class Garden extends Sequelize.Model {
     });
   }
 
-  static associate(db) {    
+  static associate(db) {   
+    db.Garden.belongsTo(db.SggCode, {
+      foreignKey : {
+          name : 'sggcode',          
+          allowNull : false,                    
+      },
+      targetKey : 'sggcode',            
+  });
   }
 };

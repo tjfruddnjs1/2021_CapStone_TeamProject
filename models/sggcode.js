@@ -30,6 +30,8 @@ module.exports = class SggCode extends Sequelize.Model {
               allowNull : false,
           },
           targetKey : 'sidocode'    
-      })
+      });
+      
+      db.SggCode.hasMany(db.Garden, {foreignKey : {name : 'sggcode', allowNull : false}, sourceKey : 'sggcode'});
   }
 };

@@ -8,123 +8,147 @@ const apiRouter = require('./api');
 const Garden = require('../models/garden');
 const SggCode = require('../models/sggcode');
 const SidoCode = require('../models/sidocode');
-// 유치원 중단
-// router.get('/', async (req,res)=>{
-//   try{
-//     let result, total, gardensInfo, info, info2;
-//     const {sidoCode, sggCode, currentPage} = req.query;    
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
 
-//     if(sidoCode){
-//         console.log('there');
-//         result = await apiRouter.requestApi(sidoCode, sggCode, currentPage);
-//         total = result['total'];
-//         gardensInfo = result['result'];
-//         info = gardensInfo.data.kinderInfo;
-//     }else{        
-//         result = await apiRouter.requestApi();
-//         total = result['total'];
-//         gardensInfo = result['result'];
-//         info = gardensInfo.data.kinderInfo;                 
-//     }
-//     res.render('garden/gardenlist', {total : total, info : info});
-//   }catch(err){
-//     console.error(err);
-//     next(err);
-//   }
-// });
-const paging = (page, total) => {        
-        let totalPage = Math.ceil(total / 10);
-        let page_size = 10;
-        let block = 5;
-        let list_page=  5;
-        let pageNum = Math.ceil(total/list_page);
-        let blockNum = Math.ceil(pageNum/block);
-        let nowBlock = Math.ceil(page/block);
-        console.log('page : ' + page);
-        let s_page = (nowBlock * block) - (block - 1);
-        if(s_page<=1) s_page = 1;
-        let e_page = nowBlock * block;
-        if(pageNum <= e_page) e_page = pageNum;
-        
-        if(page > totalPage){
-          page = 1;
-        }        
+const paging = async (page, paramName = null, param = null, name = null) => {        
+  let block = 5;
+  let list = 10;
+    
+  let total;  
+  // if(paramName == `type`){
+  //   total = await Garden.count({where : {type : param, name : {[Op.like] : '%' + name + '%'}}});
+  // }else if(paramName == `sggcode`){
+    
+  // }else{
+  //   total = await Garden.count();    
+  // }
+    if(param){
+      total = await Garden.count({where : {[paramName] : param}});
+    }else{
+      total = await Garden.count();
+    }
+    if(page <=1){
+      page = 1;
+    }   
+  let pageNum = Math.ceil(total/list); // 총 페이지수
+  let blockNum = Math.ceil(pageNum/block); // 총 블록 수
+  let nowBlock = Math.ceil(page/block);
+  let gardens;
+  console.log('blockNum : ' + blockNum);
+console.log('nowBlock : ' + nowBlock);
+  if(nowBlock >= blockNum){
+    nowBlock = blockNum;
+  }else if(nowBlock <=0){
+    nowBlock = 1;
+  }
+
+  let s_page = (nowBlock * block) - (block - 1);
+  console.log(s_page);
+  if(s_page <= 1){
+    s_page = 1;
+  }
+
+  let e_page = nowBlock * block;
+
+  if(pageNum <= e_page){    
+    e_page = pageNum;
+  }
+ 
+  let s_point = (page-1) * list;
+  if(s_point <=0){
+    s_point = 0;
+  }else if(s_point > total){
+    s_point = s_point - list*(page-2);
+  }  
+  if(param){
+    gardens = await Garden.findAndCountAll({
+      offset : s_point,
+      limit : 10,
+      where : {
+        [paramName] : param,
+      }
+    }); 
+  }else{
+    gardens = await Garden.findAndCountAll({
+      offset : s_point,
+      limit : 10,      
+    }); 
+  }
+                         
+  
+
          result = { 
           "curPage": page,            
-          "listPage": list_page, 
-          "totalPage": totalPage, 
+          "listPage": block, 
+          "totalPage": pageNum, 
           "startPage": s_page, 
-          "endPage": e_page,           
+          "endPage": e_page,    
+          "gardens" : gardens,                 
         } 
 
         return result;
 }
 
+router.get('/sido', async(req, res) => {
+  try{        
+    const {code} = req.query;    
+    if(code != ''){      
+      const sggCode = await SggCode.findAll({
+        where : {
+          sidocode : code
+        }
+      });      
+      res.send(sggCode);
+    }else{
+      console.log('no data');
+      res.send('데이터가 없습니다.');
+    }            
+  }catch(err){
+    console.error(err);
+  }
+});
 
-
-router.get('/', async (req,res)=>{
-  try{
-    // let result, total, gardensInfo, info, pageCnt;    
-    const {sidoCode, sggCode} = req.query;
+router.get('/:sggcode?', async (req,res)=>{
+  try{        
+    let {sidoCode, sggcode} = req.params;
+    sggcode = parseInt(sggcode);
+    let result;
     const sidos = await SidoCode.findAll({});
-    // let sidoecode = req.params;
-    // sidocode = (sidocode) ? sidocode : sidos[0].sidocode;
-    const sggs = await SggCode.findAll({
-      where : {
-        sidocode : sidos[0].sidocode,
-      }
-    });
-    let {page} = req.query;
-    let offset = 0;                
-    let gardens = {};    
+    const {type, name} = req.query;    
+
+    
+    let {page} = req.query;    
 
     if(!page){
       page = 1;
     }
-    if(page > 1){
-      offset = 10 * (page - 1);
+
+    if(type && name){
+      result = await paging(page, `type`, type, name);
     }
-        
-    let pageInfo = [];
-    let j = 0;
-    if(sggCode){
-        console.log('there');
-        result = await apiRouter.eachChildrenApi(sggCode);
-        info = result['info'];
-        total = result['total'];
+    // if(page > 1){
+    //   offset = 10 * (page - 1);
+    // }
+            
+    if(sggcode){                                       
+        result = await paging(page,`sggcode`, sggcode);                
+        // res.render('garden/gardenlist', {total : result.gardens.count , info : result.gardens.rows, page : result, sidos : sidos});
     }else{   
-        console.log('here');
-        gardens = await Garden.findAndCountAll({
-          offset : offset,
-          limit : 10
-        });                
-        result = paging(page, gardens.count);                                                                   
+        console.log('here');                  
+        result = await paging(page);                                                                   
+        
     }                
-    res.render('garden/gardenlist', {total : gardens.count , info : gardens.rows, page : result, sidos : sidos});
+    res.render('garden/gardenlist', {total : result.gardens.count , info : result.gardens.rows, page : result, sidos : sidos});
   }catch(err){
     console.error(err);
     next(err);
   }
 });
 
-router.get('/sggname', async(req, res) => {
-  try{
-    const {sidocode} = req.query;
-    if(sidocode){
-      console.log(sidocode);
-      const sggCode = await SggCode.findAll({
-        where : {
-          sidocode : sidocode
-        }
-      });      
-      res.send(sggCode);
-    }
-        
-    res.send('데이터가 없습니다.');
-  }catch(err){
-    console.error(err);
-  }
-});
+
+
+
 
 router.post('/search', async(req, res) => {
   
