@@ -29,27 +29,28 @@ db.Drop = Drop;
 db.Post = Post;
 db.Comment = Comment;
 
+
+
+
+
+
+
+db.SidoCode = SidoCode;
+db.SggCode = SggCode;
+db.Garden = Garden;
+
 User.init(sequelize);
 Drop.init(sequelize);
 Post.init(sequelize);
 Comment.init(sequelize);
-
-User.associate(db);
-Drop.associate(db);
-Post.associate(db);
-Comment.associate(db);
-
-db.SidoCode = SidoCode;
-db.SggCode = SggCode;
-
-User.init(sequelize);
-Drop.init(sequelize);
 SidoCode.init(sequelize);
 SggCode.init(sequelize);
 Garden.init(sequelize);
 
 User.associate(db);
 Drop.associate(db);
+Post.associate(db);
+Comment.associate(db);
 SidoCode.associate(db);
 SggCode.associate(db);
 Garden.associate(db);

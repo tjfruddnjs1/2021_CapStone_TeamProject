@@ -7,20 +7,18 @@
     .button{
   text-align : center;
 }
-.box{
-  width : 400px;
-  height : 400px;
-  border : 1px solid white;
-  display : inline-block;
-  line-height : 400px;
+.box{  
+  display : inline-block;  
+  margin : 0 100px;
 }
 .navbutton{
   width : 100%;
   font-size : 20px;
   font-weight : bold;
+  color : white;
 }
 .navbutton:hover .box{
-  color : white;
+  color : #829DA2;
   transition: 0.3s;
 
   filter: brightness(120%);
@@ -122,6 +120,13 @@
 .score{
   font-weight : bold;
 }
+.kindergarden{
+  display : block;  
+  margin : 0 auto;
+  margin-top : 50px;    
+  width : 200px;
+  
+}
   </style>
 </haed>
 
@@ -139,13 +144,16 @@
       <footer></footer>
     </article>
     <div class="button">
-      <a href="/garden" class = "navbutton">
-        <div class="box leftbox">
+      <a href="/garden" class = "navbutton">        
+        <div class="box leftbox">          
+          <img src="/images/search_kindergarden.png" alt="" class = "kindergarden">
           유치원 검색
         </div>
       </a>
       <a href="#" class = "navbutton">
+        
         <div class="box rightbox">
+          <img src="/images/my_kindergarden.png" alt="" class = "kindergarden">
           나의 유치원
         </div>
       </a>

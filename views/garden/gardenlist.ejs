@@ -115,11 +115,10 @@
        cursor : pointer;
        font-weight : bold;
    }   
-   option{
-       
-   }
-   select{       
-   }
+  #send{
+      text-align : center;
+      color : black;
+  }
   </style>      
 </head>
 
@@ -145,18 +144,17 @@
           </form>
 
           <div class="head">지역</div>
-          <form action="">
-            <select name="" id="" class = "sidocode">                            
+          <form action="/garden" id = "sggcodeForm">
+            <select name="" id="" class = "sidocode">                                            
                 <% for(let i =0; i <sidos.length; i++) {%>
                   <option value="<%= sidos[i].sidocode %>"><%= sidos[i].sidoname %></option>
                 <% } %>
             </select>
           
           
-          <select name="" id="" class = "sggcode">
-            <option value="">시/군/구</option>
-            </select>        
-        <input type="submit" value = "검색" class = "submit">
+          <select name="sggcode" id="" class = "sggcode">
+            <option value="">서울특별시 전체</option>
+            </select>                
         </form>
       </div>
       <div id="map" style="width:100%;height:350px;"></div>
@@ -173,7 +171,7 @@
       <div class="container">
         <% for(let i =0; i<info.length; i++) {%>
         <div class="head">
-            <span class="category">어린이집</span>
+            <span class="category"><%= info[i].type %></span>
             <span class="field"><%= info[i].category %></span>
             <span class="name"><%= info[i].name %></span>            
         </div>
@@ -191,12 +189,14 @@
         <% } %>        
       </div>
       
-      <div class="paging">
-        <a href="<%= `garden?page=${page.startPage-1} `%>" >이전</a> 
+      <div class="paging">                   
+            <a href="<%=`?page=${page.startPage-1}`%>"  class = "page">이전</a> 
           <% for(let i =page.startPage; i<=page.endPage; i++) {%>
-             <a href="<%= `garden?page=${i} `%>" class = "page"><%= i %></a> 
+             <a href="<%= `?page=${i} `%>" class = "page"><%= i %></a> 
           <%} %>
-          <a href="<%= `garden?page=${page.endPage+1} `%>">다음</a> 
+          <a href="<%= `?page=${page.endPage+1} `%>" class = "page">다음</a> 
+        
+        
       </div>
       <div class="clear"></div>
     </main>
@@ -266,34 +266,58 @@ let sgg = document.querySelector('.sggcode');
 let optionTag;  
 let content;
 // Array.from(sido).foreach((sidocode) => {
-    sido.addEventListener('change', (e) => {                
+    sido.addEventListener('change', (e) => {                                        
         axios({
             method : "GET",
-            url : 'http://localhost:8000/garden/sggname',          
+            url : '/garden/sido',          
             params : {
-                sidocode : e.target.value,
+                code : e.target.value,
             }
           }).then((response) => {   
+              console.log(typeof response.data)
             while ( sgg.hasChildNodes() ) { 
-                sgg.removeChild( sgg.firstChild ); 
-            }               
-              for(let i =0; i < response.data.length; i++){
+                    sgg.removeChild( sgg.firstChild ); 
+            } 
+            if(typeof response.data === 'string')            {                
                 optionTag = document.createElement("option");
-                content = document.createTextNode(response.data[i].sggname);                
-                optionTag.appendChild(content);                
-                optionTag.setAttribute("value", response.data[i].sggcode)                                
+                content = document.createTextNode(response.data);                
+                optionTag.appendChild(content);              
                 sgg.append(optionTag);
-              }
-            
-          }).catch(error => {
+            }else{
+                                                      
+                for(let i =0; i < response.data.length; i++){
+                    optionTag = document.createElement("option");
+                    content = document.createTextNode(response.data[i].sggname);                
+                    optionTag.appendChild(content);                
+                    optionTag.setAttribute("value", response.data[i].sggcode)                                
+                    sgg.append(optionTag);
+                }                             
+            }
+                     
+          }).catch((error) => {
             console.log(error);
             throw new Error(error);
           })
     })
 // })
+let search = document.getElementById('send');
+send.addEventListener('click', (e) => {
+    e.preventDefault();
+    let href = sgg.value
+    location.href = `/garden/${href}`;
+})
 
 
+let page = document.querySelector('.page');
 
+// page.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     console.log(e.target.href);
+//     let currentUrl = document.location.href;
+//     let pageUrl = currentUrl + e.target.href;
+//     console.log(pageUrl);
+//     // location.href = pageUrl;
+// });
 </script>           
     <%- include('../partials/foot') %>
     <%- include('../partials/copyright') %>

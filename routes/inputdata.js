@@ -39,17 +39,17 @@ const inputChildren = async () => {
             is_bus = (is_bus === 'Y') ? '운영' : '미운영';
             childrenInfo[k] = {
               gardencode : info[k].kindercode,
-              category : info[k].establish,
-              type : '유치원',
-              name : info[k].kindername,
-              phone : info[k].telno,
+              gardencategory : info[k].establish,
+              gardentype : '유치원',
+              gardenname : info[k].kindername,
+              gardentel : info[k].telno,
               address : info[k].addr,
-              homepage : info[k].hpaddr,
-              sggcode : sggCodes[j].sggcode,
+              homepage : info[k].hpaddr,              
               cctvnum : '',
               isbus : is_bus,
               latitude : loValue.x,
               longitude : loValue.y,
+              sggcode : sggCodes[j].sggcode,
             }                               
         }                
         Garden.bulkCreate(childrenInfo);                
@@ -96,17 +96,17 @@ const inputCarecenterData = async () => {
           }
             childrenInfo[j] = {
               gardencode : info[j].stcode,
-              category : info[j].crtypename,
-              type : '어린이집',
-              name : info[j].crname,
-              phone : info[j].crtelno,
+              gardencategory : info[j].crtypename,
+              gardentype : '어린이집',
+              gardenname : info[j].crname,
+              gardentel : info[j].crtelno,
               address : info[j].craddr,
-              homepage : info[j].crhome,
-              sggcode : sggCodes[i].sggcode,
+              homepage : info[j].crhome,              
               cctvnum : info[j].cctvinstlcnt,
               isbus : info[j].crcargbname,
               latitude : info[j].lo,
               longitude : info[j].la,
+              sggcode : sggCodes[i].sggcode,
             }                               
         }                          
         Garden.bulkCreate(childrenInfo);   
@@ -123,7 +123,7 @@ const inputCarecenterData = async () => {
 
 router.get('/', async (req,res)=>{
   try{
-    const result = await inputCarecenterData();
+    // const result = await inputCarecenterData();
     res.send('success');
   }catch(err){
     console.error(err);
