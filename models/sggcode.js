@@ -27,7 +27,7 @@ module.exports = class SggCode extends Sequelize.Model {
       db.SggCode.belongsTo(db.SidoCode, {
           foreignKey : {
               name : 'sidocode',
-              allowNull : false,
+              allowNull : false,              
           },
           targetKey : 'sidocode'    
       });
