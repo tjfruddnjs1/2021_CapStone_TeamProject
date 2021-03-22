@@ -11,10 +11,9 @@ const SidoCode = require('../models/sidocode');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 
-const paging = async (page, paramName = null, param = null, name = null) => {        
+const paging = async (page, sggCode = null, param = '', type = '', name = '') => {        
   let block = 5;
-  let list = 10;
-    
+  let list = 10;    
   let total;  
   // if(paramName == `type`){
   //   total = await Garden.count({where : {type : param, name : {[Op.like] : '%' + name + '%'}}});
@@ -23,11 +22,12 @@ const paging = async (page, paramName = null, param = null, name = null) => {
   // }else{
   //   total = await Garden.count();    
   // }
-    if(param){
-      total = await Garden.count({where : {[paramName] : param}});
+    if(sggCode){
+      total = await Garden.count({where : {sggcode : {[Op.like] : sggCode + '%' }}});
     }else{
       total = await Garden.count();
     }
+    console.log(total);
     if(page <=1){
       page = 1;
     }   
@@ -61,14 +61,14 @@ console.log('nowBlock : ' + nowBlock);
   }else if(s_point > total){
     s_point = s_point - list*(page-2);
   }  
-  if(param){
+  if(sggCode){
     gardens = await Garden.findAndCountAll({
       offset : s_point,
       limit : 10,
       where : {
-        [paramName] : param,
+        sggcode : {[Op.like] : sggCode + '%' },
       }
-    }); 
+    });     
   }else{
     gardens = await Garden.findAndCountAll({
       offset : s_point,
@@ -95,11 +95,13 @@ router.get('/sido', async(req, res) => {
     const {code} = req.query;    
     if(code != ''){      
       const sggCode = await SggCode.findAll({
+        include : [SidoCode],
         where : {
           sidocode : code
         }
-      });      
-      res.send(sggCode);
+      });
+      console.log(sggCode[0].SidoCode.sidoname)      ;
+      res.send({sggCode});
     }else{
       console.log('no data');
       res.send('데이터가 없습니다.');
@@ -109,14 +111,13 @@ router.get('/sido', async(req, res) => {
   }
 });
 
-router.get('/:sggcode?', async (req,res)=>{
+router.get('/', async (req,res)=>{
   try{        
-    let {sidoCode, sggcode} = req.params;
-    sggcode = parseInt(sggcode);
+    
+    // sggcode = parseInt(sggcode);
     let result;
     const sidos = await SidoCode.findAll({});
-    const {type, name} = req.query;    
-
+    const {type, name, sggcode, sidocode} = req.query;    
     
     let {page} = req.query;    
 
@@ -131,9 +132,9 @@ router.get('/:sggcode?', async (req,res)=>{
     //   offset = 10 * (page - 1);
     // }
             
-    if(sggcode){                                       
-        result = await paging(page,`sggcode`, sggcode);                
-        // res.render('garden/gardenlist', {total : result.gardens.count , info : result.gardens.rows, page : result, sidos : sidos});
+    if(sggcode){                      
+        result = await paging(page,sggcode);                
+        // res.render('garden/gardenlist', {total : result.gardens.count , info : result.gardens.rows, page : result, sidos : sidos, sggcode : sggcode});
     }else{   
         console.log('here');                  
         result = await paging(page);                                                                   

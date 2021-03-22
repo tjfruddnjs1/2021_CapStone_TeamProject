@@ -145,7 +145,8 @@
 
           <div class="head">지역</div>
           <form action="/garden" id = "sggcodeForm">
-            <select name="" id="" class = "sidocode">                                            
+            <select name="sidocode" id="" class = "sidocode">                                            
+                <option value="">전체</option>
                 <% for(let i =0; i <sidos.length; i++) {%>
                   <option value="<%= sidos[i].sidocode %>"><%= sidos[i].sidoname %></option>
                 <% } %>
@@ -153,7 +154,7 @@
           
           
           <select name="sggcode" id="" class = "sggcode">
-            <option value="">서울특별시 전체</option>
+            <option value="">전체</option>
             </select>                
         </form>
       </div>
@@ -171,9 +172,9 @@
       <div class="container">
         <% for(let i =0; i<info.length; i++) {%>
         <div class="head">
-            <span class="category"><%= info[i].type %></span>
-            <span class="field"><%= info[i].category %></span>
-            <span class="name"><%= info[i].name %></span>            
+            <span class="category"><%= info[i].gardentype %></span>
+            <span class="field"><%= info[i].gardencategory %></span>
+            <span class="name"><%= info[i].gardenname %></span>            
         </div>
         <div class="icons">                    
             <span class = "location"><a href="" class = "icon "><i class="fas fa-map-marker-alt"><input type="hidden" value = "<%= info[i].latitude %>" class = "la"><input type="hidden" value = "<%= info[i].longitude %>" class = "lo"></i></a></span>
@@ -183,18 +184,18 @@
         <div class="body">
             <span class="address"><%= info[i].address %></span>           
             <br>            
-            <span class="phone"><%= info[i].phone %></span>
+            <span class="phone"><%= info[i].gardentel %></span>
         </div>
         <hr>
         <% } %>        
       </div>
       
       <div class="paging">                   
-            <a href="<%=`?page=${page.startPage-1}`%>"  class = "page">이전</a> 
+            <a href="<%=`${page.startPage-1}`%>"  class = "page">이전</a> 
           <% for(let i =page.startPage; i<=page.endPage; i++) {%>
-             <a href="<%= `?page=${i} `%>" class = "page"><%= i %></a> 
+             <a href="<%= `${i} `%>" class = "page"><%= i %></a> 
           <%} %>
-          <a href="<%= `?page=${page.endPage+1} `%>" class = "page">다음</a> 
+          <a href="<%= `${page.endPage+1} `%>" class = "page">다음</a> 
         
         
       </div>
@@ -283,13 +284,18 @@ let content;
                 content = document.createTextNode(response.data);                
                 optionTag.appendChild(content);              
                 sgg.append(optionTag);
-            }else{
-                                                      
-                for(let i =0; i < response.data.length; i++){
+            }else{                   
                     optionTag = document.createElement("option");
-                    content = document.createTextNode(response.data[i].sggname);                
+                    content = document.createTextNode(`${response.data.sggCode[0].SidoCode.sidoname} 전체`);                
+                    optionTag.appendChild(content);            
+                    optionTag.setAttribute("value", response.data.sggCode[0].sidocode);
+                    sgg.append(optionTag);
+                    console.log();
+                for(let i =0; i < response.data.sggCode.length; i++){
+                    optionTag = document.createElement("option");
+                    content = document.createTextNode(response.data.sggCode[i].sggname);                
                     optionTag.appendChild(content);                
-                    optionTag.setAttribute("value", response.data[i].sggcode)                                
+                    optionTag.setAttribute("value", response.data.sggCode[i].sggcode)                                
                     sgg.append(optionTag);
                 }                             
             }
@@ -300,24 +306,64 @@ let content;
           })
     })
 // })
+
+sgg.addEventListener('change', (e) => {    
+        let href = sgg.value;        
+        location.href = `/garden?sggcode=${href}`;        
+    })
 let search = document.getElementById('send');
-send.addEventListener('click', (e) => {
-    e.preventDefault();
-    let href = sgg.value
-    location.href = `/garden/${href}`;
-})
 
-
-let page = document.querySelector('.page');
-
-// page.addEventListener('click', (e) => {
+// send.addEventListener('click', (e) => {
 //     e.preventDefault();
+//     let href = sgg.value;
+    
+//     location.href = `/garden?sggcode=${href}`;
+// })
+
+
+let pages = document.getElementsByClassName('page');
+
+for(const [key, page] of Object.entries(pages)){
+    page.addEventListener('click', (e) => {
+    e.preventDefault();
+        
+    let currentUrl = location.href;    
+    let seperator;
+    
+    let pagingUrl;
+    let newUrl;
+    let index = e.target.href.lastIndexOf('/');
+    let tagValue = e.target.href.substr(index+1, e.target.href.length-1);
+    if(currentUrl.includes('page')){
+        let url = new URL(currentUrl);
+        let value = url.searchParams.get("page");
+            
+        newUrl = currentUrl.substr(0, currentUrl.length-value.length) + tagValue;                
+                
+    }else{            
+        seperator = currentUrl.includes('?') ? '&' : '?';
+        newUrl = currentUrl + seperator + 'page=' + tagValue;
+    }  
+    
+    // console.log(newUrl)           ;
+    location.href = newUrl;
+});
+}
+// Array.form(pages).foreach((page) => {
+//     page.addEventListener('click', (e) => {
+//     e.preventDefault();
+    
+//     console.log(e.target);
 //     console.log(e.target.href);
-//     let currentUrl = document.location.href;
-//     let pageUrl = currentUrl + e.target.href;
-//     console.log(pageUrl);
+//     let currentUrl = location.href;
+    
+//     let seprator = (currentUrl.includes('?')) ? '&' : '?';
+//     let requestUrl = separtor + 'page=' + e.target.value;
+//     console.log(requestUrl);
 //     // location.href = pageUrl;
 // });
+// })
+
 </script>           
     <%- include('../partials/foot') %>
     <%- include('../partials/copyright') %>
