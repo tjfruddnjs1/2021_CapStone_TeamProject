@@ -119,6 +119,9 @@
       text-align : center;
       color : black;
   }
+  .daycare{
+      background-color : #3689dff5;
+  }
   </style>      
 </head>
 
@@ -134,29 +137,44 @@
       <!-- ################################################################################################ -->
       <div class="search">
           <div class="head">구분</div>
-          <form action="" method = "get">
+          <form action="/garden" method = "get" id = "searchForm">
             <select name="type" id="">
                 <option value="유치원">유치원</option>
                 <option value="어린이집">어린이집</option>
             </select>
             <input type="text" name = "name" placeholder = "이름을 입력해주세요" id = "name">
-            <input type="submit" value = "검색" class = "submit">
+            <input type="submit" value = "검색" class = "submit" id = "send">
           </form>
 
-          <div class="head">지역</div>
-          <form action="/garden" id = "sggcodeForm">
+          <div class="head">지역</div>          
             <select name="sidocode" id="" class = "sidocode">                                            
                 <option value="">전체</option>
                 <% for(let i =0; i <sidos.length; i++) {%>
-                  <option value="<%= sidos[i].sidocode %>"><%= sidos[i].sidoname %></option>
+                    <% if(result.sidocode == sidos[i].sidocode){%>
+                        <option value="<%= sidos[i].sidocode %>" selected><%= sidos[i].sidoname %></option>
+                    <% } else{%>
+                        <option value="<%= sidos[i].sidocode %>"><%= sidos[i].sidoname %></option>
+                    <% } %>
+                  
                 <% } %>
             </select>
           
           
-          <select name="sggcode" id="" class = "sggcode">
-            <option value="">전체</option>
-            </select>                
-        </form>
+          <select name="sggcode" id="" class = "sggcode">              
+              <% if(result.sidocode) {%>
+                <option value=""><%= result.sggcode[0].SidoCode.sidoname %> 전체</option>
+                <% for(let i =0; i<result.sggcode.length; i++) { %>
+                    <% if(result.code == result.sggcode[i].sggcode) {%>
+                        <option value="<%= result.sggcode[i].sggcode%>" selected><%= result.sggcode[i].sggname %></option>
+                    <% } else {%>
+                        <option value="<%= result.sggcode[i].sggcode%>"><%= result.sggcode[i].sggname %></option>
+                    <% } %>                    
+                <%  } %>
+              <% } else { %>
+                <option value="">전체</option>
+              <% }  %>
+                
+            </select>                        
       </div>
       <div id="map" style="width:100%;height:350px;"></div>
       <div class="searchlist">
@@ -172,7 +190,12 @@
       <div class="container">
         <% for(let i =0; i<info.length; i++) {%>
         <div class="head">
-            <span class="category"><%= info[i].gardentype %></span>
+            <% if(info[i].gardentype == '어린이집'){ %>
+                <span class="category daycare"><%= info[i].gardentype %></span>
+            <% } else { %>
+                <span class="category"><%= info[i].gardentype %></span>
+            <% } %>
+            
             <span class="field"><%= info[i].gardencategory %></span>
             <span class="name"><%= info[i].gardenname %></span>            
         </div>
@@ -266,59 +289,45 @@ let sido = document.querySelector('.sidocode');
 let sgg = document.querySelector('.sggcode');   
 let optionTag;  
 let content;
+let search = document.getElementById('send');
+let name = document.getElementById('name');
+let searchForm = document.getElementById('searchForm');
+search.addEventListener('click', (e) => {    
+    e.preventDefault();
+    if(!name.value){
+        alert('이름을 입력해주세요');
+        return;
+    }
+
+    searchForm.submit();
+})
 // Array.from(sido).foreach((sidocode) => {
-    sido.addEventListener('change', (e) => {                                        
-        axios({
-            method : "GET",
-            url : '/garden/sido',          
-            params : {
-                code : e.target.value,
-            }
-          }).then((response) => {   
-              console.log(typeof response.data)
-            while ( sgg.hasChildNodes() ) { 
-                    sgg.removeChild( sgg.firstChild ); 
-            } 
-            if(typeof response.data === 'string')            {                
-                optionTag = document.createElement("option");
-                content = document.createTextNode(response.data);                
-                optionTag.appendChild(content);              
-                sgg.append(optionTag);
-            }else{                   
-                    optionTag = document.createElement("option");
-                    content = document.createTextNode(`${response.data.sggCode[0].SidoCode.sidoname} 전체`);                
-                    optionTag.appendChild(content);            
-                    optionTag.setAttribute("value", response.data.sggCode[0].sidocode);
-                    sgg.append(optionTag);
-                    console.log();
-                for(let i =0; i < response.data.sggCode.length; i++){
-                    optionTag = document.createElement("option");
-                    content = document.createTextNode(response.data.sggCode[i].sggname);                
-                    optionTag.appendChild(content);                
-                    optionTag.setAttribute("value", response.data.sggCode[i].sggcode)                                
-                    sgg.append(optionTag);
-                }                             
-            }
-                     
-          }).catch((error) => {
-            console.log(error);
-            throw new Error(error);
-          })
+    sido.addEventListener('change', (e) => {              
+        let requestUrl = modifyUrl('sido', e.target.value);                      
+        if(requestUrl.includes('&')){
+            let andIndex = location.href.indexOf('&');
+            let url = new URL(requestUrl);
+            let value = url.searchParams.get('sido');            
+            requestUrl =  requestUrl.substr(0, andIndex - value.length) + e.target.value;
+            
+        }   
+        
+        location.href = requestUrl;       
     })
 // })
 
 sgg.addEventListener('change', (e) => {    
-        let href = sgg.value;        
-        location.href = `/garden?sggcode=${href}`;        
-    })
-let search = document.getElementById('send');
-
-// send.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     let href = sgg.value;
-    
-//     location.href = `/garden?sggcode=${href}`;
-// })
+        let href = sgg.value;            
+        let requestUrl = modifyUrl('sgg', e.target.value);        
+        if(requestUrl.includes('page')){
+            let andIndex = location.href.lastIndexOf('&');
+            let url = new URL(requestUrl);
+            let value = url.searchParams.get('sgg');               
+            requestUrl =  requestUrl.substr(0, andIndex - value.length) + e.target.value;                        
+        }  
+        console.log(requestUrl);                      ;
+        location.href = requestUrl;        
+})
 
 
 let pages = document.getElementsByClassName('page');
@@ -334,35 +343,56 @@ for(const [key, page] of Object.entries(pages)){
     let newUrl;
     let index = e.target.href.lastIndexOf('/');
     let tagValue = e.target.href.substr(index+1, e.target.href.length-1);
-    if(currentUrl.includes('page')){
-        let url = new URL(currentUrl);
-        let value = url.searchParams.get("page");
+    let requestUrl = modifyUrl('page', tagValue);        
+    console.log(requestUrl);
+    location.href = requestUrl;
+    // if(currentUrl.includes('page')){
+    //     let url = new URL(currentUrl);
+    //     let value = url.searchParams.get("page");
             
-        newUrl = currentUrl.substr(0, currentUrl.length-value.length) + tagValue;                
+    //     newUrl = currentUrl.substr(0, currentUrl.length-value.length) + tagValue;                
                 
-    }else{            
-        seperator = currentUrl.includes('?') ? '&' : '?';
-        newUrl = currentUrl + seperator + 'page=' + tagValue;
-    }  
+    // }else{            
+    //     seperator = currentUrl.includes('?') ? '&' : '?';
+    //     newUrl = currentUrl + seperator + 'page=' + tagValue;
+    // }  
     
     // console.log(newUrl)           ;
-    location.href = newUrl;
+    // location.href = requestUrl;
 });
 }
-// Array.form(pages).foreach((page) => {
-//     page.addEventListener('click', (e) => {
-//     e.preventDefault();
-    
-//     console.log(e.target);
-//     console.log(e.target.href);
-//     let currentUrl = location.href;
-    
-//     let seprator = (currentUrl.includes('?')) ? '&' : '?';
-//     let requestUrl = separtor + 'page=' + e.target.value;
-//     console.log(requestUrl);
-//     // location.href = pageUrl;
-// });
-// })
+
+const modifyUrl = (name, val) => {
+   let currentUrl = location.href;
+   let seperator;
+   let newUrl;
+   
+   if(currentUrl.includes(name)){       
+       let url = new URL(currentUrl);
+       let value = url.searchParams.get(name);    
+       let removeUrl;  
+       if(!value) {           
+         let index = currentUrl.indexOf(name);
+         newUrl = currentUrl.substr(0, index + name.length + 1) + val;         
+       }else{
+        let index = currentUrl.indexOf(value);              
+        removeUrl = currentUrl.substr(0, index);        
+        newUrl = removeUrl + val;  
+       }                        
+       
+   }else{
+       if(currentUrl.includes('type') && name != 'page'){           
+         let typeIndex = currentUrl.indexOf('type');         
+         newUrl = currentUrl.substr(0, typeIndex) + name + '=' + val;
+       }else{
+        seperator = currentUrl.includes('?') ? '&' : '?';
+        newUrl = currentUrl + seperator + `${name}=` + val;
+       }       
+   }
+
+   return newUrl;
+}
+
 
 </script>           
     <%- include('../partials/foot') %>
