@@ -11,10 +11,10 @@ const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
 const gardenRouter =require('./routes/garden');
 const mypageRouter = require('./routes/mypage');
-
 const kidstalkRouter = require('./routes/kidstalk');
-
 const inputdata = require('./routes/inputdata');
+const reviewRouter = require('./routes/review');
+
 const passportConfig = require('./passport');
 
 const app = express();
@@ -25,7 +25,7 @@ passportConfig();
 app.set('port', process.env.PORT || 8000);
 app.set('view engine', 'ejs');
 
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
   .then(() => {
     console.log('데이터베이스 연결 성공');
   })
@@ -36,7 +36,7 @@ sequelize.sync({ force: false })
 app.use(morgan('dev'));
 app.use(express.static(__dirname+'/public'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(session({
   resave: true,
   saveUninitialized: true,
@@ -56,8 +56,8 @@ app.use('/',homeRouter);
 app.use('/login', loginRouter);
 app.use('/garden', gardenRouter);
 app.use('/mypage', mypageRouter);
-
 app.use('/kidstalk', kidstalkRouter);
+app.use('/review',reviewRouter);
 
 app.use('/inputdata', inputdata);
 
