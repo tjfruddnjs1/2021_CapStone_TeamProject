@@ -153,8 +153,7 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 
 - 메인페이지
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/111051642-0644ce00-8498-11eb-8e12-76d20115bb81.png">
-<img width=70% src="https://user-images.githubusercontent.com/41010744/111051653-26748d00-8498-11eb-858d-e7df16f747d4.png">
+<img src="https://user-images.githubusercontent.com/41010744/112147506-1ee37f80-8c20-11eb-9b47-58d4efb7fef1.png">
 
 - 유치원/어린이집 검색
 <br/>
@@ -185,6 +184,7 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br>
 
 > CRUD + 댓글
+<br>
 <img src="https://user-images.githubusercontent.com/41010744/111615947-a8f8a600-8824-11eb-9229-26491f9670ac.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111615591-456e7880-8824-11eb-9ef2-697699607230.png">
@@ -197,10 +197,12 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <img src="https://user-images.githubusercontent.com/41010744/111050670-61bf8d80-8491-11eb-81e2-9c62e5bddadc.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111050746-ce3a8c80-8491-11eb-8f1b-d52e85c8eb65.png">
+<br>
 
 - 회원가입
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111050767-ef02e200-8491-11eb-850d-60ff715cf0e8.png">
+<br>
 
 - 마이페이지
 <br>
@@ -222,10 +224,12 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 - `2021-03-18` : ERD 중간 과정(user, drop, post, comment)
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111616124-dfcebc00-8824-11eb-8f51-5d0f7a340ea5.png">
+<br>
 
 - `2021-03-23` : ERD 중간 과정2(sidocode, sggcode, garden, review 추가)
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/112146760-4d148f80-8c1f-11eb-919b-91b176672d93.png">
+<br>
 
 ## 개발 규칙
 
@@ -260,13 +264,12 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 - 유치원 검색, 나의 유치원 기능 상세 기능
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111051519-fa0c4100-8496-11eb-98ea-7a37ce050c2d.png">
+<br>
 
-> `2021-03-11` : 초기 ERD 
-<br>
-- 초기 ERD
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/111051572-6b4bf400-8497-11eb-9698-d43f54af2071.png">
+> `2021-03-11` : 초기 ERD 도출
 
 > `2021-03-14` : 헤더 기능 상세 도출 > 키즈가든 검색(유치원/어린이집 찾기), 마이 키즈가든(나의 유치원/어린이집), 이벤트, 키즈톡(자유게시판), 쪽지, 마이페이지
 
-> `2021-03-15` : 현호 > 검색 기능(지도 포함) + 페이징 기능 , 경원 > 키즈톡(게시판) + 페이징 기능 `2021-03-21` 까지 구현 예정
+> `2021-03-15` : 현호 > 검색 기능(지도 포함) + 페이징 기능 , 경원 > 키즈톡(게시판) + 페이징 기능 `2021-03-21` 까지 구현 예정 , ERD 중간 과정 1 도출
+
+> `2021-03-21` : 현호 > 검색 기능 (추가) + 유치원/어린이집 정보페이지 , 경원 > 리뷰페이지, ERD 중간 과정 2 도출
