@@ -21,8 +21,8 @@
 |이름|프로젝트관리 파트|서비스개발 파트|
 |:---:|:---|:---|
 |임종묵|-Scrum Master <br> -프로젝트 문서 관리 <br> -프로젝트 수행 관련 각종 신청|-CCTV 연동<br>-CCTV열람 페이지|
-|문현호|-아이디어 세부조사<br>-Product Owner|-리뷰페이지<br>-어린이집/유치원검색<br>-API정보가공|
-|설경원|-Develope Leader(PM)<br>-스프린트 관련 계획관리<br>-형상관리|-로그인/로그아웃<br>-마이페이지<br>-커뮤니티 게시판|
+|문현호|-아이디어 세부조사<br>-Product Owner|<br>-어린이집/유치원검색<br>-API정보가공|
+|설경원|-Develope Leader(PM)<br>-스프린트 관련 계획관리<br>-형상관리|-로그인/로그아웃<br>-마이페이지<br>-커뮤니티 게시판<br>-리뷰페이지|
 
 ## 목차
 
@@ -160,6 +160,10 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br/>
 <img src = "https://user-images.githubusercontent.com/57825856/111155455-d270c200-85d7-11eb-95d1-9e467c9c81fe.png">
 
+- 유치원/어린이집 리뷰 작성 페이지
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/112147086-a4b2fb00-8c1f-11eb-9127-93b636e3b79e.png">
+
 - 나의 유치원/어린이집
 
 
@@ -218,6 +222,10 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 - `2021-03-18` : ERD 중간 과정(user, drop, post, comment)
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111616124-dfcebc00-8824-11eb-8f51-5d0f7a340ea5.png">
+
+- `2021-03-23` : ERD 중간 과정2(sidocode, sggcode, garden, review 추가)
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/112146760-4d148f80-8c1f-11eb-919b-91b176672d93.png">
 
 ## 개발 규칙
 
