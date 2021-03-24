@@ -179,13 +179,25 @@ router.get('/', async (req,res)=>{
   }
 });
 
+router.get('/:gardenCode', async(req, res) => {
+  try{        
+    const {gardenCode} = req.params;  
+    console.log(gardenCode);    
+    
+    const kinderInfo = await Garden.findOne({
+        where : {
+          gardencode : gardenCode,
+        }
+    });    
+          
+    console.log(kinderInfo)
+    res.render('garden/gardenView', {info : kinderInfo});    
+  }catch(err){
+    console.error(err);
+  }
+});
 
 
-
-
-router.post('/search', async(req, res) => {
-  
-})
 
 
 
