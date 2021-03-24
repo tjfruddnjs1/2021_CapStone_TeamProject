@@ -66,6 +66,11 @@ module.exports = class Garden extends Sequelize.Model {
           allowNull : false,                    
       },
       targetKey : 'sggcode',            
-  });
+    });
+
+    db.Garden.hasMany(db.Review,{
+      foreignKey : 'gardencode',
+      sourceKey : 'gardencode'
+    });
   }
 };
