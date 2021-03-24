@@ -29,12 +29,13 @@
           font-size : 16px;
       }
       .sub{
+        
           list-style : none;
           text-align: left;          
           margin : 10px 0;
       }
       .sub i{
-          margin-right : 30px;
+          margin-right : 33px;
           font-style : normal;
           font-size : 12px;          
           color : #a8a6a6;
@@ -114,7 +115,9 @@
        font-size : 12px;
    }
     
-
+   .wrap, span{
+       font-style : normal;
+   }
   </style>
 
   <body id="top">
@@ -140,9 +143,9 @@
               <div class="main">
                   <div class="title"><i class="fas fa-home">기본정보</i></div>                  
                   <ul>                      
-                    <li class = "sub"><i><span class = "info">전화번호</span>    </i><span><%= info.gardentel %></span></span></li>                                                                                        
+                    <li class = "sub"><i><span class = "info">전화번호</span></i><span><%= info.gardentel %></span></span></li>                                                                                        
                                                           
-                    <li class = "sub"><i><span class = "info">주소</span>   </i><span><%= info.address %></span></li>
+                    <li class = "sub"><i><span class = "info">주소</span></i><span><%= info.address %></span></li>
                     <% if(info.cctvnum) {%>
                         <li class = "sub"><i><span class = "info">CCTV 개수</span></i><span><%= info.cctvnum %></span></li>                   
                     <% } else { %>
@@ -150,9 +153,9 @@
                     <%  }%>
                     
                     <li class = "sub"><i><span class = "info">홈페이지</span></i><span class="ovrf"><a href="http://cafe.daum.net/teresakids" class="underline" target="_blank">http://cafe.daum.net/teresakids</a></span></li>
-                    <li class = "sub"><i>평점</i><span>10</span></li>                   
+                    <li class = "sub"><i><span class = "info">평점</span></i><span>10</span></li>                   
                   </ul>
-                  <div class="cont bus"><i class="fas fa-bus">통학차량</i><span class="info"><%= info.isbus %></span> </div>
+                  <div class="cont bus"><i class="fas fa-bus">통학차량</i><span class = "info"><%= info.isbus %></span></div>
               </div>
           </div>
           <div class="right">
