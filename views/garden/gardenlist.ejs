@@ -122,6 +122,9 @@
   .daycare{
       background-color : #3689dff5;
   }
+  .name{
+      color : black;
+  } 
   </style>      
 </head>
 
@@ -197,7 +200,7 @@
             <% } %>
             
             <span class="field"><%= info[i].gardencategory %></span>
-            <span class="name"><%= info[i].gardenname %></span>            
+            <span class="name"><a href="<%= `/garden/${info[i].gardencode}` %>" class = "name"><%= info[i].gardenname %></a></span>            
         </div>
         <div class="icons">                    
             <span class = "location"><a href="" class = "icon "><i class="fas fa-map-marker-alt"><input type="hidden" value = "<%= info[i].latitude %>" class = "la"><input type="hidden" value = "<%= info[i].longitude %>" class = "lo"></i></a></span>
@@ -231,14 +234,26 @@
 let locate = document.getElementsByClassName('location');
 let latitude = document.getElementsByClassName('la');
 let longtitue = document.getElementsByClassName('lo');
-let la, lo;
+let la = `<%=info[0].latitude %>`;
+let lo = `<%=info[0].longitude %>`;
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(lo, la), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(lo, la); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
 
 var marker;
 
@@ -392,6 +407,14 @@ const modifyUrl = (name, val) => {
 
    return newUrl;
 }
+
+// let kinderCode = document.getElementsByClassName('name')[0];
+
+// kinderCode.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     console.log(e.target.href);
+// })
+
 
 
 </script>           

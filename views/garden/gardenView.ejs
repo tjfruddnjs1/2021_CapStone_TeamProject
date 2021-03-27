@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  </head>    
+  <style>
+      .box{
+          width : 100%;
+          height : 400px;
+          border : 5px solid #dee4f9;
+          
+      }
+      .left, .right{
+          width : 50%;          
+          height : 100%;          
+          display : inline-block;
+      }   
+      .left{
+        padding : 40px 20px;
+      }
+      .right{
+          float : right;
+          height : 100%;
+      }     
+      .name{
+          width : 50px;
+          font-weight : bold;
+          font-size : 16px;
+      }
+      .sub{
+        
+          list-style : none;
+          text-align: left;          
+          margin : 10px 0;
+      }
+      .sub i{
+          margin-right : 33px;
+          font-style : normal;
+          font-size : 12px;          
+          color : #a8a6a6;
+      }
+      ul{
+        padding: 0 10px;         
+      }
+      .info{
+          display : inline-block;
+          width : 70px;                    
+      }
+      .bus span{
+          text-align  :right;
+      }
+      #map{
+          width : 100%;
+          height : 100%;
+          padding : 0;
+          margin : 0;
+      }
+      #home{
+        width : 30px;
+        height : 30px;
+        padding : 7px;       
+        background-color : #80808033;
+        border-radius : 50%;
+        color : #22d029bf;        
+        
+   }
+   .icon{
+       color : #22d029bf;
+   }
+   .category{
+       padding : 7px 5px;
+       border-radius: 50%;
+       background-color : #22d029bf;
+       color : white;
+       font-size : 12px;       
+   }
+   .field{
+       border : 1px solid #22d029bf;
+       padding : 4px 5px;
+       color : #22d029bf;
+       font-size : 12px;
+       font-weight : bold;
+   }
+   hr{
+       margin :  30px 0;
+   }
+   .name{
+       font-size : 18px;
+   }
+   #infowindow{
+    
+       width : 300px;
+       height : 100px;
+       text-align  : left;
+       padding : 5px;
+       border-radius: 10px;   
+   }
+   .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative; overflow :visible;}
+    .info .desc {position: relative;margin: 6px 0 0 0;height: 75px; padding : 5px; font-size : 13px; font-weight : bold};
+    .desc .ellipsis {overflow: visible;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .link {color: #5085BB;}
+
+   .page{
+       font-size : 12px;
+   }
+    
+   .wrap, span{
+       font-style : normal;
+   }
+  </style>
+
+  <body id="top">
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    > 
+
+    <%- include('../partials/nav') %>
+    </div>
+
+  <div class="wrapper row3">
+    <main class="hoc container clear">
+      <div class="box">          
+          <div class="left">
+              <div class="head">
+                <span class="category daycare"><%= info.gardentype%></span>
+                <span class="field"><%= info.gardencategory %></span>
+                <span class="name"><%= info.gardenname %></span>        
+                <span><a href="<%= info.homepage %>" class = "icon" target = '_blank' id = "homepage"><i class="fas fa-home" id = "home"></i></a></span>
+              </div>              
+              <hr>
+              <div class="main">
+                  <div class="title"><i class="fas fa-home">기본정보</i></div>                  
+                  <ul>                      
+                    <li class = "sub"><i><span class = "info">전화번호</span></i><span><%= info.gardentel %></span></span></li>                                                                                        
+                                                          
+                    <li class = "sub"><i><span class = "info">주소</span></i><span><%= info.address %></span></li>
+                    <% if(info.cctvnum) {%>
+                        <li class = "sub"><i><span class = "info">CCTV 개수</span></i><span><%= info.cctvnum %></span></li>                   
+                    <% } else { %>
+                        <li class = "sub"><i><span class = "info">CCTV 개수</span></i><span id = "no">미공개</span></li>                   
+                    <%  }%>
+                    
+                    <li class = "sub"><i><span class = "info">홈페이지</span></i><span class="ovrf"><a href="http://cafe.daum.net/teresakids" class="underline" target="_blank">http://cafe.daum.net/teresakids</a></span></li>
+                    <li class = "sub"><i><span class = "info">평점</span></i><span>10</span></li>                   
+                  </ul>
+                  <div class="cont bus"><i class="fas fa-bus">통학차량</i><span class = "info"><%= info.isbus %></span></div>
+              </div>
+          </div>
+          <div class="right">
+            <div id="map" style=""></div>
+          </div>
+      </div>
+      
+    </main>    
+    </div>    
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28f2f70ef1f0ab3e87563b70d829d265"></script>
+    <script>       
+    let la = `<%=info.latitude %>`;
+    let lo = `<%=info.longitude %>`;
+      var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(lo, la), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+};
+
+var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(lo, la); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+var content = '<div class="wrap">' + 
+            '    <div class="info">' + 
+            '        <div class="title">' + 
+            '            <%= info.gardenname %>' + 
+            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+            '        </div>' + 
+            '        <div class="body">' +             
+            '            <div class="desc">' + 
+            '                <div class="ellipsis"><%= info.address %></div>' +             
+            '                <div class="jibun ellipsis"><%= info.gardencategory %></div>' + 
+            '                <div class="ellipsis"><%= info.gardentel %></div>' +             
+            '                <div class = "page"><a href="<%= info.homepage %>" target="_blank" class="link">홈페이지</a></div>' + 
+            '            </div>' + 
+            '        </div>' + 
+            '    </div>' +    
+            '</div>';
+
+// 마커 위에 커스텀오버레이를 표시합니다
+// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+var overlay = new kakao.maps.CustomOverlay({
+    content: content,
+    map: map,
+    position: marker.getPosition()       
+});
+
+// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+kakao.maps.event.addListener(marker, 'click', function() {
+    overlay.setMap(map);
+});
+
+overlay.setMap(map);
+function closeOverlay() {
+    overlay.setMap(null);     
+}
+
+    </script>
+  </body>  
+</html>
