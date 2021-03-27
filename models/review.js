@@ -5,7 +5,7 @@ module.exports = class Review extends Sequelize.Model {
     return super.init({
       teacherName: {
         type: Sequelize.STRING(50),
-        allowNull: false,
+        allowNull: true,
       },
       attendTime : {
         type: Sequelize.STRING(10),
