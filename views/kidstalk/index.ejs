@@ -22,7 +22,7 @@
     #btn{
       width: 17%;
       color: white;
-      background-color: rgb(40, 87, 209);
+      background-color: #5172df;
       border: 1px solid #8080805c;
       padding-left : 3%;
       padding-right : 3%;
@@ -46,6 +46,33 @@
       margin-top : 10%;
     }
 
+    .banner{
+      border : 1px solid blue;
+      background-color: #5172df;
+      height : 150px;
+      text-align: center;
+      color : white;
+      font-family: NotoSansKR-Regular;
+    }
+
+    #banner{
+      margin-top : 1%;
+    }
+    
+    #talk{
+      margin-top : 2.5%;
+    }
+
+    .row3{
+      background-color: #f8f8f8;
+    }
+
+    .container{
+      padding : 6%;
+      min-width : 80%;
+      background-color: white;
+    }
+
   </style>
 
   <body id="top">
@@ -55,6 +82,10 @@
     > 
 
     <%- include('../partials/nav') %>
+    </div>
+    <div class="banner">
+      <h2 id="talk">키즈맘TALK</h2> 
+      <h5 id="banner">사랑스러운 어린이들의 행복한 배움터를 만듭니다</h5>
     </div>
 
   <div class="wrapper row3">
@@ -127,7 +158,7 @@
 
           <% for(i=1;i<=maxPage;i++){ %>
             <% if(i==1 || i==maxPage || (i>=currentPage-offset && i<=currentPage+offset)){ %>
-              <li class="page-item <%= currentPage==i?'active':'' %>"><a class="page-link" href="/kidstalk?page=<%= i %>&limit=<%= limit %>"> <%= i %> </a></li>
+              <li class="page-item <%= currentPage==i?'active':'' %>"><a style="background-color: #5172df ; border:none;" class="page-link" href="/kidstalk?page=<%= i %>&limit=<%= limit %>"> <%= i %> </a></li>
             <% } else if(i==2 || i==maxPage-1){ %>
               <li><a class="page-link">...</a></li>
             <% } %>

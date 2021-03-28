@@ -8,8 +8,19 @@ const apiRouter = require('./api');
 const Garden = require('../models/garden');
 const SggCode = require('../models/sggcode');
 const SidoCode = require('../models/sidocode');
+const User = require('../models/user');
+const Review = require('../models/review');
+
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
+
+//session 유지를 위한 > passport module
+router.use((req,res,next)=>{
+  res.locals.user = req.user;
+  next();
+});
 
 const paging = async (page, sggCode = null, type = null, name = null) => {        
   let block = 5;
@@ -181,24 +192,89 @@ router.get('/', async (req,res)=>{
 
 router.get('/:gardenCode', async(req, res) => {
   try{        
-    const {gardenCode} = req.params;  
-    console.log(gardenCode);    
+    const {gardenCode} = req.params;   
     
     const kinderInfo = await Garden.findOne({
         where : {
           gardencode : gardenCode,
         }
-    });    
+    });   
+
+    const review = await Review.findAll({
+      where : {
+        gardencode : gardenCode,
+      }
+    });
+
+    console.log(review);
           
-    console.log(kinderInfo)
-    res.render('garden/gardenView', {info : kinderInfo});    
+    res.render('garden/gardenView', {info : kinderInfo, review : review});    
   }catch(err){
     console.error(err);
   }
 });
 
+router.get('/:gardenCode/review', isLoggedIn, async(req,res)=>{
+  try{        
+    const {gardenCode} = req.params; 
+    
+    const kinderInfo = await Garden.findOne({
+        where : {
+          gardencode : gardenCode,
+        }
+    });
+          
+    res.render('garden/review', {info : kinderInfo});    
+  }catch(err){
+    console.error(err);
+  }
+});
 
+//리뷰 post 요청
+router.post('/:gardenCode/review',isLoggedIn, async(req,res,next)=>{
+  try{
+      const { teacherName, attendTime, attendTimeDirect, reJoin, isCommunicate, isActive, isSafe, advantage, disAdvantage } = req.body;
+      const {gardenCode} = req.params;
 
+      console.log(gardenCode);
 
+      if(attendTime == "dircet"){
+          await Review.create({
+              teacherName : teacherName,
+              attendTime : attendTimeDirect,
+              reJoin : reJoin,
+              isCommunicate : isCommunicate,
+              isActive : isActive,
+              isSafe : isSafe,
+              advantage : advantage,
+              disAdvantage : disAdvantage,
+              userNickname : req.user.nickname,
+              gardencode : gardenCode,
+          });
+          res.send(
+              "<script>alert('리뷰가 작성되었습니다.'); window.location='/garden';</script>"
+          );
+      }else{
+          await Review.create({
+              teacherName : teacherName,
+              attendTime : attendTime,
+              reJoin : reJoin,
+              isCommunicate : isCommunicate,
+              isActive : isActive,
+              isSafe : isSafe,
+              advantage : advantage,
+              disAdvantage : disAdvantage,
+              userNickname : req.user.nickname,
+              gardencode : gardenCode
+          });
+          res.send(
+              "<script>alert('리뷰가 작성되었습니다.'); window.location='/garden';</script>"
+          );
+      }   
+  }catch(err){
+      console.error(err);
+      next(err);
+  }
+});
 
 module.exports = router;

@@ -29,7 +29,6 @@
 }
 
 .title{
-  font-family: sans-serif;
   font-weight: bold;
 }
 .section{
@@ -44,7 +43,6 @@
   cursor: pointer;
 }
 .head{
-  font-family : sans-serif;
   font-size : 30px;
   font-weight : bold;
 }
@@ -82,13 +80,9 @@
   border : 1px solid black;
   float : right;
 }
-/* .desc{
-  font-size : 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-} */
+
 .name{
+  font-family: NotoSansKR-Regular;
   font-size: 24px;
   font-weight : bold;
 }
@@ -108,7 +102,6 @@
 }
 .name{
   font-size : 20px;
-  font-family: sans-serif;
 }
 .fa-star{
   color : #F6EC11;
@@ -126,62 +119,36 @@
   margin-top : 50px;    
   width : 300px;
 }
+
+.heading{
+  font-family: NotoSansKR-Regular;
+}
+
+.overlay::after{
+  background-color: rgba(0,0,0,0);
+}
+
   </style>
 </haed>
 
 <body id="top">
+
+  <%- include('../partials/nav') %>
 <!-- Top Background Image Wrapper -->
 <div class="bgded overlay" style="background-image:url('/images/child.jpg');">
 
-  <%- include('../partials/nav') %>
-  
   <div id="pageintro" class="hoc clear">
     <!-- ################################################################################################ -->
     <article>
-      <h1 class="heading" style="font-family: sans-serif;">어린이집 안전 서비스</h1>
+      <h1 class="heading">어린이집 안전 서비스</h1>
       <p id = "story">우리 아이가 유치원에서 잘 지내는지 궁금하신가요? <br>키즈가든에서 안전한 유치원을 골라 확인하세요!</p>
       <footer></footer>
     </article>
-    <div class="button">
-      <a href="/garden" class = "navbutton">        
-        <div class="box leftbox">          
-          <img src="/images/search_kindergarden.png" alt="" class = "kindergarden">
-          유치원 검색
-        </div>
-      </a>
-      <a href="#" class = "navbutton">
-        
-        <div class="box rightbox">
-          <img src="/images/my_kindergarden.png" alt="" class = "kindergarden">
-          나의 유치원
-        </div>
-      </a>
-    </div>
-
     <!-- ################################################################################################ -->
   </div>
 
 </div>
-<!-- End Top Background Image Wrapper -->
-<div class="wrapper row4 statistic">
 
-  <!-- ################################################################################################ -->
-  <div class="sub_title">
-      <h2 class = "head">20000</h2>
-      <span class = "desc">등록된 유치원 수</span>
-  </div>
-  <div class="sub_title">
-      <h2 class = "head">20000</h2>
-      <span class = "desc">등록된 사용자 수</span>
-  </div>
-  <div class="sub_title">
-      <h2 class = "head">20000</h2>
-      <span class = "desc">등록된 리뷰 수</span>
-  </div>
-
-  <!-- ################################################################################################ -->
-
-</div>
 <div class="wrapper row3">
 <section class="hoc container clear">  
   <div class="title">

@@ -13,7 +13,6 @@ const gardenRouter =require('./routes/garden');
 const mypageRouter = require('./routes/mypage');
 const kidstalkRouter = require('./routes/kidstalk');
 const inputdata = require('./routes/inputdata');
-const reviewRouter = require('./routes/review');
 
 const passportConfig = require('./passport');
 
@@ -57,10 +56,7 @@ app.use('/login', loginRouter);
 app.use('/garden', gardenRouter);
 app.use('/mypage', mypageRouter);
 app.use('/kidstalk', kidstalkRouter);
-app.use('/review',reviewRouter);
-
 app.use('/inputdata', inputdata);
-
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
@@ -78,3 +74,4 @@ app.use((err, req, res, next) => {
 app.listen(app.get('port'), ()=> {
   console.log(app.get('port'), '번 포트에서 대기중');
 });
+
