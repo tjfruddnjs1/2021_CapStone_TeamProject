@@ -231,39 +231,44 @@ router.get('/:gardenCode/review', isLoggedIn, async(req,res)=>{
 });
 
 //리뷰 post 요청
-router.post('/:gardenCode/review',isLoggedIn, async(req,res,next)=>{
+router.post('/:gardenCode/review', isLoggedIn, async(req,res,next)=>{
   try{
-      const { teacherName, attendTime, attendTimeDirect, reJoin, isCommunicate, isActive, isSafe, advantage, disAdvantage } = req.body;
+      const { teacherName, attendTime, attendTimeDirect, reJoin, isCommunicate, isActive, isSafe, advantage, disAdvantage, lineReview } = req.body;
+      const totalStar = (parseInt(reJoin) + parseInt(isCommunicate) + parseInt(isActive) + parseInt(isSafe))/4;
       const {gardenCode} = req.params;
 
-      console.log(gardenCode);
+      console.log(attendTime == "direct");
 
-      if(attendTime == "dircet"){
+      if(attendTime != "dircet"){
           await Review.create({
               teacherName : teacherName,
               attendTime : attendTimeDirect,
-              reJoin : reJoin,
-              isCommunicate : isCommunicate,
-              isActive : isActive,
-              isSafe : isSafe,
+              reJoin : parseInt(reJoin),
+              isCommunicate : parseInt(isCommunicate),
+              isActive : parseInt(isActive),
+              isSafe : parseInt(isSafe),
               advantage : advantage,
+              totalStar : totalStar,
               disAdvantage : disAdvantage,
+              lineReview : lineReview,
               userNickname : req.user.nickname,
               gardencode : gardenCode,
           });
           res.send(
-              "<script>alert('리뷰가 작성되었습니다.'); window.location='/garden';</script>"
+              "<script>alert('리뷰가 작성되었습니다.zz'); window.location='/garden';</script>"
           );
       }else{
           await Review.create({
               teacherName : teacherName,
               attendTime : attendTime,
-              reJoin : reJoin,
-              isCommunicate : isCommunicate,
-              isActive : isActive,
-              isSafe : isSafe,
+              reJoin : parseInt(reJoin),
+              isCommunicate : parseInt(isCommunicate),
+              isActive : parseInt(isActive),
+              isSafe : parseInt(isSafe),
               advantage : advantage,
+              totalStar : totalStar,
               disAdvantage : disAdvantage,
+              lineReview : lineReview,
               userNickname : req.user.nickname,
               gardencode : gardenCode
           });

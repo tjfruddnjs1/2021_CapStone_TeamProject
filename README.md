@@ -21,7 +21,7 @@
 |이름|프로젝트관리 파트|서비스개발 파트|
 |:---:|:---|:---|
 |임종묵|-Scrum Master <br> -프로젝트 문서 관리 <br> -프로젝트 수행 관련 각종 신청|-CCTV 연동<br>-CCTV열람 페이지|
-|문현호|-아이디어 세부조사<br>-Product Owner|<br>-어린이집/유치원검색<br>-API정보가공|
+|문현호|-아이디어 세부조사<br>-Product Owner|-어린이집/유치원검색<br>-API정보가공|
 |설경원|-Develope Leader(PM)<br>-스프린트 관련 계획관리<br>-형상관리|-로그인/로그아웃<br>-마이페이지<br>-커뮤니티 게시판<br>-리뷰페이지|
 
 ## 목차
@@ -93,6 +93,11 @@
   <img width=100% src="https://user-images.githubusercontent.com/41010744/111613555-fc1d2980-8821-11eb-93e0-30963a8ee42e.png">
   <br>
 
+- `2021-03-29` : header navigation 상태
+  <br>
+  <img src="https://user-images.githubusercontent.com/41010744/112770049-9c175600-905f-11eb-81a1-0b2d903a7f0c.png">
+  <br>
+
 - 유치원/어린이집 검색 : 현호
 
 기능명 | 주요 키워드 | 구현 상태
@@ -101,6 +106,16 @@
 검색기능| 어린이집 이름 | `구현 중`
 지도 | 위도, 경도 | `구현 중`
 페이징| 갯수, 리스트 | `구현 중`
+전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
+`추가 개선사항 1` | `추가 시 업데이트` | `구현 중`
+
+- 리뷰페이지 : 경원
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+리뷰페이지 | checkbox, database CRUD 중 Create, Read | `구현 완료`
+평점(별점) | Star Rating Plugin : Raty, JQuery 통한 데이터 요청/전달 | `구현 중`
+전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1` | `추가 시 업데이트` | `구현 중`
 
 - 나의 유치원/어린이집
@@ -117,6 +132,7 @@
 페이징 | sequelize Offset & Limit & Join   | `구현완료`
 댓글 | /:id/edit , sequelize Join, 1:N  | `구현완료`
 검색 | Op.like , createSearchQuery(quries), searchType, searchText  | `구현완료`
+전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
 - 로그인 : 경원
@@ -147,31 +163,44 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 핸드폰 인증하기 | twilio,  Token, 난수 생성 | `구현 완료`
 비밀번호 변경하기 | database CRUD 중 Read & Update , brycpt(hash 비교 및 저장) | `구현 완료`
 회원 탈퇴 | database CRUD 중 Create & Delete | `구현 완료`
+전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
 ## 개발 결과
 
-- 메인페이지
+> 메인페이지 : `2021-03-14`
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/112147506-1ee37f80-8c20-11eb-9b47-58d4efb7fef1.png">
 
-- 유치원/어린이집 검색
+> 메인페이지 : `2021-03-29` > 글씨체 및 이미지 변경 > 전체 구조 통일 및 디자인을 위한
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/112770152-45f6e280-9060-11eb-804c-b279f997d5f6.png">
+
+> 유치원/어린이집 검색
 <br/>
 <img src = "https://user-images.githubusercontent.com/57825856/111155455-d270c200-85d7-11eb-95d1-9e467c9c81fe.png">
 
-- 유치원/어린이집 리뷰 작성 페이지
+> 유치원/어린이집 정보페이지 & 작성된 리뷰 보여주는 페이지
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/112147086-a4b2fb00-8c1f-11eb-9127-93b636e3b79e.png">
+<img src="https://user-images.githubusercontent.com/41010744/112770582-40020100-9062-11eb-822a-6060608e6fb4.png">
 
-- 나의 유치원/어린이집
+> 유치원/어린이집 리뷰 작성 페이지
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/112770246-c1589400-9060-11eb-93d0-0db5f7895eca.png">
+
+> 나의 유치원/어린이집
 
 
-- 키즈맘TALK
+> 키즈맘TALK
 
-> 게시판 index
+> 게시판 index : `2021-03-19`
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111614869-74381f00-8823-11eb-8777-ed3742f824a0.png">
 <br>
+
+> 게시판 index : `2021-03-29` > 글씨체 및 배너 추가 & color 층 생성 > 전체 구조 통일 및 디자인을 위한
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/112770280-f2d15f80-9060-11eb-93af-bf1cd0dc13c7.png">
 
 > 페이징
 <br>
@@ -204,13 +233,18 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <img src="https://user-images.githubusercontent.com/41010744/111050767-ef02e200-8491-11eb-850d-60ff715cf0e8.png">
 <br>
 
-- 마이페이지
+- 마이페이지 : `2021-03-16`
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111050851-65074900-8492-11eb-8fed-44e7734171c1.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111050993-45bceb80-8493-11eb-9831-0927677df228.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111051001-53727100-8493-11eb-93fb-892e3541c5eb.png">
+<br>
+
+- 마이페이지 : `2021-03-29` > 글씨체  & color 층 생성 > 전체 구조 통일 및 디자인을 위한
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/112770368-74c18880-9061-11eb-9192-ded2c4c7553d.png">
 <br>
 
 ## 데이터베이스 ERD
@@ -275,3 +309,5 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 > `2021-03-21` : 현호 > 검색 기능 (추가) + 유치원/어린이집 정보페이지 , 경원 > 리뷰페이지, ERD 중간 과정 2 도출
 
 > `2021-03-28` : 현호 > 메인페이지 내에 유치원/어린이집 통계 , 경원 > 저장된 리뷰페이지 형식에 맞게 출력
+
+> `2021-03-29` : 전체적인 디자인 수정 , 글꼴 설정, 사이트 만의 컬러 정한 후 통일

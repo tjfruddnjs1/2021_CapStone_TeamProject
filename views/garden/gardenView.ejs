@@ -2,8 +2,9 @@
 <html>
   <head>
     <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/star-rating-svg.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
   </head>    
   <style>
       .box{
@@ -101,7 +102,7 @@
    #btn{
       width: 13%;
       color: white;
-      background-color: rgb(40, 87, 209);
+      background-color: #5172df;
       border: 1px solid #8080805c;
       padding-left : 3%;
       padding-right : 3%;
@@ -135,7 +136,7 @@
    }
 
    #review{
-    border: 1px solid red;
+    border : 5px solid #dee4f9;
     width: 100%;
     height: 100%;
    }
@@ -149,28 +150,41 @@
     height: 100%;
    }
 
+   .main_2{
+    padding-top : 10px;
+    padding-left : 10px;
+    display:inline-table;
+    float: left;
+    width: 70%;
+    height: 100%;
+   }
+
+   .main_3{
+    padding-top : 10px;
+    padding-left : 10px;
+    display:inline-table;
+    float: left;
+    width: 50%;
+    height: 60%;
+   }
+
    .content{
     display: table-cell;
     vertical-align: middle;
     text-align: center;
    }
 
-   .star-rating {
-       width:100%; 
+   .lineReview{
+       font-weight: bold;
+       font-size : 20px;
+       text-align: center;
+       margin-right : 5%;
    }
 
-   .star-rating,.star-rating span {
-       display:inline-block;  
-       overflow:hidden; 
-       background:url('/images/star.png')no-repeat; 
-       height:55px;
-    }
-
-   .star-rating span{
-       background-position:left bottom; 
-       line-height:0; 
-       vertical-align:top; 
-    }
+   .attendTime{
+       text-align: right;
+       margin-right : 5%;
+   }
 
   </style>
 
@@ -218,36 +232,67 @@
           </div>
       </div>
       <% for(let i=0;i<review.length;i++) {%>
-        <div id="review" style="margin-top : 4%; height: 200px; border : 1px solid black;">
+        <div id="review" style="margin-top : 4%; height: 280px;">
             <div class="main_1 main_common">
-                <div class="wrap-star">
-                    <div class='star-rating' style="">
-                        <span style ="width:30%"></span>
-                    </div>
+                <div class="totalStar rating <%= i %>" style="margin-left : 10%; margin-bottom : 10%;">
+                    <span style="display: none;"><%= review[i].totalStar %></span>
                 </div>
-                <h5>입원 추천</h5> 
-                <div class="wrap-star">
-                    <div class='star-rating' style="">
-                        <span style="width:60%"></span>
-                    </div>
-                </div> 
+ 
+                <div class="reJoin rating <%= i %>" style="float : right; display: block;margin-bottom: 5%;">
+                    아이 재입원 여부
+                    <span style="display: none;"><%= review[i].reJoin %></span>
+                </div>
+
+                <div class="communicate rating <%= i %>" style="float : right; display: block;margin-bottom: 5%;">
+                    원장님 소통성
+                    <span style="display: none;"><%= review[i].isCommunicate %></span>
+                </div>
+
+                <div class="active rating <%= i %>" style="float : right; display: block;margin-bottom: 5%;">
+                    선생님 적극성
+                    <span style="display: none;"><%= review[i].isActive %></span>
+                </div>
+
+                <div class="safe rating <%= i %>" style="float : right; display: block;margin-bottom: 5%;">
+                    건강/안전 보장
+                    <span style="display: none;"><%= review[i].isSafe %></span>
+                </div>
+
             </div>
             <div class="main_2">
-                <p class="content">
-                    <%= review[i].attendTime %>
+                <p class="lineReview">
+                    " <%= review[i].lineReview %> "
                 </p>
+                <p class="attendTime">
+                    <%= review[i].attendTime %>년 등원
+                </p>
+                <div class="main_3">
+                    <img src="/images/better.png" style="width:9%; margin-left:4%">
+                    <p style="margin-left : 5%;margin-top : 5%;">
+                        <%= review[i].advantage %>
+                    </p>
+                </div>
+                <div class="main_3">
+                    <img src="/images/worst.png" style="width:9%; margin-left:4%">
+                    <p style="margin-left : 5%;margin-top : 5%;">
+                        <%= review[i].disAdvantage %>
+                    </p>
+                </div>
             </div>
         
         </div>
       <% } %>
-      <a id="btn" href="/garden/<%= info.gardencode %>/review" style="float:right; width: 20%; margin-top : 5%;" class="btn btn-outline-primary">리뷰작성하기</a>
+      <a id="btn" href="/garden/<%= info.gardencode %>/review" style="float:right; width: 20%; margin-top : 5%;" class="btn btn-outline-primary">리뷰 작성</a>
       
     </main>    
     </div>    
     <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
-    <%- include('../partials/top') %>
+    <%- include('../partials/top') %>   
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28f2f70ef1f0ab3e87563b70d829d265"></script>
-    <script>       
+    <script src="/js/jquery.star-rating-svg.js"></script>
+    <script>
+    
+
     let la = `<%=info.latitude %>`;
     let lo = `<%=info.longitude %>`;
       var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -303,6 +348,82 @@ overlay.setMap(map);
 function closeOverlay() {
     overlay.setMap(null);     
 }
+
+let rate_length = $('.totalStar.rating').length;
+
+for(i=0;i<rate_length;i++){
+    let totalStar = $(".totalStar.rating."+i).children();
+    let reJoinStar = $(".reJoin.rating."+i).children();
+    let communicateStar = $(".communicate.rating."+i).children();
+    let activeStar = $(".active.rating."+i).children();
+    let safeStar = $(".safe.rating."+i).children();
+
+    $(".totalStar.rating."+i).starRating({
+        initialRating : totalStar.html(),
+        totalStars: 5,
+        starShape : 'rounded',
+        starSize : 50,
+        emptyColor : 'lightgray',
+        readOnly : true,
+        starGradient:{
+            start:'#5172DF',
+            end : '#5172df'
+        }
+    });
+
+    $(".reJoin.rating."+i).starRating({
+        initialRating : reJoinStar.html(),
+        totalStars: 5,
+        starShape : 'rounded',
+        starSize : 23,
+        emptyColor : 'lightgray',
+        readOnly : true,
+        starGradient:{
+            start:'#5172DF',
+            end : '#5172df'
+        }
+    });
+
+    $(".communicate.rating."+i).starRating({
+        initialRating : communicateStar.html(),
+        totalStars: 5,
+        starShape : 'rounded',
+        starSize : 23,
+        emptyColor : 'lightgray',
+        readOnly : true,
+        starGradient:{
+            start:'#5172DF',
+            end : '#5172df'
+        }
+    });
+
+    $(".active.rating."+i).starRating({
+        initialRating : activeStar.html(),
+        totalStars: 5,
+        starShape : 'rounded',
+        starSize : 23,
+        emptyColor : 'lightgray',
+        readOnly : true,
+        starGradient:{
+            start:'#5172DF',
+            end : '#5172df'
+        }
+    });
+
+    $(".safe.rating."+i).starRating({
+        initialRating : safeStar.html(),
+        totalStars: 5,
+        starShape : 'rounded',
+        starSize : 23,
+        emptyColor : 'lightgray',
+        readOnly : true,
+        starGradient:{
+            start:'#5172DF',
+            end : '#5172df'
+        }
+    });
+}
+
 
     </script>
   </body>  

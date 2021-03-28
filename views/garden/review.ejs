@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <style>
     html{
-        background-color: #FFEFEF;
+        background-color: #f8f8f8;
     }
     body{
         margin : 7%;
@@ -71,7 +71,7 @@
         margin-top : 7%;
         width : 30%;
         color : white;
-        background-color: rgb(40, 87, 209);
+        background-color: #5172df;
         border : 1px solid #8080805c;
     }
 
@@ -98,7 +98,7 @@
         <!--네비게이션-->
 
         <div class="">
-          <h1 style="font-family: sans-serif;font-weight: bold;">
+          <h1 style="font-family: NotoSansKR-Regular;font-weight: bold;">
             <%= info.gardenname %> 리뷰 작성
           </h1>
           <label id="info">키즈가든은 평가자의 익명성을 보장하며<br>
@@ -179,6 +179,11 @@
               <div class="one_two">
                 <label style="display : block;">단점<span>*</span></label>
                 <textarea id="disAdavantage" name="disAdvantage" rows="10" class="form-control" placeholder="단점을 작성해주세요" required></textarea>
+              </div>
+
+              <div class="one_two">
+                <label style="display : block;">한줄리뷰<span>*</span></label>
+                <textarea id="disAdavantage" name="lineReview" rows="3" class="form-control" placeholder="한줄리뷰를 작성해주세요" required></textarea>
               </div>
 
               <div class="one_two">
