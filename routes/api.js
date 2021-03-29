@@ -38,6 +38,24 @@ const isBusChildrenApi = async (sidoCode, sggCode, kindercode) => {
 
 }
 
+// 유치원 cctv api
+const cctvNumApi = async (sidoCode, sggCode, kinderCode) => {  
+  let result;
+  const url = 'https://e-childschoolinfo.moe.go.kr/api/notice/safetyEdu.do';
+  const key = process.env.KINDERGARDEN_KEY;  
+  const requestUrl = url + '?key=' + key + '&sidoCode=' + sidoCode + '&sggCode='+sggCode;  
+  result = await axios.get(requestUrl);     
+  
+  for(let i =0; i<result.data.kinderInfo.length; i++){    
+    if(result.data.kinderInfo[i].kindercode == kinderCode){         
+      return result.data.kinderInfo[i].cctv_ist_total;
+    }
+  }
+  console.log('false');
+  return '0';
+
+}
+
 // 개별 어린이집 api
 
 const eachChildrenApi = async(sggCode = '11680') => {
@@ -108,3 +126,4 @@ exports.eachChildrenApi = eachChildrenApi;
 exports.totalChildrenApi = totalChildrenApi;
 exports.locationApi = locationApi;
 exports.isBusChildrenApi = isBusChildrenApi;
+exports.cctvNumApi = cctvNumApi;

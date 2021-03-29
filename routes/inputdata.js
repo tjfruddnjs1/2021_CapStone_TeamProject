@@ -15,28 +15,34 @@ const inputChildren = async () => {
   try{    
     let loValue,gardensInfo, info;       
     const sidoCodes = await SidoCode.findAll({});        
-    let is_bus;
+    let is_bus, cctvNum;
     var startTime = new Date().getTime();
     var startTime = new Date().getTime();
-    for(let i = 0; i < sidoCodes.length; i++){
+    for(let i = 15; i < sidoCodes.length; i++){      
       // console.log('시도코드 : ' + sidoCodes[i].sidocode);
       let sggCodes = await SggCode.findAll({
         attributes : ['sggcode'],
         where : {
           sidocode : sidoCodes[i].sidocode,
         }
-      });                  
-      for(let j = 0; j < sggCodes.length; j++){        
+      });                        
+      for(let j = 0; j < sggCodes.length; j++){         
+        console.log(sggCodes[j].sggcode);       
+        console.log(sggCodes[j].sggname);       
         // console.log('시군구 코드 : ' + sggCodes[j].sggcode);
         let childrenInfo = [];
         gardensInfo = await apiRouter.requestApi(sidoCodes[i].sidocode, sggCodes[j].sggcode);                        
         info = gardensInfo.data.kinderInfo;                 
-        for(let k = 0; k < info.length; k++){   
+        for(let k = 0; k < info.length; k++){             
             // console.log(k);
             // console.log('주소 : ' + info[k].addr);
-            loValue = await apiRouter.locationApi(info[k].addr);
+            loValue = await apiRouter.locationApi(info[k].addr);                     
             is_bus = await apiRouter.isBusChildrenApi(sidoCodes[i].sidocode, sggCodes[j].sggcode, info[k].kindercode);
-            is_bus = (is_bus === 'Y') ? '운영' : '미운영';
+            cctvNum = await apiRouter.cctvNumApi(sidoCodes[i].sidocode, sggCodes[j].sggcode, info[k].kindercode);
+            is_bus = (is_bus === 'Y') ? '운영' : '미운영';            
+            if(cctvNum == null){
+              cctvNum = 0;
+            }
             childrenInfo[k] = {
               gardencode : info[k].kindercode,
               gardencategory : info[k].establish,
@@ -45,7 +51,7 @@ const inputChildren = async () => {
               gardentel : info[k].telno,
               address : info[k].addr,
               homepage : info[k].hpaddr,              
-              cctvnum : '',
+              cctvnum : cctvNum,
               isbus : is_bus,
               latitude : loValue.x,
               longitude : loValue.y,
@@ -79,7 +85,8 @@ const inputCarecenterData = async () => {
     //     return 'success';
     //   }
     // }
-    for(let i = 0; i < sggCodes.length; i++){            
+    for(let i = 0; i < sggCodes.length; i++){          
+        console.log(i);
         console.log(sggCodes[i].sggcode + ' : ' + sggCodes[i].sggname);
         let childrenInfo = [];
 
@@ -120,10 +127,28 @@ const inputCarecenterData = async () => {
     console.error(err);    
   }
 }
+const cctvNumApi = async (sidoCode, sggCode, kinderCode) => {  
+  let result;
+  const url = 'https://e-childschoolinfo.moe.go.kr/api/notice/safetyEdu.do';
+  const key = process.env.KINDERGARDEN_KEY;  
+  const requestUrl = url + '?key=' + key + '&sidoCode=' + sidoCode + '&sggCode='+sggCode;  
+  result = await axios.get(requestUrl);     
+  
+  for(let i =0; i<result.data.kinderInfo.length; i++){    
+    if(result.data.kinderInfo[i].kindercode == kinderCode){   
+      console.log(result.data.kinderInfo[i].cctv_ist_total);
+      return result.data.kinderInfo[i].cctv_ist_total;
+    }
+  }
+  console.log('false');
+  return '0';
+
+}
+
 
 router.get('/', async (req,res)=>{
-  try{
-    // const result = await inputCarecenterData();
+  try{    
+    // const result = await inputCarecenterData();    
     res.send('success');
   }catch(err){
     console.error(err);
