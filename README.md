@@ -183,6 +183,10 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br/>
 <img src = "https://user-images.githubusercontent.com/57825856/112773317-8f4f2e00-9070-11eb-809f-c5b96d014201.png">
 
+> 유치원/어린이집 검색 `2021-03-29` > 글씨체 및 이미지 변경 > 전체 구조 통일 및 디자인을 위한
+<br>
+<img src="https://user-images.githubusercontent.com/57825856/112854276-a6c9fd80-90e8-11eb-83a6-1c9e8594fd8b.png">
+
 > 유치원/어린이집 정보페이지 & 작성된 리뷰 보여주는 페이지
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/112770582-40020100-9062-11eb-822a-6060608e6fb4.png">
