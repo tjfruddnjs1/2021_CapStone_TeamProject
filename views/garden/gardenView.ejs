@@ -349,6 +349,7 @@ function closeOverlay() {
     overlay.setMap(null);     
 }
 
+
 let rate_length = $('.totalStar.rating').length;
 
 for(i=0;i<rate_length;i++){
@@ -425,6 +426,13 @@ for(i=0;i<rate_length;i++){
 }
 
 
+
+let homepage = document.querySelector('.underline');
+
+homepage.addEventListener('click', (e) => {
+    e.preventDefault();
+    location.href = e.target.href;
+})
     </script>
   </body>  
 </html>
