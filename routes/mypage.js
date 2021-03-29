@@ -21,6 +21,7 @@ router.use((req,res,next)=>{
     next();
 });
 
+
 // upload 폴더 생성
 try{
     fs.readdirSync('public/images/user_image');        
