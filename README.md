@@ -67,6 +67,7 @@
 - twilio : 마이페이지 > 핸드폰인증을 위한 모듈
 - **[package.json](https://github.com/tjfruddnjs1/2021_CapStone_TeamProject/blob/main/package.json)** : 사용 모듈(미들웨어) json 파일
 - axios : Promise를 사용하는 HTTP 비동기 통신 모듈로 공공 api와 통신하기 위함
+- xml2json-light : xml 형식을 json 형식으로 밖꿔주는 모듈 사용
 
 ## 개발 기능 
 
@@ -102,10 +103,10 @@
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
-어린이집 리스트 출력 | 공공 api | `구현 완료`
-검색기능| 어린이집 이름 | `구현 중`
-지도 | 위도, 경도 | `구현 중`
-페이징| 갯수, 리스트 | `구현 중`
+어린이집 리스트 출력 | 어린이집 API, 유치원 API | `구현 완료`
+검색기능| 어린이집 이름, 주소 검색, ajax 기술  | `구현 완료`
+지도 | 좌표변환 API, 지도 API | `구현 완료`
+페이징| 갯수, 리스트 | `구현 완료`
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1` | `추가 시 업데이트` | `구현 중`
 
@@ -122,6 +123,8 @@
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
+지도 출력 | 지도 API, 마커, 인포윈도우  | `구현 완료`
+전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
 - 키즈맘TALK : 경원
@@ -178,7 +181,7 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 
 > 유치원/어린이집 검색
 <br/>
-<img src = "https://user-images.githubusercontent.com/57825856/111155455-d270c200-85d7-11eb-95d1-9e467c9c81fe.png">
+<img src = "https://user-images.githubusercontent.com/57825856/112773317-8f4f2e00-9070-11eb-809f-c5b96d014201.png">
 
 > 유치원/어린이집 정보페이지 & 작성된 리뷰 보여주는 페이지
 <br>
