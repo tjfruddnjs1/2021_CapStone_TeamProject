@@ -1,11 +1,14 @@
 <!DOCTYPE html>
   <html lang="">
-<haed>
+<head>
   <%- include('../partials/head') %>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> <!-- 차트 링크 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <style>
+    
     .button{
-  text-align : center;
+  text-align : center;  
 }
 .box{  
   display : inline-block;  
@@ -28,7 +31,7 @@
   margin-right : 30px;
 }
 
-.title{
+.title{  
   font-weight: bold;
 }
 .section{
@@ -42,8 +45,8 @@
 .title_link{
   cursor: pointer;
 }
-.head{
-  font-size : 30px;
+.head{  
+  font-size : 20px;
   font-weight : bold;
 }
 .sub_title{
@@ -53,13 +56,11 @@
   padding: 10px;
   border : 1px solid #ffffff78;
 }
-.statistic{
-  text-align : center;
-}
+
 .desc{
   font-size : 18px;
 }
-.articles{
+.articles{  
   width : 100%;
 }
 .article{
@@ -127,9 +128,137 @@
 .overlay::after{
   background-color: rgba(0,0,0,0);
 }
+.total{      
+  width : 100%;
+  height : 400px;  
+}
 
+.picture{  
+  width : 50%;
+  float : left;  
+  
+}
+.statistic{    
+  text-align : center;
+  float : left;
+  width : 50%;      
+  border-right : 1px solid #D7D7D7;
+}
+.row3{       
+    background-color: #f8f8f8;    
+  }
+  .container{
+    padding : 6%;
+    min-width : 80%;
+    background-color : white;    
+  }  
+  .card-body{      
+    display : flex;
+    align-items: center;  
+    width : 70%;
+    border : none;
+  }
+  select{
+       text-align : center;
+       display : inline;              
+       padding : 10px ;              
+       width : 40%;
+       border : 1px solid #D7D7D7;       
+       cursor : pointer;
+       font-weight : normal;
+   }
+   option{
+       padding : 10px 0;       
+       padding : 10px 0;       
+   }
+   .card{
+    display : flex;
+    align-items: center; 
+   }
+   .all{
+     list-style : none;
+   }
+   .title{
+     font-size : 18px;
+     padding : 10px;
+     text-align : left;
+     font-weight : bold;
+   }
+   .garden{     
+    width : 60%;     
+     margin : 0 auto;  
+     font-weight : bold;  
+     font-size : 18px;         
+   }
+   
+   #blue{
+     display : inline-block;
+     width : 15px;
+     height : 15px;
+     background-color : #5172df;     
+   }
+   #pink{
+    display : inline-block;
+     width : 15px;
+     height : 15px;
+     background-color : pink;        
+   }   
+   .right{
+     float : right;
+   }  
+   .number{
+     text-align : left;     
+   }
+   .picture{        
+   }
+   .child{
+     display : inline-block;     
+     border : 1px solid #D7D7D7;
+     width : 40%;     
+     padding : 8px 0;     
+   }   
+   .checked{
+     background-color : #5172df;
+     color : white;
+   } 
+   .gae{
+     font-weight : normal;
+     font-size : 16px;
+   }  
+   .content{
+     margin : 0 auto;     
+   }
+   .unordered{     
+     margin-top : 1%;
+   }
+   .list{     
+     margin : 0 auto;
+     width : 60%;
+     padding : 10px 0;
+     list-style-type: none;     
+     font-weight : bold;     
+   }
+   .childrenImage{          
+     height : 100px;     
+   }
+   .childImage{
+     text-align: center;
+   }
+   .childButton{
+     text-align : center;
+     margin-top : 1%;
+   }
+   .interval{
+     margin : 0 auto;
+     height : 10px;
+     width : 100%;
+     background-color : #d7d7d736;
+   }     
+   .totalContain{
+     background-color: white;
+   }
   </style>
-</haed>
+</head>
 
 <body id="top">
 
@@ -143,214 +272,239 @@
       <h1 class="heading">어린이집 안전 서비스</h1>
       <p id = "story">우리 아이가 유치원에서 잘 지내는지 궁금하신가요? <br>키즈가든에서 안전한 유치원을 골라 확인하세요!</p>
       <footer></footer>
-    </article>
+    </article>    
     <!-- ################################################################################################ -->
   </div>
 
 </div>
 
 <div class="wrapper row3">
-<section class="hoc container clear">  
-  <div class="title">
-      <span class = "head">주위에 유치원을 찾아보세요</span>
-      <a class = "title_link">++더 보기</a>
-  </div>
-  <hr>
-
-  <div class="articles">
-    <a href="" class = "link">
-      <div class="article">
-        <div class="info">
-          <h2 class = "name">전주 유치원</h2>
-          <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
-          <div class="address">전주시 덕진구 금암동 1273-28</div>
-          <div class="phone">031-286-1482</div>
-        </div>
-        <div class="image">
-          <img src="" alt="" class = "img">
-        </div>
-        <div class="star">
-          <i class="fas fa-star"></i>
-          <span class = "score">X 4.7</span>
-        </div>
-
-      </div>
-    </a>
-    <a href="" class = "link">
-      <div class="article">
-        <div class="info">
-          <h2 class = "name">전주 유치원</h2>
-          <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
-          <div class="address">전주시 덕진구 금암동 1273-28</div>
-          <div class="phone">031-286-1482</div>
-        </div>
-        <div class="image">
-          <img src="" alt="" class = "img">
-        </div>
-        <div class="star">
-          <i class="fas fa-star"></i>
-          <span class = "score">X 4.7</span>
-        </div>
-
-      </div>
-    </a>
+  <main class="hoc container clear">
+    <div class="title">
+      <span class = "head">선택한 지역의 어린이집 및 유치원 현황</span>           
+    </div>
     <hr>
-    <a href="" class = "link">
-      <div class="article">
-        <div class="info">
-          <h2 class = "name">전주 유치원</h2>
-          <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
-          <div class="address">전주시 덕진구 금암동 1273-28</div>
-          <div class="phone">031-286-1482</div>
+  <div class="total">
+    <div class="statistic">            
+      <div class="contain">
+        <select name="sidocode" id="" class="sidocode">
+          <option value="">전체</option>
+        </select>
+        <select name="sggcode" id="" class="sggcode">
+          <option value="">전체</option>
+        </select>
+        <div class="card" style = "border : none">
+          <div class="card-body "> <canvas id="myChart2"></canvas> </div>        
         </div>
-        <div class="image">
-          <img src="" alt="" class = "img">
+        <div class="number">
+          <div class="garden"> 
+            <span class="left">
+              <span id = "blue"></span>
+              <span >유치원</span>                        
+            </span>          
+            <span class="right">
+              <span class = "num">4800</span>            
+              <span class = "gae">개원</span>
+            </span>                             
+          </div>
+          <div class="garden"> 
+            <span class="left">
+              <span id = "pink"></span>
+              <span >어린이집</span>                        
+            </span>                         
+            <span class="right">
+              <span class = "num">4800</span>            
+              <span class = "gae">개원</span>
+            </span>             
+          </div>
         </div>
-        <div class="star">
-          <i class="fas fa-star"></i>
-          <span class = "score">X 4.7</span>
-        </div>
-
       </div>
-    </a>
-    <a href="" class = "link">
-      <div class="article">
-        <div class="info">
-          <h2 class = "name">전주 유치원</h2>
-          <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
-          <div class="address">전주시 덕진구 금암동 1273-28</div>
-          <div class="phone">031-286-1482</div>
-        </div>
-        <div class="image">
-          <img src="" alt="" class = "img">
-        </div>
-        <div class="star">
-          <i class="fas fa-star"></i>
-          <span class = "score">X 4.7</span>
-        </div>
-
+      
+    </div>
+    <div class="line"></div>
+    <div class="picture">
+      <div class="childImage">
+        <img src="/images/children.png" alt="" class = "childrenImage">
       </div>
-    </a>
-
+      
+      <div class="childButton">
+        <div class="checked child">유치원</div>
+        <div class="child">어린이집</div>
+      </div>
+      <div class="content">
+        <span class="left">  
+          <ul class = "unordered">
+            <li class = "list">
+              기본운영
+              <span class="right">
+                <span class="num">4800</span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              특수학급
+              <span class="right">
+                <span class="num">4800</span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              아침돌봄
+              <span class="right">
+                <span class="num">4800</span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              저녁돌봄
+              <span class="right">
+                <span class="num">4800</span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              기본운영
+              <span class="right">
+                <span class="num">4800</span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+          </ul>                    
+        </span>                  
+      </div>
+    </div>    
   </div>
+  
+  </main>
+  </div>
+  <div class="interval"></div>
+  <div class="wrapper row2">
+    <main class="division hoc container clear">
+      <div class="totalContain">
+        <div class="title">
+          <span class = "head">주위에 유치원을 찾아보세요</span>
+          <a class = "title_link">++더 보기</a>      
+      </div>
+      
+      <hr>
+      
+      <div class="articles">
+        <a href="" class = "link">
+          <div class="article">
+            <div class="info">
+              <h2 class = "name">전주 유치원</h2>
+              <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
+              <div class="address">전주시 덕진구 금암동 1273-28</div>
+              <div class="phone">031-286-1482</div>
+            </div>
+            <div class="image">
+              <img src="" alt="" class = "img">
+            </div>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <span class = "score">X 4.7</span>
+            </div>
+      
+          </div>
+        </a>
+        <a href="" class = "link">
+          <div class="article">
+            <div class="info">
+              <h2 class = "name">전주 유치원</h2>
+              <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
+              <div class="address">전주시 덕진구 금암동 1273-28</div>
+              <div class="phone">031-286-1482</div>
+            </div>
+            <div class="image">
+              <img src="" alt="" class = "img">
+            </div>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <span class = "score">X 4.7</span>
+            </div>
+      
+          </div>
+        </a>
+        <hr>
+        <a href="" class = "link">
+          <div class="article">
+            <div class="info">
+              <h2 class = "name">전주 유치원</h2>
+              <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
+              <div class="address">전주시 덕진구 금암동 1273-28</div>
+              <div class="phone">031-286-1482</div>
+            </div>
+            <div class="image">
+              <img src="" alt="" class = "img">
+            </div>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <span class = "score">X 4.7</span>
+            </div>
+      
+          </div>
+        </a>
+        <a href="" class = "link">
+          <div class="article">
+            <div class="info">
+              <h2 class = "name">전주 유치원</h2>
+              <div class="desc">꿈과 희망이 가득한 전주 유치원으로 놀러오세요!</div>
+              <div class="address">전주시 덕진구 금암동 1273-28</div>
+              <div class="phone">031-286-1482</div>
+            </div>
+            <div class="image">
+              <img src="" alt="" class = "img">
+            </div>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <span class = "score">X 4.7</span>
+            </div>
+      
+          </div>
+        </a>
+      </div>
+    
+  </main>
+  </div>
+  
   <!-- <div id="latest" class="group">
     <article>
 
     </article>
   </div> -->
   <!-- ################################################################################################ -->
-</section>
-</div>
-<div class="wrapper row2">
-<main class="hoc container clear">
-  <!-- main body -->
-  <!-- ################################################################################################ -->
-  <section id="introblocks">
-    <div class="sectiontitle">
-      <h6 class="heading">Quisque adipiscing</h6>
-      <p>Urna sed augue class aptent taciti sociosqu ad litora torquent</p>
-    </div>
-    <ul class="nospace group">
-      <li class="one_quarter first">
-        <article><a href="#"><i class="fas fa-golf-ball"></i></a>
-          <h6 class="heading">Suspendisse</h6>
-          <p>Per conubia nostra per mauris aliquet massa nulla facilisi porta ligula non elementum</p>
-          <footer><a class="btn" href="#">More Details</a></footer>
-        </article>
-      </li>
-      <li class="one_quarter">
-        <article><a href="#"><i class="fas fa-ribbon"></i></a>
-          <h6 class="heading">Inceptos</h6>
-          <p>Ultricies justo urna egestas metus ut ornare leo augue pharetra risus morbi tincidunt massa</p>
-          <footer><a class="btn" href="#">More Details</a></footer>
-        </article>
-      </li>
-      <li class="one_quarter">
-        <article><a href="#"><i class="fas fa-tablets"></i></a>
-          <h6 class="heading">Himenaeos</h6>
-          <p>Ac vestibulum rutrum orci augue iaculis nibh quis porta nunc nisi suscipit leo nam ac lacus</p>
-          <footer><a class="btn" href="#">More Details</a></footer>
-        </article>
-      </li>
-      <li class="one_quarter">
-        <article><a href="#"><i class="fas fa-wine-glass"></i></a>
-          <h6 class="heading">Facilisis</h6>
-          <p>Cras tempor ultricies urna aliquam massa sapien posuere in iaculis adipiscing vulputate</p>
-          <footer><a class="btn" href="#">More Details</a></footer>
-        </article>
-      </li>
-    </ul>
-  </section>
-  <!-- ################################################################################################ -->
-  <!-- / main body -->
-  <div class="clear"></div>
-</main>
-</div>
-<div class="wrapper row3">
-<section id="references" class="hoc container clear">
-  <!-- ################################################################################################ -->
-  <div class="sectiontitle">
-    <h6 class="heading">Aliquet vestibulum</h6>
-    <p>Eget magna eget sem imperdiet tincidunt vestibulum fringilla nulla</p>
-  </div>
-  <nav class="ref-sort">
-    <ul>
-      <li class="current"><a href="#">Ultricies</a></li>
-      <li><a href="#">Curabitur</a></li>
-      <li><a href="#">Porttitor</a></li>
-      <li><a href="#">Pulvinar</a></li>
-    </ul>
-  </nav>
-  <ul class="nospace group ref-img">
-    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-    <li class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a></li>
-  </ul>
-  <footer class="block center"><a class="btn" href="#">View more here</a></footer>
-  <!-- ################################################################################################ -->
-</section>
-</div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
-<section id="testimonials" class="hoc container clear">
-  <!-- ################################################################################################ -->
-  <div class="sectiontitle">
-    <h6 class="heading">Donec condimentum</h6>
-    <p>Adipiscing justo nulla mollis iaculis tortor in mauris integer</p>
-  </div>
-  <div class="group">
-    <article class="one_half first"><img src="images/demo/80x80.png" alt="">
-      <blockquote>Pretium duis viverra malesuada mi proin iaculis mauris eu sodales cursus sapien erat pharetra justo vitae volutpat eros magna et magna mauris hendrerit pellentesque.</blockquote>
-      <h6 class="heading font-x1">A. Doe</h6>
-      <em>Et ipsum mattis ipsum</em></article>
-    <article class="one_half"><img src="images/demo/80x80.png" alt="">
-      <blockquote>Pellentesque pretium proin molestie erat in rhoncus posuere nibh quam consectetuer lectus ac vulputate ligula lorem ut dolor duis tempus mauris nunc et ligula ut.</blockquote>
-      <h6 class="heading font-x1">B. Doe</h6>
-      <em>Tortor suscipit convallis</em></article>
-  </div>
-  <!-- ################################################################################################ -->
-</section>
 </div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row3">
-<article class="hoc cta clear">
-  <!-- ################################################################################################ -->
-  <h6 class="three_quarter first">Sed ullamcorper arcu eu ante ut sollicitudin sem sit amet</h6>
-  <footer class="one_quarter"><a class="btn" href="#">Ipsum fusce non pede</a></footer>
-  <!-- ################################################################################################ -->
-</article>
-</div>
+<script>
+  data = {
+        datasets: [{
+          backgroundColor: ['pink', '#5172df'],
+          data: [30, 70]
+        }],
+        options: {
+          responsive: true,
+          legend: {
+              display: false,
+          }
+        },
+    centerText: {
+        display: true,
+        text: "hello world"
+    }         
+        
+  }; // 가운데 구멍이 없는 파이형 차트
+        
+        var ctx2 = document.getElementById("myChart2"); 
+        var myDoughnutChart = new Chart(ctx2, { type: 'doughnut', data: data, options: {
+            cutoutPercentage: 80, 
+            animation : {
+              animateRotate : false
+            },            
+          },
+         
+        }); 
+</script>
+
 
 <%- include('../partials/foot') %>
  
