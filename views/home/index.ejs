@@ -211,11 +211,12 @@
    }
    .picture{        
    }
-   .child{
+   .type{
      display : inline-block;     
      border : 1px solid #D7D7D7;
      width : 40%;     
      padding : 8px 0;     
+     cursor : pointer;
    }   
    .checked{
      background-color : #5172df;
@@ -239,7 +240,7 @@
      font-weight : bold;     
    }
    .childrenImage{          
-     height : 100px;     
+     width : 35%;    
    }
    .childImage{
      text-align: center;
@@ -256,7 +257,7 @@
    }     
    .totalContain{
      background-color: white;
-   }
+   }   
   </style>
 </head>
 
@@ -288,7 +289,10 @@
     <div class="statistic">            
       <div class="contain">
         <select name="sidocode" id="" class="sidocode">
-          <option value="">전체</option>
+          <option value="">전체</option>            
+          <% sidos.forEach((sido) => {%>
+           <option value="<%= sido.sidocode %>"><%= sido.sidoname %></option>
+           <% }) %>
         </select>
         <select name="sggcode" id="" class="sggcode">
           <option value="">전체</option>
@@ -303,7 +307,7 @@
               <span >유치원</span>                        
             </span>          
             <span class="right">
-              <span class = "num">4800</span>            
+              <span class = "num">9055</span>            
               <span class = "gae">개원</span>
             </span>                             
           </div>
@@ -313,7 +317,7 @@
               <span >어린이집</span>                        
             </span>                         
             <span class="right">
-              <span class = "num">4800</span>            
+              <span class = "num">53258</span>            
               <span class = "gae">개원</span>
             </span>             
           </div>
@@ -325,51 +329,101 @@
     <div class="picture">
       <div class="childImage">
         <img src="/images/children.png" alt="" class = "childrenImage">
-      </div>
-      
+      </div>      
       <div class="childButton">
-        <div class="checked child">유치원</div>
-        <div class="child">어린이집</div>
+        <div class="checked type">유치원</div>
+        <div class="type">어린이집</div>
       </div>
       <div class="content">
         <span class="left">  
-          <ul class = "unordered">
+          <ul class = "unordered kinder">
             <li class = "list">
-              기본운영
+              공립(병설)
               <span class="right">
-                <span class="num">4800</span>
+                <span class="childnum"><%= childCount[0] %></span>
                 <span class="gae">개원</span>
               </span>
             </li>
             <li class = "list">
-              특수학급
+              공립(단설)
               <span class="right">
-                <span class="num">4800</span>
+                <span class="childnum"><%= childCount[1] %></span>
                 <span class="gae">개원</span>
               </span>
             </li>
             <li class = "list">
-              아침돌봄
+              사립(사인)
               <span class="right">
-                <span class="num">4800</span>
+                <span class="childnum"><%= childCount[2] %></span>
                 <span class="gae">개원</span>
               </span>
             </li>
             <li class = "list">
-              저녁돌봄
+              사립(법인)
               <span class="right">
-                <span class="num">4800</span>
+                <span class="childnum"><%= childCount[3] %></span>
                 <span class="gae">개원</span>
               </span>
             </li>
             <li class = "list">
-              기본운영
+              국립
               <span class="right">
-                <span class="num">4800</span>
+                <span class="childnum"><%= childCount[4] %></span>
                 <span class="gae">개원</span>
               </span>
             </li>
-          </ul>                    
+          </ul> 
+          <ul class = "unordered daycare hidden">
+            <li class = "list">
+              민간
+              <span class="right">
+                <span class="daycarenum"><%= dayCareCount[0] %></span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              국공립
+              <span class="right">
+                <span class="daycarenum"><%= dayCareCount[1] %></span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              사회복지법인
+              <span class="right">
+                <span class="daycarenum"><%= dayCareCount[2] %></span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              법인•단체등
+              <span class="right">
+                <span class="daycarenum"><%= dayCareCount[3] %></span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              직장
+              <span class="right">
+                <span class="daycarenum"><%= dayCareCount[4] %></span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              가정
+              <span class="right">
+                <span class="daycarenum"><%= dayCareCount[5] %></span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+            <li class = "list">
+              협동
+              <span class="right">
+                <span class="daycarenum"><%= dayCareCount[6] %></span>
+                <span class="gae">개원</span>
+              </span>
+            </li>
+          </ul>                                       
         </span>                  
       </div>
     </div>    
@@ -475,11 +529,141 @@
   <!-- ################################################################################################ -->
 
 </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-  data = {
+  const select = document.querySelector('.sidocode');
+  const sggTags = document.querySelector('.sggcode');
+  const count = document.getElementsByClassName('num');
+  const type = document.getElementsByClassName('type');
+
+  select.addEventListener('change', async (e) => {
+    try{        
+      const result = await axios.post('/', {sidoCode : e.target.value});      
+      while ( sggTags.hasChildNodes() ) { sggTags.removeChild( sggTags.firstChild ); }
+      
+      if(typeof result.data.sggs == 'object'){
+        let option = document.createElement('option');
+        let text = document.createTextNode('전체');
+        option.appendChild(text);
+        option.setAttribute('value', select.value);
+        sggTags.appendChild(option);
+        for(let i =0; i <result.data.sggs.length; i++){
+          let option = document.createElement('option');
+          let text = document.createTextNode(result.data.sggs[i].sggname);
+          option.appendChild(text);
+          option.setAttribute('value', result.data.sggs[i].sggcode);
+          sggTags.appendChild(option);
+        }        
+      }else{
+        let option = document.createElement('option');
+        let text = document.createTextNode('전체');
+        option.appendChild(text);
+        option.setAttribute('value', select.value);
+        sggTags.appendChild(option);
+      }    
+    let gardens = result.data.gardens;
+    let childCount = gardens.childGardens.count;
+    let dayCareCount = gardens.dayCareGardens.count;
+    drawDoughnutChart(childCount, dayCareCount);
+    modifyText(childCount, dayCareCount);
+
+    modifyValue('daycarenum', result.data.dayCareCount);
+    modifyValue('childnum', result.data.childCount);    
+    }catch(err){
+      console.error(err);
+    }
+  })
+
+  sggTags.addEventListener('change', async(e) => {
+    try{            
+      const result = await axios.post(`/${e.target.value}`, {sggCode : e.target.value, sidoCode : select.value});
+      
+      let gardens = result.data.gardens;
+      let childCount = gardens.childGardens.count;
+      let dayCareCount = gardens.dayCareGardens.count;
+      drawDoughnutChart(childCount, dayCareCount);      
+      modifyText(childCount, dayCareCount);
+
+      modifyValue('childnum', result.data.childCount);
+      modifyValue('daycarenum', result.data.dayCareCount);
+      }catch(err){
+        console.error(err);
+      }
+  })
+
+  const modifyValue = (className, values) => {
+    const type = document.getElementsByClassName(className);    
+    for(let i =0; i<type.length; i++){
+      type[i].innerHTML = values[i];
+    }
+  }
+
+  const modifyText = (childCount, dayCareCount) => {
+      count[0].innerHTML = childCount;
+      count[1].innerHTML = dayCareCount; 
+  }
+
+  const deleteChild = (tagName) => {
+   const tag = document.querySelector(tagName);
+   while(tag.hasChildNodes()){
+     tag.removeChild(tag.firstChild);
+   }
+  }
+
+  // const createCategory = (categories) => {
+  //   deleteChild('.unordered');
+  //   for(let i =0; i < categories.length; i++){
+  //     let span = document.createElement('span');
+  //     span.className = 'right';
+  //     let numSpan = document.createElement('span');
+  //     numSpan.className = 'num';
+  //     let gaeSpan = document.createElement('span');
+  //     gaeSpan.className = 'gae';
+  //     let numSpanText = document.createTextNode('4490');      
+  //     let gaeSpanText = document.createTextNode('개원');
+  //     numSpan.appendChild(numSpanText);
+  //     gaeSpan.appendChild(gaeSpanText);
+  //     span.appendChild(numSpan);
+  //     span.appendChild(gaeSpan);
+  //     let li = document.createElement('li');      
+  //     li.className = 'list';
+  //     let text = document.createTextNode('공립(병설)');
+  //     li.appendChild(text);
+  //     li.appendChild(span);      
+  //   }
+  // }
+  let ul = document.getElementsByClassName('unordered');
+  for(let i =0; i<type.length; i++){
+    type[i].addEventListener('click', (e) => {            
+      let className = e.target.className;
+      if(i == 0){
+        if(!className.includes('checked')){
+          e.target.classList.add('checked');
+          ul[0].classList.remove('hidden');
+          type[1].classList.remove('checked');          
+          ul[1].classList.add('hidden');          
+        }      
+      }else{
+        if(!className.includes('checked')){
+          e.target.classList.add('checked');
+          ul[1].classList.remove('hidden');
+          type[0].classList.remove('checked');
+          ul[0].classList.add('hidden');
+        }      
+      }
+      
+      
+      
+    })
+  }
+  
+  
+
+  const drawDoughnutChart = (childCount = 9055, dayCareCount = 53258) => {
+    data = {
         datasets: [{
-          backgroundColor: ['pink', '#5172df'],
-          data: [30, 70]
+          backgroundColor: ['#5172df', 'pink'],
+          data: [childCount, dayCareCount]
         }],
         options: {
           responsive: true,
@@ -487,7 +671,7 @@
               display: false,
           }
         },
-    centerText: {
+    centerText: { // 현재 안됨
         display: true,
         text: "hello world"
     }         
@@ -498,11 +682,15 @@
         var myDoughnutChart = new Chart(ctx2, { type: 'doughnut', data: data, options: {
             cutoutPercentage: 80, 
             animation : {
-              animateRotate : false
+              animateRotate : true
             },            
           },
          
         }); 
+
+  }
+  drawDoughnutChart();
+  
 </script>
 
 
