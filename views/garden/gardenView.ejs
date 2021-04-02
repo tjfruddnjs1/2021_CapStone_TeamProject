@@ -136,7 +136,7 @@
    }
 
    #review{
-    border : 5px solid #dee4f9;
+    border-bottom: 1px solid #dee4f9;
     width: 100%;
     height: 100%;
    }
@@ -259,8 +259,8 @@
       </div>
       <% for(let i=0;i<review.length;i++) {%>
         <div id="review" style="margin-top : 4%; height: 280px;">
-            <div class="main_1 main_common">
-                <div class="totalStar rating <%= i %>" style="margin-left : 10%; margin-bottom : 10%;">
+            <div class="main_1 main_common" style="border-right : 1px solid #dee4f9; padding-right: 3%;" >
+                <div class="totalStar rating <%= i %>" style="margin-left : 30%; margin-bottom : 10%;">
                     <span style="display: none;"><%= review[i].totalStar %></span>
                 </div>
  
@@ -389,7 +389,7 @@ for(i=0;i<rate_length;i++){
         initialRating : totalStar.html(),
         totalStars: 5,
         starShape : 'rounded',
-        starSize : 50,
+        starSize : 40,
         emptyColor : 'lightgray',
         readOnly : true,
         starGradient:{

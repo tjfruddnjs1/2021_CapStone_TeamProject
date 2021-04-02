@@ -161,11 +161,13 @@
   select{
        text-align : center;
        display : inline;              
-       padding : 10px ;              
+       padding : 10px;              
        width : 40%;
+       border : none;
        border : 1px solid #D7D7D7;       
        cursor : pointer;
        font-weight : normal;
+       margin : 0 10px;
    }
    option{
        padding : 10px 0;       
@@ -258,6 +260,21 @@
    .totalContain{
      background-color: white;
    }   
+   .hoc{
+     padding : 3%;
+   }
+   .custom-select{
+    text-align : center;
+       display : inline;              
+                   
+       width : 40%;
+       border : none;
+       border : 1px solid #D7D7D7;       
+       cursor : pointer;
+       font-weight : normal;
+       margin : 0 10px;
+       height : 40px;
+   }
   </style>
 </head>
 
@@ -280,7 +297,7 @@
 </div>
 
 <div class="wrapper row3">
-  <main class="hoc container clear">
+  <main class="hoc container clear shit">
     <div class="title">
       <span class = "head">선택한 지역의 어린이집 및 유치원 현황</span>           
     </div>
@@ -288,13 +305,13 @@
   <div class="total">
     <div class="statistic">            
       <div class="contain">
-        <select name="sidocode" id="" class="sidocode">
+        <select name="sidocode" id="" class="sidocode custom-select">
           <option value="">전체</option>            
           <% sidos.forEach((sido) => {%>
            <option value="<%= sido.sidocode %>"><%= sido.sidoname %></option>
            <% }) %>
         </select>
-        <select name="sggcode" id="" class="sggcode">
+        <select name="sggcode" id="" class="sggcode custom-select">
           <option value="">전체</option>
         </select>
         <div class="card" style = "border : none">
