@@ -7,6 +7,12 @@ const SidoCode = require('../models/sidocode');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
 
+//session 유지를 위한 > passport module
+router.use((req,res,next)=>{
+  res.locals.user = req.user;
+  next();
+});
+
 const allSido = async () => {
   const sidoCode = await SidoCode.findAll({});  
   return sidoCode;  
@@ -94,12 +100,6 @@ const categoryCount = async (type, sggCode = null) => {
   return result;
 }
 
-//session 유지를 위한 > passport module
-router.use((req,res,next)=>{
-  res.locals.user = req.user;
-  next();
-});
-
 //메인 페이지
 router.get('/', async (req,res)=>{
   try{  
@@ -141,7 +141,7 @@ router.post('/', async (req, res) => {
 });
 
 // 시군구용
-router.post('/:sggCode', async (req, res) => {
+router.get('/:sggCode', async (req, res) => {
   try{
     const {sggCode, sidoCode} = req.body;
     let childCountResult;
@@ -164,15 +164,5 @@ router.post('/:sggCode', async (req, res) => {
     next(err);
   }
 });
-
-//Navigation bar의 킨터가든 버튼 눌렀을 때 
-// router.get('/index',async(req,res,next)=>{
-//   try{
-//     res.render('home/index');
-//   }catch(err){
-//     console.error(err);
-//     next(err);
-//   }
-// });
 
 module.exports = router;

@@ -15,7 +15,7 @@ router.use((req,res,next)=>{
   });
 
 //로그인 눌렀을 때
-  router.get('/', async(req,res,next)=>{
+router.get('/local', async(req,res,next)=>{
     try{
       res.render('auth/login');
     }catch(err){
@@ -25,7 +25,7 @@ router.use((req,res,next)=>{
   });
 
 //로그인 post 요청
-router.post('/', isNotLoggedIn, (req, res, next) => {
+router.post('/local', isNotLoggedIn, (req, res, next) => {
   passport.authenticate('local', (authError, user, info) => {
     if (authError) {
       console.error(authError);
