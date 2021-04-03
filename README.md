@@ -318,3 +318,20 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 > `2021-03-28` : 현호 > 메인페이지 내에 유치원/어린이집 통계 , 경원 > 저장된 리뷰페이지 형식에 맞게 출력
 
 > `2021-03-29` : 전체적인 디자인 수정 , 글꼴 설정, 사이트 만의 컬러 정한 후 통일
+
+> `2021-04-02` : 나의 유치원/어린이집 기능 도출 및 초기 erd 작성, 헤더 추가, cctv (실시간, 녹화) 틀 추가
+<br>
+- 나의 유치원/어린이집 틀, 헤더, cctv 틀
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/113479703-81b00300-94cb-11eb-9ff8-d69bcf10cae9.jpg">
+<br>
+- 유치원/어린이집 설문 항목, 상세 기능
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/113479729-a86e3980-94cb-11eb-8a6a-33eef6d90263.jpg">
+<br>
+- 학무모 설문 항목, erd
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/113479763-cf2c7000-94cb-11eb-910a-71d21bab9c11.jpg">
+<br>
+
+> `2021-04-03` : 현호 > 상담(유치원/어린이집, 학부모)페이지, 경원 > 관리자 페이지(유치원/어린이집 승인)
