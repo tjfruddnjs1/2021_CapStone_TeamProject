@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/star-rating-svg.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <style>
+      .banner{    
+      border : 1px solid blue;
+      background-color: #5172df;
+      height : 150px;
+      text-align: center;
+      color : white;
+      font-family: NotoSansKR-Regular;     
+    } 
+    #banner{
+      margin-top : 1%;
+    }
+    
+    #talk{
+      margin-top : 2.5%;
+    }           
+    .container{
+        padding : 50px 78.828px;
+    }
+    .subhead {
+  font-family: sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#updatemento {
+  width: 60%;
+  margin: 0 auto;
+  text-align: left;
+  color: #6D6D72;
+}
+
+#updatemento input[type="text"],
+input[type="submit"],
+input[type="email"],
+#gender,
+textarea {
+  border: 1px solid #8080805c;
+  width: 100%;
+  padding: 12px 5px;
+  margin: 20px auto;
+}
+
+#updatemento input[type="submit"] {
+  cursor: pointer;
+}
+
+.container {
+  padding: 40px 0;
+}
+
+#footer {
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+  text-align: center;
+}
+
+#updatemento input[type="checkbox"] {
+  display: inline;
+  border: 1px solid #8080805c;  
+  cursor: pointer;
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.item-list, .lang-list {  
+  width: 30%;
+  border: 1px solid #8080805c;
+  padding: 10px 5px;  
+  display: inline-block;
+  left : 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.item-list:active {
+  background-color: #8080805c;
+  transition: 0.3s;
+}
+
+label {
+  font-size : 16px;
+  transition: 0.1s;
+  font-weight: bold;  
+  margin-top : 20px;
+}
+.ref-sort ul{ 
+    height : 50px;
+    line-height : 50px;                   
+    background : #f7f7f8;            
+  }    
+  .ref-sort a{        
+    
+    text-align : center;
+    font-weight : bold;      
+  }   
+  .ref-sort div{
+    display : inline;
+    padding : 10px 10px;
+    width : 20%;
+    text-align : center;
+  } 
+  .ref-sort li{      
+    text-align : center;
+    height : 100%;            
+    /* border-bottom : 2px solid #829DA2;       */
+  }
+  .nav {                  
+    width : 50%;      
+    margin : 0 auto;          
+  }
+  #image_section{
+    width : 30%;            
+  }
+  #upload{
+    display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #829DA2;
+    cursor: pointer;
+    border : 0;
+    border-radius: .25em;
+  }
+  #margin{
+    margin-top : 20px;
+  }
+  .radio{
+    display : inline;
+    margin-right : 30px;
+  }
+  
+  .item{
+    text-align: center;
+  }
+  .row3{       
+    background-color: #f8f8f8;    
+  }
+  .container{
+      padding : 6%;
+      min-width : 70%;
+    background-color : white;
+    
+  }
+  #addressBtn, #agreeBtn{
+    padding : 5px 10px;
+    border : 1px solid black;
+    background-color : #EFEFEF;
+    color : #6D6D72;
+    cursor : pointer;
+    margin-top : 20px;
+    text-decoration: none;
+  }  
+  #agreeBtn{
+    display : inline;
+  }
+  input[type = "radio"]{
+    width : 50%;    
+    border : 1px solid black;
+    display : none;
+    transition: 0.1s;
+  }
+  .item-list{
+    float: left;
+    width: 30%;
+    border: 1px solid #8080805c;
+    padding: 5px 10px;
+    margin: 5px;  
+    text-align: center;
+    cursor: pointer;
+    width : 50%;
+    text-align: center;
+    margin : 0 auto;
+    transition: 0.1s;
+  }
+  .checked{
+    background-color: #5172DF;
+    color : white;
+    transition: 0.1s;
+  }
+  #agree{
+    width : 40px;
+  }
+  .type{
+    background-color: #80808014;
+  }
+  .navigation{
+    text-align: center;
+    margin-bottom : 30px;    
+  }
+  .nav{
+    line-height: 130px;
+    display : inline-block;
+    width : 130px;
+    height : 130px;
+    border-radius: 50%;
+    background-color : #8080808c;
+    border : 2px solid gray;    
+    margin : 0 70px;
+    font-weight: bold;
+  }
+  .arrow{
+    font-size : 20px;
+  }
+  .hoc{
+    padding : 50px;
+  }
+  #garden_submit{
+    background-color : #5172DF;
+    color : white;
+  }
+  .mul{
+    margin-top : 0;
+  }
+  #center{
+    border : 2px solid  #0a40f5;
+    background-color : #5172DF;
+    color : white;
+  }
+  .star{
+    color : #ff0000;
+  }
+    </style>
+  </head>      
+  <body id="top">
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    > 
+
+    <%- include('../partials/nav') %>
+    </div>
+    <div class="banner">
+        <h2 id="talk" >유치원·어린이집 등록</h2> 
+        <h5 id="banner" >유치원·어린이집을 키즈가든에 등록할 수 있습니다.</h5>
+    </div>
+  <div class="wrapper row3">    
+    <main class="hoc container clear">              
+      <div class="navigation">
+        <div class="nav">등록 종류 선택</div>      
+        <span class = "arrow">></span>
+        <div class="nav" id = "center">회원정보 입력</div>
+        <span class = "arrow">></span>
+        <div class="nav">등록 완료</div>
+      </div>
+      <div id="updatemento">          
+        <form action="/register/garden" method="post" id = "gardenForm">
+          <fieldset>
+            <label for="username">유형<span class = "star">*</span></label>              
+            <br>            
+            <div class="item-list checked">
+              <label class = "mul"><input type="radio" name="type" value = "유치원" class = "type" checked>유치원</label>                                    
+            </div>
+            <div class="item-list">
+              <label class = "rightitem mul"><input type="radio" name="type"value = "어린이집" class = "type">어린이집</label> 
+            </div>                                    
+          </fieldset>          
+          <fieldset id = "margin">
+            <label for="address">기관명<span class = "star">*</span></label>  <br><br>                     
+            <a href='javascript:window.open("/register/address",
+            "", "width=700, height=600, resizable = no, scrollbars = no");'id = "addressBtn">주소찾기</a>               
+            <input type="text" id="gardencode" name="gardencode" class = "type" hidden>
+            <input type="text" id="address" name="address" class = "type" placeholder = "예) 대구광역시 중구 달구벌대로447길 10" readonly>
+            <input type="text" id="gardenname" name="gardenname" placeholder = "예) 대구삼덕초등학교병설유치원"  class = "type" readonly>                          
+          </fieldset>          
+          <fieldset>
+            <label for="firm">작성자<span class = "star">*</span></label>              
+            <input type="text" id="writer" name="writer" value = "">              
+          </fieldset>
+          <fieldset>
+            <label for="department">원장명<span class = "star">*</span></label>
+            <input type="text" id="representative" name="representative" value = "">
+          </fieldset>          
+          <fieldset>
+            <label for="phone">휴대전화 번호<span class = "star">*</span></label>
+            <input type="text" id="phone" name="phone" value = "<%= phone %>" readonly>
+          </fieldset>
+          <fieldset>
+            <label for="phone">기관 전화번호<span class = "star">*</span></label>
+            <input type="text" id="gardenphone" name="gardenphone" value = "">
+          </fieldset> 
+          <fieldset>
+            <label for="agree">약관 동의<span class = "star">*</span></label><br><br>
+            <a href='javascript:window.open("/register/agree",
+            "childForm", "width=700, height=600, resizable = no, scrollbars = no");  ' id = "agreeBtn">약관보기</a>
+            
+            <input type="checkbox" id = "agree" name = "agree">                  
+          </fieldset> 
+          <input type="submit" value="등록" id = "garden_submit">
+        </form>
+      </div>
+    </section>    
+    </main>    
+    </div>        
+  </section>
+  <div class="clear"></div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>       
+    <script>          
+        const addresBtn = document.querySelector('#addressBtn');
+        const agreeBtn = document.querySelector('#agreeBtn');
+        const submitBtn = document.getElementById('garden_submit');
+        const item = document.getElementsByClassName('item-list');
+        const type = document.getElementsByClassName('type');
+        const writer = document.getElementById('writer');
+        const representative = document.getElementById('representative');
+        const phone = document.getElementById('phone');
+        const gardenPhone = document.getElementById('gardenphone');
+        const agreeBox = document.getElementById('agree');
+        const address = document.getElementById('address');
+        const gardenName = document.getElementById('gardenname');
+
+        
+        //   addresBtn.addEventListener('click', () => {
+        //   window.name = "parentForm";
+
+        //   openWin = window.open("/register/address",
+        //             "childForm", "width=700, height=600, resizable = no, scrollbars = no");  
+        //             return false;
+        // });
+        
+        
+        // agreeBtn.addEventListener('click', () => {
+        //   window.name = "parentForm";
+
+        //   openWin = window.open("/register/agree",
+        //             "childForm", "width=700, height=600, resizable = no, scrollbars = no");  
+
+        //             return false;
+        // });
+
+        
+
+        for(let i =0; i< item.length; i++){
+          item[i].addEventListener('click', () => {
+            if(i==0){
+              if(!type[0].checked){                
+                type[0].checked = true;
+                item[0].classList.add('checked');            
+                item[1].classList.remove('checked');
+              }            
+            }else{
+              if(!type[1].checked){
+                type[1].checked = true;
+                item[1].classList.add('checked');            
+                item[0].classList.remove('checked');
+              }            
+            }
+            
+          })
+        }
+
+        submitBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          let flag = false;
+          for(let i =0; i<type.length; i++){
+            if(type[i].checked){                        
+               flag = true;               
+            }
+          }
+          if(!flag){
+              alert('유형을 선택해주세요');
+              return false;
+          }
+          
+          if(!address.value || !gardenName.value){
+            alert('주소를 입력해주세요');
+            return false;
+          }
+
+          if(!writer.value){
+            alert('작성자를 입력해주세요');
+            return false;
+          }
+
+          if(!representative.value){
+            alert('원장명 입력해주세요');
+            return false;
+          }
+
+          if(!phone.value){
+            alert('휴대전화 번호를 입력해주세요');
+            return false;
+          }
+
+          if(!gardenPhone.value){
+            alert('기관 전화번호를 입력해주세요');
+            return false;
+          }
+
+          if(!agree.checked){
+            alert('약관동의를 선택해주세요');
+            return false;
+          }
+          console.log(address.value);
+          console.log(gardenName.value);
+
+          gardenForm.submit();
+          
+        })
+    </script>
+  </body>  
+</html>

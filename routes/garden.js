@@ -133,6 +133,7 @@ router.get('/sido', async(req, res) => {
   }
 });
 
+      
 router.get('/index', async (req,res)=>{
   try{        
     

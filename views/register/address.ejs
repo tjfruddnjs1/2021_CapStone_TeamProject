@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+        <title>주소 등록</title>
+        <style>
+            @font-face{
+              font-family: NotoSansKR-Regular;
+              src:url("/font/NotoSansKR-Regular.otf");
+            }
+                      
+            body{
+              font-family: NotoSansKR-Regular;
+            }
+            .contain{
+                margin : 0 auto;
+                font-size : 14px;
+                width : 95%;
+                text-align: left;
+            }
+            .kids{
+              background-color: white;
+              color : black;
+              font-weight: bold;
+              font-size : 12px;
+              font-family: NotoSansKR-Regular;
+            }
+
+            .banner{    
+                border : 1px solid #5172df;
+                background-color: #5172df;                
+                text-align: center;
+                color : white;
+                height : 50px;                
+                font-family: NotoSansKR-Regular;  
+                padding : 0;                                   
+            }             
+            #logo{
+                padding : 0 10px;
+                font-size : 18px;
+                color : black;
+            }
+            .hoc{
+                margin : 0;
+                padding : 0;
+            }
+            .kids{
+                margin : 0;
+                padding : 0;
+            }
+            .type{
+                display : inline-block;     
+                background : none;
+                border : 1px solid #D7D7D7;
+                width : 49%;    
+                padding : 8px 0;     
+                cursor : pointer;
+                margin : 0;
+            }
+            .childButton{
+                margin-top : 3%;
+                text-align: center;
+            }
+            #talk{
+                line-height: 50px;
+                font-size : 14px;
+            }          
+        .custom-select{
+            text-align : center;
+            display : inline;                                      
+            width : 30%;
+            border : none;
+            border : 1px solid #D7D7D7;       
+            cursor : pointer;
+            font-weight : normal;
+            margin : 0 30px;            
+        }
+        #hr{
+            border-width : 2px;
+        }        
+        #pathname, #childname{
+            border : 1px solid #D7D7D7;       
+            margin : 0 30px;
+            padding : 6px 28px 6px 12px;
+            width : 80%;
+        }
+        label{
+            width : 50px;
+        }
+        .search{            
+            text-align: center;
+            
+        }
+        .search input{
+            padding : 10px 30px;
+            background-color: #979292;
+            border : 1px solid #979292;
+            color : #fff;
+        }
+        thead{
+            border : 1px solid #D7D7D7;
+            border-top : 2px solid #797171;                        
+        }
+        tr,td,th{
+            padding : 5px 10px;
+            border-top : 1px solid #D7D7D7;            
+            border-bottom : 1px solid #D7D7D7;            
+            
+        }
+        th{
+            background-color : #b9bbbe;
+        }
+        table{
+            width : 100%;
+            margin : 0 auto;            
+            text-align: center;
+            border-collapse: collapse;            
+        }
+        .subhead{
+            margin-top : 30px;
+            margin-bottom : 10px;
+        }
+        .address{
+            border-right : 1px solid #D7D7D7;            
+        }
+        .category{
+            width : 100px;
+        }
+        input[type="radio"]{
+            margin-right : 50px;
+        }
+        .pagination{
+            margin-top : 5%;
+            display:flex;
+            align-items:center;
+            justify-content: center;
+        }
+        .hidden{
+            display : none;
+        }
+        .checked{
+            background-color : #5172df;
+            color : white;
+        } 
+        .selection{
+            cursor : pointer;
+            color : #5172df;
+        }
+        .selection:hover{
+            color : #5172df;
+            text-decoration: underline;
+        }
+        .hide{
+            display : none;
+        }
+      </style>
+    </head>
+    
+    <body>
+        <div class="wrapper row1 kids">
+            <header id="header" class="hoc clear">            
+              <div id="logo" class="fl_left">
+                <h1><a href="#" style="font-family: NotoSansKR-Regular; font-weight: bold; text-decoration: none; cursor : default; " id = "logo"><img style="width:5%;margin-bottom:0.5%; margin-right:2%;" src="/images/navi.png"></img>키즈가든</a></h1>
+              </div>    
+              <div class="banner">
+                <h2 id="talk" >유치원·어린이집 주소 등록</h2>                 
+            </div>                    
+            </header>            
+        </div>
+        <div class="contain">
+            <div class="childButton">
+                <div class="checked type">도로명</div>
+                <div class="type">기관명</div>
+            </div>
+            <hr id = "hr">      
+            <div class="cate">
+                <label for="kinder" class = "category">유치원</label>
+                <input type="radio" value = "유치원" id = "kinder" name = "type" class = "field">
+                <label for="daycare" class = "category">어린이집</label>
+                <input type="radio" value = "어린이집" id = "daycare" name = "type" class = "field">
+            </div>         
+            
+            <hr>         
+            <label for="sido">시/도</label>
+            <select name="sidocode" id="sido" class="sidocode custom-select">
+                <option value="">전체</option>
+                <% sidos.forEach((sido) => {%>
+                    <option value="<%= sido.sidocode %>"><%= sido.sidoname %></option>
+                <% }) %>
+            </select>
+            <label for="sido">시/군/구</label>
+            <select name="sggcode" id="sgg" class="sggcode custom-select">
+                <option value="">전체</option>
+            </select>
+            <hr>
+            <div class="searchtype ">
+                <label for="pathname checked">도로명</label>
+                <input type="text" id = "pathname">
+            </div>
+            <div class="searchtype hidden">
+                <label for="childname">기관명</label>
+                <input type="text" id = "childname">
+            </div>
+            
+            <hr>
+            <div class="search">
+                <input type="submit" value = "검색"  class = "submit">
+            </div>
+
+            <div class="result">
+                <div class="subhead">총 0건이 검색되었습니다.</div>
+                <table>
+                    <thead>
+                        <th>주소</th>
+                        <th>이름</th>
+                    </thead>
+                    <tbody class = "tbody">                                                                    
+                    </tbody>
+                </table>
+            </div>
+            <ul class="pagination">
+
+            </ul>
+        </div>
+        
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            const logo = document.querySelector('.logo');
+            const select = document.querySelector('.sidocode');
+            const sggTags = document.querySelector('.sggcode');
+            const count = document.getElementsByClassName('num');
+            const type = document.getElementsByClassName('type');
+            const submit = document.querySelector('.submit');
+            const pathName = document.querySelector('#pathname');
+            const gardenName = document.querySelector('#childname');
+            const field = document.getElementsByClassName('field');
+            const subHead = document.querySelector('.subhead');
+            const tbody = document.querySelector('.tbody');
+            const ulTag = document.querySelector('.pagination');
+            let lastPage;
+            
+
+            select.addEventListener('change', async (e) => {
+                try{                            
+                const result = await axios.post('/register/address', {sidoCode : e.target.value});                  
+                while ( sggTags.hasChildNodes() ) { sggTags.removeChild( sggTags.firstChild ); }                       
+                    let option = document.createElement('option');
+                    let text = document.createTextNode('전체');
+                    option.appendChild(text);
+                    option.setAttribute('value', select.value);
+                    sggTags.appendChild(option);
+                    for(let i =0; i <result.data.sggs.length; i++){
+                    let option = document.createElement('option');
+                    let text = document.createTextNode(result.data.sggs[i].sggname);
+                    option.appendChild(text);
+                    option.setAttribute('value', result.data.sggs[i].sggcode);
+                    sggTags.appendChild(option);
+                    }                              
+                
+                }catch(err){
+                    console.error(err);
+                }
+            })
+
+            submit.addEventListener('click', async () => {       
+                try{                    
+                    let type;
+                    let total;
+                    let gardens;
+                    let tr;
+                    let flag = false;                
+                    let result;
+                    for(let i =0; i<field.length; i++){
+                        if(field[i].checked){                        
+                            flag = true;
+                            type = field[i].value;                        
+                        }
+                    }
+                    if(!flag){
+                        alert('유형을 선택해주세요');
+                        return false;
+                    }
+                    if(!select.value){
+                        alert('시/도 를 선택해주세요');
+                        return false;
+                    }                  
+                    if(pathName.value){                        
+                        result = await axios.post('/register/address/gardens', {type : type, sggCode : sggTags.value, pathName : pathName.value});
+                    }else{                        
+                        result = await axios.post('/register/address/gardens', {type : type, sggCode : sggTags.value, gardenName : gardenName.value});
+                    }                                        
+                    console.log(result.data);
+                    createTable(result);
+                    
+                }catch(err){
+                    console.error(err)
+                }
+                                
+            });
+            
+           const createTag = (tagName, text = null, value = null, attribute = null) => {
+            let tag = document.createElement(tagName);      
+            let textNode;
+            if(text){
+                textNode = document.createTextNode(text);            
+                tag.appendChild(textNode);
+            }                   
+            if(value && attribute){
+                tag.setAttribute(value, attribute);
+            }
+             return tag;
+           }
+
+           const deleteChild = (tagName) => {
+            const tag = document.querySelector(tagName);
+            while(tag.hasChildNodes()){
+                tag.removeChild(tag.firstChild);
+            }
+           }
+           let pages = document.getElementsByClassName('page-link');
+           
+            $(document).on('click', '.page-link', async (e) => {
+                e.preventDefault();                
+                let type;
+                let result;
+                let flag = false;                
+                    for(let i =0; i<field.length; i++){
+                        if(field[i].checked){                        
+                            flag = true;
+                            type = field[i].value;                        
+                        }
+                    }
+
+                
+                
+                console.log(e.target.href);
+                let index = e.target.href.lastIndexOf('/');                
+                let tagValue = e.target.href.substr(index+1, e.target.href.length-1);
+                if(tagValue == lastPage){
+                    alert('마지막 페이지입니다.');
+                    return false;
+                }else{                  
+                    if(pathName.value){                        
+                        result = await axios.post(`/register/address/gardens/${tagValue}`, {type : type, sggCode : sggTags.value, pathName : pathName.value});
+                    }else{                        
+                        result = await axios.post(`/register/address/gardens/${tagValue}`, {type : type, sggCode : sggTags.value, gardenName : gardenName.value});
+                    }                                                                                                     
+                    console.log(result.data);
+                    createTable(result);   
+
+                    return false;                 
+                }
+                        
+            })
+           
+            
+                
+            
+            
+           
+           
+            const createTable = (result) => {
+                total = result.data.result.gardens.count;
+                lastPage = result.data.result.totalPage + 1;                
+                    subHead.innerHTML = `총 ${total} 건이 검색되었습니다.`;
+                    gardens = result.data.result.gardens.rows;
+                    deleteChild('tbody');
+                    deleteChild('.pagination');
+                    for(let i = 0; i< result.data.result.gardens.rows.length; i++){                          
+                        tr = createTag('tr');                        
+                        let input = createTag('input', gardens[i].gardencode, 'class', 'hide');
+                                        ;
+                        input.classList.add(`${i}`);
+                        let tdAdress = createTag('td', gardens[i].address, 'class', `gardenaddress`);
+                        let tdName = createTag('td', gardens[i].gardenname, 'class', `selection`);
+                        tdAdress.classList.add(`${i}`);
+                        tdName.classList.add(`${i}`);
+                        tdName.setAttribute('onClick', 'createClickEvent(this); return false;');
+                        tr.appendChild(input);
+                        tr.appendChild(tdAdress);
+                        tr.appendChild(tdName);                        
+                        tbody.appendChild(tr);          
+                    }
+                    let data = result.data.result;                     
+                    let li = createTag('li', null, 'class','page-item');
+                    let aTag = createTag('a', '«', 'class', 'page-link');
+                    aTag.setAttribute('href', `/register/address/${data.startPage-1}`);
+                    li.appendChild(aTag);
+                    ulTag.appendChild(li);
+                    for(let i =data.startPage; i <= data.endPage;  i++){
+                        li = createTag('li', null, 'class','page-item');
+                        aTag = createTag('a', i , 'class', 'page-link');
+                        aTag.setAttribute('href', `/register/address/${i}`);
+                        li.appendChild(aTag);
+                        ulTag.appendChild(li);
+                    }                                          
+                    li = createTag('li', null, 'class','page-item');
+                    aTag = createTag('a', '»', 'class', 'page-link');
+                    aTag.setAttribute('href', `/register/address/${data.endPage+1}`);
+                    li.appendChild(aTag);
+                    ulTag.appendChild(li);       
+            }
+            const searchType = document.getElementsByClassName('searchtype');
+            for(let i =0; i<type.length; i++){                
+                type[i].addEventListener('click', (e) => {                                
+                let className = e.target.className;
+                if(i == 0){ // 도로명
+                    if(!className.includes('checked')){
+                    e.target.classList.add('checked');
+                    searchType[0].classList.remove('hidden');
+                    type[1].classList.remove('checked');          
+                    searchType[1].classList.add('hidden');    
+                    gardenName.value = null;     
+                    }      
+                }else{
+                    if(!className.includes('checked')){
+                    e.target.classList.add('checked');
+                    searchType[1].classList.remove('hidden');
+                    type[0].classList.remove('checked');
+                    searchType[0].classList.add('hidden');
+                    pathName.value = null;
+                    }      
+                }
+                
+                
+                
+                })
+            }
+
+            const createClickEvent = (e) => {                
+                let index  = parseInt(e.classList[1]);                
+                let gardenAddress = document.getElementsByClassName('gardenaddress');
+                let selection = document.getElementsByClassName('selection');
+                let gardenCode = document.getElementsByClassName('hide');                                                                             
+                    opener.document.getElementById("address").value = gardenAddress[index].innerHTML;                        
+                    opener.document.getElementById("gardenname").value = selection[index].innerHTML;  
+                    opener.document.getElementById("gardencode").value = gardenCode[index].innerText;  
+                                
+                window.close()       ;
+            }
+            
+        </script>
+    </body>
+      
+      
+      
+</html>
