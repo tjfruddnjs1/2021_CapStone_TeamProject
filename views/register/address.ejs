@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+        <title>주소 등록</title>
         <style>
             @font-face{
               font-family: NotoSansKR-Regular;
@@ -148,6 +149,9 @@
         .selection:hover{
             color : #5172df;
             text-decoration: underline;
+        }
+        .hide{
+            display : none;
         }
       </style>
     </head>
@@ -364,12 +368,16 @@
                     deleteChild('tbody');
                     deleteChild('.pagination');
                     for(let i = 0; i< result.data.result.gardens.rows.length; i++){                          
-                        tr = createTag('tr');
+                        tr = createTag('tr');                        
+                        let input = createTag('input', gardens[i].gardencode, 'class', 'hide');
+                                        ;
+                        input.classList.add(`${i}`);
                         let tdAdress = createTag('td', gardens[i].address, 'class', `gardenaddress`);
                         let tdName = createTag('td', gardens[i].gardenname, 'class', `selection`);
                         tdAdress.classList.add(`${i}`);
                         tdName.classList.add(`${i}`);
                         tdName.setAttribute('onClick', 'createClickEvent(this); return false;');
+                        tr.appendChild(input);
                         tr.appendChild(tdAdress);
                         tr.appendChild(tdName);                        
                         tbody.appendChild(tr);          
@@ -424,12 +432,12 @@
                 let index  = parseInt(e.classList[1]);                
                 let gardenAddress = document.getElementsByClassName('gardenaddress');
                 let selection = document.getElementsByClassName('selection');
-                
-                console.log(selection.length);                                                  
+                let gardenCode = document.getElementsByClassName('hide');                                                                             
                     opener.document.getElementById("address").value = gardenAddress[index].innerHTML;                        
-                    opener.document.getElementById("gardenname").value = selection[index].innerHTML;                        
-                    
-                    window.close();
+                    opener.document.getElementById("gardenname").value = selection[index].innerHTML;  
+                    opener.document.getElementById("gardencode").value = gardenCode[index].innerText;  
+                                
+                window.close()       ;
             }
             
         </script>

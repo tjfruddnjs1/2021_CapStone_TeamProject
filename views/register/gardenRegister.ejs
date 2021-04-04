@@ -31,7 +31,7 @@
 }
 
 #updatemento {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   text-align: left;
   color: #6D6D72;
@@ -67,8 +67,7 @@ textarea {
 
 #updatemento input[type="checkbox"] {
   display: inline;
-  border: 1px solid #8080805c;
-  width: 20%;
+  border: 1px solid #8080805c;  
   cursor: pointer;
 }
 
@@ -99,7 +98,10 @@ input[type="file"] {
 }
 
 label {
-  font-weight: bold;
+  font-size : 16px;
+  transition: 0.1s;
+  font-weight: bold;  
+  margin-top : 20px;
 }
 .ref-sort ul{ 
     height : 50px;
@@ -148,11 +150,96 @@ label {
     display : inline;
     margin-right : 30px;
   }
-  .rightitem{
-    margin-left : 10%;
-  }  
+  
   .item{
     text-align: center;
+  }
+  .row3{       
+    background-color: #f8f8f8;    
+  }
+  .container{
+      padding : 6%;
+      min-width : 70%;
+    background-color : white;
+    
+  }
+  #addressBtn, #agreeBtn{
+    padding : 5px 10px;
+    border : 1px solid black;
+    background-color : #EFEFEF;
+    color : #6D6D72;
+    cursor : pointer;
+    margin-top : 20px;
+    text-decoration: none;
+  }  
+  #agreeBtn{
+    display : inline;
+  }
+  input[type = "radio"]{
+    width : 50%;    
+    border : 1px solid black;
+    display : none;
+    transition: 0.1s;
+  }
+  .item-list{
+    float: left;
+    width: 30%;
+    border: 1px solid #8080805c;
+    padding: 5px 10px;
+    margin: 5px;  
+    text-align: center;
+    cursor: pointer;
+    width : 50%;
+    text-align: center;
+    margin : 0 auto;
+    transition: 0.1s;
+  }
+  .checked{
+    background-color: #5172DF;
+    color : white;
+    transition: 0.1s;
+  }
+  #agree{
+    width : 40px;
+  }
+  .type{
+    background-color: #80808014;
+  }
+  .navigation{
+    text-align: center;
+    margin-bottom : 30px;    
+  }
+  .nav{
+    line-height: 130px;
+    display : inline-block;
+    width : 130px;
+    height : 130px;
+    border-radius: 50%;
+    background-color : #8080808c;
+    border : 2px solid gray;    
+    margin : 0 70px;
+    font-weight: bold;
+  }
+  .arrow{
+    font-size : 20px;
+  }
+  .hoc{
+    padding : 50px;
+  }
+  #garden_submit{
+    background-color : #5172DF;
+    color : white;
+  }
+  .mul{
+    margin-top : 0;
+  }
+  #center{
+    border : 2px solid  #0a40f5;
+    background-color : #5172DF;
+    color : white;
+  }
+  .star{
+    color : #ff0000;
   }
     </style>
   </head>      
@@ -168,64 +255,59 @@ label {
         <h2 id="talk" >유치원·어린이집 등록</h2> 
         <h5 id="banner" >유치원·어린이집을 키즈가든에 등록할 수 있습니다.</h5>
     </div>
-  <div class="wrapper row3">
+  <div class="wrapper row3">    
     <main class="hoc container clear">              
+      <div class="navigation">
+        <div class="nav">등록 종류 선택</div>      
+        <span class = "arrow">></span>
+        <div class="nav" id = "center">회원정보 입력</div>
+        <span class = "arrow">></span>
+        <div class="nav">등록 완료</div>
+      </div>
       <div id="updatemento">          
-        <form action="/register" method="post" id = "">
+        <form action="/register/garden" method="post" id = "gardenForm">
           <fieldset>
-            <label for="username">유형</label>              
-            <br><br>
-            <label><input type="radio" name="type" value = "유치원" class = "radio">유치원</label>                                    
-            <label class = "rightitem"><input type="radio" name="type"value = "어린이집" class = "radio">어린이집</label> 
-            
+            <label for="username">유형<span class = "star">*</span></label>              
+            <br>            
+            <div class="item-list checked">
+              <label class = "mul"><input type="radio" name="type" value = "유치원" class = "type" checked>유치원</label>                                    
+            </div>
+            <div class="item-list">
+              <label class = "rightitem mul"><input type="radio" name="type"value = "어린이집" class = "type">어린이집</label> 
+            </div>                                    
           </fieldset>          
           <fieldset id = "margin">
-            <label for="gender">기관명</label>              
-            <button id = "addressBtn">주소찾기</button>
-            <input type="text" id="address" name="firm" value = "" disabled>
-            <input type="text" id="gardenname" name="firm" value = "" placeholder = "기관명" disabled>              
-            </select>
+            <label for="address">기관명<span class = "star">*</span></label>  <br><br>                     
+            <a href='javascript:window.open("/register/address",
+            "", "width=700, height=600, resizable = no, scrollbars = no");'id = "addressBtn">주소찾기</a>               
+            <input type="text" id="gardencode" name="gardencode" class = "type" hidden>
+            <input type="text" id="address" name="address" class = "type" placeholder = "예) 대구광역시 중구 달구벌대로447길 10" readonly>
+            <input type="text" id="gardenname" name="gardenname" placeholder = "예) 대구삼덕초등학교병설유치원"  class = "type" readonly>                          
+          </fieldset>          
+          <fieldset>
+            <label for="firm">작성자<span class = "star">*</span></label>              
+            <input type="text" id="writer" name="writer" value = "">              
           </fieldset>
           <fieldset>
-            <label for="firm">작성자</label>              
-            <input type="text" id="firm" name="firm" value = "">              
+            <label for="department">원장명<span class = "star">*</span></label>
+            <input type="text" id="representative" name="representative" value = "">
+          </fieldset>          
+          <fieldset>
+            <label for="phone">휴대전화 번호<span class = "star">*</span></label>
+            <input type="text" id="phone" name="phone" value = "<%= phone %>" readonly>
           </fieldset>
           <fieldset>
-            <label for="department">원장명</label>
-            <input type="text" id="department" name="department" value = "">
-          </fieldset>
-          <fieldset>
-            <label for="career">주요경력</label>
-            <textarea name="career" id="career" cols="30" rows="10"></textarea>
+            <label for="phone">기관 전화번호<span class = "star">*</span></label>
+            <input type="text" id="gardenphone" name="gardenphone" value = "">
           </fieldset> 
           <fieldset>
-            <label for="phone">휴대전화 번호</label>
-            <input type="text" id="phone" name="phone" value = "">
-          </fieldset>
-          <fieldset>
-            <label for="email">이메일</label>
-            <input type="email" id="email" name="email" value = "" readonly >
-          </fieldset>
-          <fieldset>
-            <label for="intro">멘토 소개</label>              
-            <textarea name="intro" id="intro" cols="30" rows="10"></textarea>
-            </fieldset>
-          <fieldset>                       
-          <fieldset>              
-            <label for="name">프로필 사진</label>
-            <label for="image" id = "upload">업로드</label>              
-            <input type="file" value="업로드" name = "image" id = "image" accept="image/png, image/jpeg">
-            <img id="image_section" src="" alt=""/>
-            <div id="imagebox">
-              <p>
-                - 얼굴이 포함된 사진을 등록해주세요. <br>
-                - 얼굴 확인이 어려울 경우, 수정 요청이 있을 수 있습니다. <br>
-                - 해당 사진의 최적 사이즈는 800 x 800px 입니다. <br>
-                - 등록 가능한 파일 형식은 jpg, png 입니다.
-              </p>
-            </div>
-          </fieldset>            
-          <input type="submit" value="다음" id = "mentor_submit">
+            <label for="agree">약관 동의<span class = "star">*</span></label><br><br>
+            <a href='javascript:window.open("/register/agree",
+            "childForm", "width=700, height=600, resizable = no, scrollbars = no");  ' id = "agreeBtn">약관보기</a>
+            
+            <input type="checkbox" id = "agree" name = "agree">                  
+          </fieldset> 
+          <input type="submit" value="등록" id = "garden_submit">
         </form>
       </div>
     </section>    
@@ -237,12 +319,105 @@ label {
     <%- include('../partials/top') %>       
     <script>          
         const addresBtn = document.querySelector('#addressBtn');
+        const agreeBtn = document.querySelector('#agreeBtn');
+        const submitBtn = document.getElementById('garden_submit');
+        const item = document.getElementsByClassName('item-list');
+        const type = document.getElementsByClassName('type');
+        const writer = document.getElementById('writer');
+        const representative = document.getElementById('representative');
+        const phone = document.getElementById('phone');
+        const gardenPhone = document.getElementById('gardenphone');
+        const agreeBox = document.getElementById('agree');
+        const address = document.getElementById('address');
+        const gardenName = document.getElementById('gardenname');
 
-        addresBtn.addEventListener('click', () => {
-          window.name = "parentForm";
+        
+        //   addresBtn.addEventListener('click', () => {
+        //   window.name = "parentForm";
 
-          openWin = window.open("/register/address",
-                    "childForm", "width=700, height=600, resizable = no, scrollbars = no");  
+        //   openWin = window.open("/register/address",
+        //             "childForm", "width=700, height=600, resizable = no, scrollbars = no");  
+        //             return false;
+        // });
+        
+        
+        // agreeBtn.addEventListener('click', () => {
+        //   window.name = "parentForm";
+
+        //   openWin = window.open("/register/agree",
+        //             "childForm", "width=700, height=600, resizable = no, scrollbars = no");  
+
+        //             return false;
+        // });
+
+        
+
+        for(let i =0; i< item.length; i++){
+          item[i].addEventListener('click', () => {
+            if(i==0){
+              if(!type[0].checked){                
+                type[0].checked = true;
+                item[0].classList.add('checked');            
+                item[1].classList.remove('checked');
+              }            
+            }else{
+              if(!type[1].checked){
+                type[1].checked = true;
+                item[1].classList.add('checked');            
+                item[0].classList.remove('checked');
+              }            
+            }
+            
+          })
+        }
+
+        submitBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          let flag = false;
+          for(let i =0; i<type.length; i++){
+            if(type[i].checked){                        
+               flag = true;               
+            }
+          }
+          if(!flag){
+              alert('유형을 선택해주세요');
+              return false;
+          }
+          
+          if(!address.value || !gardenName.value){
+            alert('주소를 입력해주세요');
+            return false;
+          }
+
+          if(!writer.value){
+            alert('작성자를 입력해주세요');
+            return false;
+          }
+
+          if(!representative.value){
+            alert('원장명 입력해주세요');
+            return false;
+          }
+
+          if(!phone.value){
+            alert('휴대전화 번호를 입력해주세요');
+            return false;
+          }
+
+          if(!gardenPhone.value){
+            alert('기관 전화번호를 입력해주세요');
+            return false;
+          }
+
+          if(!agree.checked){
+            alert('약관동의를 선택해주세요');
+            return false;
+          }
+          console.log(address.value);
+          console.log(gardenName.value);
+
+          gardenForm.submit();
+          
         })
     </script>
   </body>  

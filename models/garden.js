@@ -72,5 +72,7 @@ module.exports = class Garden extends Sequelize.Model {
       foreignKey : 'gardencode',
       sourceKey : 'gardencode'
     });
+
+    db.Garden.hasOne(db.GardenRequest, {foreignKey : 'gardencode', source : 'gardencode'});
   }
 };

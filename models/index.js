@@ -10,6 +10,8 @@ const SidoCode = require('./sidocode');
 const Garden = require('./garden');
 const Review = require('./review');
 
+const GardenRequest = require('./gardenRequest');
+
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
@@ -32,6 +34,7 @@ db.SidoCode = SidoCode;
 db.SggCode = SggCode;
 db.Garden = Garden;
 db.Review = Review;
+db.GardenRequest = GardenRequest;
 
 User.init(sequelize);
 Drop.init(sequelize);
@@ -41,6 +44,7 @@ SidoCode.init(sequelize);
 SggCode.init(sequelize);
 Garden.init(sequelize);
 Review.init(sequelize);
+GardenRequest.init(sequelize);
 
 User.associate(db);
 Drop.associate(db);
@@ -50,5 +54,6 @@ SidoCode.associate(db);
 SggCode.associate(db);
 Garden.associate(db);
 Review.associate(db);
+GardenRequest.associate(db);
 
 module.exports = db;

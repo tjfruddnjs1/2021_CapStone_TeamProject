@@ -4,6 +4,7 @@ const Garden = require('../models/garden');
 const SggCode = require('../models/sggcode');
 const SidoCode = require('../models/sidocode');
 const User = require('../models/user');
+const GardenRequest = require('../models/gardenRequest');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
@@ -42,8 +43,7 @@ if(pathName){
       address : {[Op.like] : '%' + pathName + '%'},
     }
   });        
-}else{
-  console.log('기관명 등장');
+}else{  
   total = await Garden.count({
     where : {    
       gardentype : type,        
@@ -85,7 +85,7 @@ if(pathName){
   }  
   if(pathName){
     gardens = await Garden.findAndCountAll({
-      attributes : ['address', 'gardenname'],
+      attributes : ['gardencode', 'address', 'gardenname'],
       offset : s_point,
       limit : 5,
       where : {    
@@ -97,7 +97,7 @@ if(pathName){
     });     
   }else{
     gardens = await Garden.findAndCountAll({
-      attributes : ['address', 'gardenname'],
+      attributes : ['gardencode','address', 'gardenname'],
       offset : s_point,
       limit : 5,
       where : {    
@@ -134,32 +134,85 @@ router.get('/', async (req,res)=>{
   }
 });
 
-router.get('/garden',  async (req,res)=>{
-  try{  
-  // const user = req.user;
-  // if(!user.phone){
-  //   res.send('<script>alert("본인인증이 필요합니다"); location.href = "/mypage/account";</script>')
-  // }
-
-  // const userPhone = await User.findOne({where : {phone : req.user.phone}});  
-  res.render('register/gardenRegister');
-  }catch(err){
-    console.error(err);
-    next(err);
-  }
-});
-
-router.get('/parent', async (req,res)=>{
+router.get('/', async (req,res)=>{
   try{  
   
-  res.render('register/gardenRegister');
+    res.render('register/');
   }catch(err){
     console.error(err);
     next(err);
   }
 });
 
-router.get('/address', async (req,res)=>{
+router.get('/garden',  isLoggedIn, async (req,res)=>{
+  try{  
+  const user = req.user;
+  if(!user.phone){
+    res.send('<script>alert("본인인증이 필요합니다"); location.href = "/mypage/account";</script>')
+  }
+    
+  res.render('register/gardenRegister', {phone : user.phone});
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.post('/garden',isLoggedIn,  async (req,res)=>{
+  try{  
+    const {type, gardencode, address, gardenname, writer, representative, phone, gardenphone, agree} = req.body;
+    console.log(type, address, gardencode, gardenname, writer, representative, phone, gardenphone, agree);
+
+    const gardenRequest = await GardenRequest.create({
+      type,
+      address,
+      gardenname,
+      writer,
+      representative,
+      phone,
+      gardenphone,
+      gardencode,
+    })
+  res.render('register/complete');
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/parent', isLoggedIn, async (req,res)=>{
+  try{  
+    const user = req.user;
+    if(!user.phone){
+      res.send('<script>alert("본인인증이 필요합니다"); location.href = "/mypage/account";</script>')
+    }
+  res.render('register/parentRegister', {phone : user.phone});
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.post('/garden',isLoggedIn,  async (req,res)=>{
+  try{  
+      
+  res.render('register/complete');
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/agree',isLoggedIn, async (req,res)=>{
+  try{    
+    res.render('register/agree');
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.get('/address',isLoggedIn, async (req,res)=>{
   try{  
     const sidos = await allSido();
   res.render('register/address', {sidos : sidos});
@@ -169,7 +222,7 @@ router.get('/address', async (req,res)=>{
   }
 });
 
-router.post('/address', async (req, res) => {
+router.post('/address',isLoggedIn, async (req, res) => {
   try{
     const {sidoCode} = req.body;    
     const sggs = await findAllSgg(sidoCode);
@@ -180,7 +233,7 @@ router.post('/address', async (req, res) => {
   }
 });
 
-router.post('/address/gardens/:page?', async (req, res) => {
+router.post('/address/gardens/:page?', isLoggedIn, async (req, res) => {
   try{
     const {type, sggCode, pathName, gardenName} = req.body;    
     let {page} = req.params;        
