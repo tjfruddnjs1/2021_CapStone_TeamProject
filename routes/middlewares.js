@@ -7,7 +7,7 @@ exports.isLoggedIn = (req, res, next) => {
       next();
     } else {
       res.send(
-        "<script>alert('로그인이 필요한 작업입니다.'); window.location='/login';</script>"
+        "<script>alert('로그인이 필요한 작업입니다.'); window.location='/login/local';</script>"
       )
     }
   };

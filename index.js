@@ -15,6 +15,7 @@ const kidstalkRouter = require('./routes/kidstalk');
 const inputdata = require('./routes/inputdata');
 
 const passportConfig = require('./passport');
+const router = require('./routes/home');
 
 const app = express();
 
@@ -51,12 +52,16 @@ app.use(passport.session());
 
 app.use(methodOverride('_method'));
 
-app.use('/',homeRouter);
+app.use('/home',homeRouter);
 app.use('/login', loginRouter);
 app.use('/garden', gardenRouter);
 app.use('/mypage', mypageRouter);
 app.use('/kidstalk', kidstalkRouter);
 app.use('/inputdata', inputdata);
+
+app.get('/', async(req,res,next)=>{
+  res.redirect('/home');
+});
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

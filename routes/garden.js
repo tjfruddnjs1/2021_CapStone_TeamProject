@@ -133,7 +133,7 @@ router.get('/sido', async(req, res) => {
   }
 });
 
-router.get('/', async (req,res)=>{
+router.get('/index', async (req,res)=>{
   try{        
     
     // sggcode = parseInt(sggcode);

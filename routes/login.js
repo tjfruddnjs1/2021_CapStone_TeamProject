@@ -128,13 +128,22 @@ router.post('/searchPassword',isNotLoggedIn, async(req,res,next)=>{
 router.post('/regist', isNotLoggedIn, async (req, res, next) => {
     const { email, nickname, password } = req.body;
     try {
-    const exUser = await User.findOne({ where: { email } });
-      if (exUser) {
-        res.send(
-            "<script>alert('가입된 중복 메일이 존재합니다.'); window.location='/login/regist'; </script>"
-        );
-      }
+    const exUser = await User.findOne({ where: { email } }); 
+    const exNick = await User.findOne({ where : { nickname }});
 
+    if(exNick){
+      res.send(
+        "<script>alert('닉네임 중복 확인 해주세요.'); history.back();</script>"
+      );
+    }
+
+    if (exUser) {
+      res.send(
+        "<script>alert('가입된 중복 메일이 존재합니다.'); history.back(); </script>"
+      );
+    }
+
+    if(!(exUser && exNick)){
       const hash = await bcrypt.hash(password, 12);
       await User.create({
         email,
@@ -142,13 +151,33 @@ router.post('/regist', isNotLoggedIn, async (req, res, next) => {
         password: hash,
       });
       res.send(
-          "<script>alert('정상적으로 회원가입 되었습니다.'); window.location='/login';</script>"
+          "<script>alert('정상적으로 회원가입 되었습니다.'); window.location='/login/local';</script>"
       );
-      
+    }  
     } catch (error) {
       console.error(error);
       return next(error);
     }
+});
+
+router.post('/duplicated', async(req,res,next)=>{
+  try{
+    const nickname = req.body.nickname;
+    const exUser = await User.findOne({where : { nickname : nickname }});
+
+    if(exUser) {
+      res.send(
+        "<script>alert('가입된 닉네임이 존재합니다.');history.back();</script>"
+      )
+    }else{
+      res.send(
+        "<script>alert('사용 가능한 닉네임입니다.');history.back();</script>"
+      )
+    }
+  }catch(error){
+    console.error(error);
+    return next(error);
+  }
 });
 
 //회원가입 이메일 인증

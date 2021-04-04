@@ -56,6 +56,18 @@
     margin-bottom: 40px;
     }
 
+    #nickname{
+      display : inline;
+      width : 35%;
+    }
+
+    #duplicated{
+      padding : 1.5%;
+      width : 16%;
+      margin-bottom : 40px;
+      margin-left : 2%;
+    }
+
   </style>
 
   <body>
@@ -79,6 +91,17 @@
                 placeholder="닉네임을 입력해주세요"
                 autofocus
               />
+
+              
+              <input
+                type="submit"
+                value="중복확인"
+                class="btn"
+                id="duplicated"
+                formaction="/login/duplicated"
+                style="cursor: pointer;"
+              />
+              
 
               <input
                 class="btmspace-15"
