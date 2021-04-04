@@ -99,6 +99,15 @@
     h5{
         font-weight: bold;
     }
+
+    #username{
+      width : 70%;
+    }
+
+    #duplicated{
+      width : 20%;
+    }
+
   </style>
 
   <body id="top">
@@ -159,15 +168,24 @@
                 </h5>
               </div>
               <div class="one_two">
-                <label for="email">이름<span>*</span></label>
+                <label for="email">닉네임<span>*</span></label>
                 <input
                   type="text"
-                  name="username"
+                  name="nickname"
                   id="username"
                   value="<%= user.nickname %>"
                   size="22"
                   required
                 />
+
+                <input
+                type="submit"
+                value="중복확인"
+                class="btn"
+                id="duplicated"
+                formaction="/mypage/duplicated"
+                style="cursor: pointer; margin-left : 10%;"
+              />
               </div>
               <div class="one_two">
                 <label for="phone">핸드폰 번호<span>*</span></label>
@@ -192,7 +210,7 @@
                   type="submit"
                   value="인증번호 전송"
                   class="btn"
-                  id="certified"
+                  id="duplicated"
                   formaction="/mypage/sendPhone"
                   style="cursor: pointer; width : 30%; margin-left : 10%;"
                   onclick="javascript:alert('입력하신 핸드폰으로 인증번호가 전송되었습니다')"
