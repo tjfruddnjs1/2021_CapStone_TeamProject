@@ -57,39 +57,84 @@ router.get('/account',isLoggedIn,(req,res,next)=>{
 
 router.post('/account',isLoggedIn, upload.single('upload'), async(req,res,next)=>{
     const { nickname, phone, gender} = req.body;
+    const exUser = await User.findOne({where : { nickname : nickname }});
 
     try{
         if(! req.file || ! req.file.path){
-        await User.update({
-                nickname : nickname,
-                phone : phone,
-                gender : gender,
-        },{
-                where:{id : req.user.id},
-        });
+            if((exUser == null) || (req.body.nickname == req.user.nickname)){
+                await User.update({
+                    nickname : nickname,
+                    phone : phone,
+                    gender : gender,
+                },{
+                    where:{id : req.user.id},
+                });
+
+                return res.send(
+                    "<script>alert('정보가 수정 되었습니다.'); history.back();</script>"
+                );
+            }else if(exUser.nickname != req.user.nickname){
+                return res.send(
+                    "<script>alert('닉네임 중복확인을 해주세요.');history.back();</script>"
+                )
+            }
         }else{
             let path = req.file.path;
             path = path.replace('public','');
-            
-            await User.update({
-                nickname : nickname,
-                phone : phone,
-                gender : gender,
-                path : path,
-        },{
-                where:{id : req.user.id},
-        });
-        }   
 
-        res.send(
-            "<script>alert('정보가 수정 되었습니다.'); history.back();</script>"
-        );
-        
+            if((exUser == null) || (req.body.nickname == req.user.nickname)){
+                await User.update({
+                    nickname : nickname,
+                    phone : phone,
+                    gender : gender,
+                    path : path,
+                },{
+                    where:{id : req.user.id},
+                });
+
+                return res.send(
+                    "<script>alert('정보가 수정 되었습니다.'); history.back();</script>"
+                );
+            }else if(exUser.nickname != req.user.nickname){
+                return res.send(
+                    "<script>alert('닉네임 중복확인을 해주세요.');history.back();</script>"
+                )
+            }
+        }        
     }catch(err){
         console.error(err);
         next(err);
     }
 });
+
+router.post('/duplicated', isLoggedIn, upload.single('upload'), async(req,res,next)=>{
+    try{
+      const nickname = req.body.nickname;
+      const exUser = await User.findOne({where : { nickname : nickname }});
+  
+      if(exUser == null){
+        return await res.send(
+          "<script>alert('사용 가능한 닉네임입니다.');history.back();</script>"
+        )
+      }
+
+      if(exUser.nickname == req.user.nickname) {
+        res.send(
+            "<script>alert('기존 사용하던 닉네임은 사용 가능합니다.');history.back();</script>"
+        )
+      }else if(exUser.nickname != req.user.nickname){
+        res.send(
+            "<script>alert('가입된 닉네임이 존재합니다.');history.back();</script>"
+        )
+      }
+
+      console.log(exUser);
+      
+    }catch(error){
+      console.error(error);
+      return next(error);
+    }
+  });
 
 //핸드폰 인증번호 발송
 router.post('/sendPhone', upload.any(), isLoggedIn, async (req,res,next)=>{

@@ -128,22 +128,22 @@ router.post('/searchPassword',isNotLoggedIn, async(req,res,next)=>{
 router.post('/regist', isNotLoggedIn, async (req, res, next) => {
     const { email, nickname, password } = req.body;
     try {
-    const exUser = await User.findOne({ where: { email } }); 
-    const exNick = await User.findOne({ where : { nickname }});
+    const exUser = await User.findOne({ where: { email : email } }); 
+    const exNick = await User.findOne({ where : { nickname : nickname }});
 
-    if(exNick){
+    if(!(exNick == null)){
       res.send(
         "<script>alert('닉네임 중복 확인 해주세요.'); history.back();</script>"
       );
     }
 
-    if (exUser) {
+    if (!(exUser == null)) {
       res.send(
         "<script>alert('가입된 중복 메일이 존재합니다.'); history.back(); </script>"
       );
     }
 
-    if(!(exUser && exNick)){
+    if((exUser == null) && (exNick == null)){
       const hash = await bcrypt.hash(password, 12);
       await User.create({
         email,
