@@ -133,8 +133,10 @@ router.get('/sido', async(req, res) => {
   }
 });
 
-router.get('/', async (req,res)=>{
-  try{            
+      
+router.get('/index', async (req,res)=>{
+  try{        
+    
     // sggcode = parseInt(sggcode);
     let result;
     const sidos = await SidoCode.findAll({});

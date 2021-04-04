@@ -626,28 +626,6 @@
    }
   }
 
-  // const createCategory = (categories) => {
-  //   deleteChild('.unordered');
-  //   for(let i =0; i < categories.length; i++){
-  //     let span = document.createElement('span');
-  //     span.className = 'right';
-  //     let numSpan = document.createElement('span');
-  //     numSpan.className = 'num';
-  //     let gaeSpan = document.createElement('span');
-  //     gaeSpan.className = 'gae';
-  //     let numSpanText = document.createTextNode('4490');      
-  //     let gaeSpanText = document.createTextNode('개원');
-  //     numSpan.appendChild(numSpanText);
-  //     gaeSpan.appendChild(gaeSpanText);
-  //     span.appendChild(numSpan);
-  //     span.appendChild(gaeSpan);
-  //     let li = document.createElement('li');      
-  //     li.className = 'list';
-  //     let text = document.createTextNode('공립(병설)');
-  //     li.appendChild(text);
-  //     li.appendChild(span);      
-  //   }
-  // }
   let ul = document.getElementsByClassName('unordered');
   for(let i =0; i<type.length; i++){
     type[i].addEventListener('click', (e) => {            
@@ -666,15 +644,10 @@
           type[0].classList.remove('checked');
           ul[0].classList.add('hidden');
         }      
-      }
-      
-      
-      
+      }   
     })
   }
   
-  
-
   const drawDoughnutChart = (childCount = 9055, dayCareCount = 53258) => {
     data = {
         datasets: [{

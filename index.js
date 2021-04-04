@@ -16,6 +16,7 @@ const inputdata = require('./routes/inputdata');
 const RegisterRouter = require('./routes/register');
 
 const passportConfig = require('./passport');
+const router = require('./routes/home');
 
 const app = express();
 
@@ -63,6 +64,10 @@ app.use('/register', RegisterRouter);
 app.get('/', async(req, res, next) => {
   res.redirect('/home');
 })
+
+app.get('/', async(req,res,next)=>{
+  res.redirect('/home');
+});
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);

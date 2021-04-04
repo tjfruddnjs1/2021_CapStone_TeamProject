@@ -17,7 +17,7 @@ router.use((req,res,next)=>{
 });
 
 //kidstalk 메인 페이지
-router.get('/', async (req,res)=>{
+router.get('/index', async (req,res)=>{
   try{
     let page = Math.max(1, req.query.page);
     let limit = Math.max(1, req.query.limit);
@@ -102,7 +102,7 @@ router.post('/new', isLoggedIn, async (req,res)=>{
       body : req.body.body,
       writer : req.user.id,
   });
-  res.redirect('/kidstalk');
+  res.redirect('/kidstalk/index');
   }catch(err){
     console.error(err);
     next(err);
@@ -213,7 +213,7 @@ router.route('/:id')
             },{
                 where : {id : req.params.id},
             });
-            res.redirect('/kidstalk');
+            res.redirect('/kidstalk/index');
         }catch(err){
             console.error(err);
             next(err);
@@ -233,7 +233,7 @@ router.route('/:id')
           });
 
           res.send(
-            "<script>alert('글이 삭제되었습니다.'); window.location='/kidstalk';</script>"
+            "<script>alert('글이 삭제되었습니다.'); window.location='/kidstalk/index';</script>"
           );
         }else{
           res.send(

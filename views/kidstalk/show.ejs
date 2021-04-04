@@ -145,7 +145,7 @@
       <p id="body"><%= post.body %></p>
 
       <div>
-        <a id="back" class="btn" href="/kidstalk">뒤로가기</a>
+        <a id="back" class="btn" href="/kidstalk/index">뒤로가기</a>
         <a id="update" class="btn" href="/kidstalk/<%= post.id %>/edit">글 수정</a>
         <form action="/kidstalk/<%= post.id %>?_method=delete" method="post" class="d-inline">
           <a id="delete" class="btn" href="javascript:void(0)" onclick="confirm('글을 삭제하시겠습니까?')?this.parentElement.submit():null;">글 삭제</a>

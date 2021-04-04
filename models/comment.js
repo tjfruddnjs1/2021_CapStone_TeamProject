@@ -28,6 +28,6 @@ module.exports = class Comment extends Sequelize.Model {
   }
 
   static associate(db) {
-      db.Comment.belongsTo(db.Post, {foreignKey : 'post', targetKey : 'id'});
+      db.Comment.belongsTo(db.Post, {foreignKey : 'post', targetKey : 'id', onDelete: 'cascade'});
   }
 };
