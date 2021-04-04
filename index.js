@@ -15,8 +15,8 @@ const kidstalkRouter = require('./routes/kidstalk');
 const inputdata = require('./routes/inputdata');
 const RegisterRouter = require('./routes/register');
 const enrollGardenRouter = require('./routes/enrollGarden');
+
 const passportConfig = require('./passport');
-const router = require('./routes/home');
 
 const app = express();
 
@@ -60,10 +60,13 @@ app.use('/mypage', mypageRouter);
 app.use('/kidstalk', kidstalkRouter);
 app.use('/inputdata', inputdata);
 app.use('/register', RegisterRouter);
+app.use('/enrollGarden', enrollGardenRouter);
 
 app.get('/', async(req, res, next) => {
   res.redirect('/home');
 })
+
+
 
 app.get('/', async(req,res,next)=>{
   res.redirect('/home');
