@@ -211,8 +211,7 @@
    .number{
      text-align : left;     
    }
-   .picture{        
-   }
+   
    .type{
      display : inline-block;     
      border : 1px solid #D7D7D7;
@@ -555,7 +554,7 @@
 
   select.addEventListener('change', async (e) => {
     try{        
-      const result = await axios.post('/', {sidoCode : e.target.value});      
+      const result = await axios.post('/home', {sidoCode : e.target.value});      
       while ( sggTags.hasChildNodes() ) { sggTags.removeChild( sggTags.firstChild ); }
       
       if(typeof result.data.sggs == 'object'){
@@ -593,7 +592,7 @@
 
   sggTags.addEventListener('change', async(e) => {
     try{            
-      const result = await axios.post(`/${e.target.value}`, {sggCode : e.target.value, sidoCode : select.value});
+      const result = await axios.post(`/home/${e.target.value}`, {sggCode : e.target.value, sidoCode : select.value});
       
       let gardens = result.data.gardens;
       let childCount = gardens.childGardens.count;

@@ -141,7 +141,7 @@ router.post('/', async (req, res) => {
 });
 
 // 시군구용
-router.get('/:sggCode', async (req, res) => {
+router.post('/:sggCode', async (req, res) => {
   try{
     const {sggCode, sidoCode} = req.body;
     let childCountResult;
@@ -157,7 +157,7 @@ router.get('/:sggCode', async (req, res) => {
       gardens = await findGardens(sidoCode);
       childCountResult = await categoryCount('유치원', sidoCode);  
       dayCareCountResult = await categoryCount('어린이집', sidoCode);  
-    }    
+    }      
     res.send({gardens : gardens, childCount : childCountResult, dayCareCount : dayCareCountResult});
   }catch(err){
     console.error(err);

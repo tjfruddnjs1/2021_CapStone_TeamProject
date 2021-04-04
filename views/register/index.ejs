@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/star-rating-svg.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <style>
+      .banner{    
+      border : 1px solid blue;
+      background-color: #5172df;
+      height : 150px;
+      text-align: center;
+      color : white;
+      font-family: NotoSansKR-Regular;     
+    } 
+    #banner{
+      margin-top : 1%;
+    }
+    
+    #talk{
+      margin-top : 2.5%;
+    }           
+    .container{
+        padding : 50px 78.828px;
+    }
+    .subhead {
+  font-family: sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#updatemento {
+  width: 50%;
+  margin: 0 auto;
+  text-align: left;
+  color: #6D6D72;
+}
+
+#updatemento input[type="text"],
+input[type="submit"],
+input[type="email"],
+#gender,
+textarea {
+  border: 1px solid #8080805c;
+  width: 100%;
+  padding: 12px 5px;
+  margin: 20px auto;
+}
+
+#updatemento input[type="submit"] {
+  cursor: pointer;
+}
+
+.container {
+  padding: 40px 0;
+}
+
+#footer {
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+  text-align: center;
+}
+
+#updatemento input[type="checkbox"] {
+  display: inline;
+  border: 1px solid #8080805c;
+  width: 20%;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.item-list, .lang-list {
+  float: left;
+  width: 30%;
+  border: 1px solid #8080805c;
+  padding: 10px 5px;
+  margin: 5px;
+  display: inline;
+  text-align: left;
+  cursor: pointer;
+}
+
+.item-list:active {
+  background-color: #8080805c;
+  transition: 0.3s;
+}
+
+label {
+  font-weight: bold;
+}
+.ref-sort ul{ 
+    height : 50px;
+    line-height : 50px;                   
+    background : #f7f7f8;            
+  }    
+  .ref-sort a{        
+    
+    text-align : center;
+    font-weight : bold;      
+  }   
+  .ref-sort div{
+    display : inline;
+    padding : 10px 10px;
+    width : 20%;
+    text-align : center;
+  } 
+  .ref-sort li{      
+    text-align : center;
+    height : 100%;            
+    /* border-bottom : 2px solid #829DA2;       */
+  }
+  .nav {                  
+    width : 50%;      
+    margin : 0 auto;          
+  }
+  #image_section{
+    width : 30%;            
+  }
+  #upload{
+    display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #829DA2;
+    cursor: pointer;
+    border : 0;
+    border-radius: .25em;
+  }
+    </style>
+  </head>      
+  <body id="top">
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    > 
+
+    <%- include('../partials/nav') %>
+    </div>
+    <div class="banner">
+        <h2 id="talk" >유치원·어린이집 등록</h2> 
+        <h5 id="banner" >유치원·어린이집을 키즈가든에 등록할 수 있습니다.</h5>
+    </div>
+  <div class="wrapper row3">
+    <main class="hoc container clear">              
+        <a href="/register/parent">학부모 등록</a>
+        <a href="/register/garden">유치원•어린이집 등록</a>
+    </main>    
+    </div>        
+  </div>
+  <div class="clear"></div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>       
+    </script>
+  </body>  
+</html>
