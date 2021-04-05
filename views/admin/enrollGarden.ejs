@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="/css/kidstalk.css">
   </head>
   <style>
-    #post_id, #post_hit{
-      width : 7%;
+    #post_id, #post_hit, #post_gardenCaptain{
+      width : 10%;
     }
+
 
     #post_writer, #post_date{
       width : 14%;
@@ -92,7 +93,7 @@
     <main class="hoc container clear">
 
       <h1 style="font-family: sans-serif; margin-bottom : 5%">
-        <a href="/enrollGarden/index">가든등록</a>
+        <a href="/register/enrollGarden">가든등록</a>
       </h1>
 
       <h5 style="margin-bottom: 2%; font-weight: bold;">
@@ -104,10 +105,11 @@
         <thead class="thead-light">
           <tr>
             <th scope="col" id="post_id">번호</th>
-            <th scope="col" id="post_title">제목</th>
+            <th scope="col" id="post_title">가든명</th>
             <th scope="col" id="post_writer">작성자</th>
+            <th scope="col" id="post_gardenCaptain">원장명</th>
             <th scope="col" id="post_date">등록일</th>
-            <th scope="col" id="post_hit">조회수</th>
+            <th scope="col" id="post_hit">승인상태</th>
           </tr>
         </thead>
 
@@ -118,34 +120,29 @@
                 </tr>
           <% } %>
         <% posts.forEach(function(post) { %>
-
-            <%
-              let commentCount = 0;
-            %>
             <tr>
               <td><%= post.id %></td>
               <td id="post_title_content">
-                <% comment.forEach(function(comments) { %>
-                  <% if(comments.post == post.id) { %>
-                    <% ++commentCount; %>
-                  <% } %>
-                <% }) %>
-                <a href="/kidstalk/<%= post.id %>"><div class="post_title"><%= post.title %> <span style="color:darkslateblue;"> [<%= commentCount %>] </span></div></a>
+                <a href="/register/enrollGarden/<%= post.id %>"><div class="post_title"><%= post.gardenname %></div></a>
               </td>
-              <td><%= post.User.nickname %></td>
+              <td><%= post.writer %></td>
+              <td><%= post.representative %></td>
               <td id="post_date">
                 <span data-date="<%= post.createdAt %>"></span>
               </td>
-              <td><%= post.hits %></td>
+              <td>
+                <% if(post.isapprove == true) {%>
+                    <span style="color : red;"><%= post.isapprove %></span>
+                <% }else{ %>
+                    <span style="color : #5172df"><%= post.isapprove %></span>
+                <% } %>
+              </td>
             </tr>
         <% }) %>
         </tbody>
       </table>
-      <div>
-        <a id="btn" class="btn btn-primary" href="/kidstalk/new">글쓰기</a>
-      </div>
 
-      <nav>
+      <nav style="margin-top : 5%;">
         <%
           var offset = 2;
           var previousBtnEnabled = currentPage > 1;
@@ -153,23 +150,23 @@
         %>
           <ul id="paging" class="pagination pagination justify-content-center align-items-center">            
             <li class="page-item <%= previousBtnEnabled?'':'disabled' %>">
-              <a class="page-link" href="/kidstalk/index?page=<%= currentPage-1 %>&limit=<%= limit %>" <%= previousBtnEnabled?'':'tabindex=-1' %>>«</a>
+              <a class="page-link" href="/register/enrollGarden?page=<%= currentPage-1 %>&limit=<%= limit %>" <%= previousBtnEnabled?'':'tabindex=-1' %>>«</a>
             </li>
 
           <% for(i=1;i<=maxPage;i++){ %>
             <% if(i==1 || i==maxPage || (i>=currentPage-offset && i<=currentPage+offset)){ %>
-              <li class="page-item <%= currentPage==i?'active':'' %>"><a class="page-link" href="/kidstalk/index?page=<%= i %>&limit=<%= limit %>"> <%= i %> </a></li>
+              <li class="page-item <%= currentPage==i?'active':'' %>"><a class="page-link" href="/register/enrollGarden?page=<%= i %>&limit=<%= limit %>"> <%= i %> </a></li>
             <% } else if(i==2 || i==maxPage-1){ %>
               <li><a class="page-link">...</a></li>
             <% } %>
           <% } %>
           <li class="page-item <%= nextBtnEnabled?'':'disabled' %>">
-            <a class="page-link" href="/kidstalk/index?page=<%= currentPage+1 %>&limit=<%= limit %>" <%= nextBtnEnabled?'':'tabindex=-1' %>>»</a>
+            <a class="page-link" href="/register/enrollGarden?page=<%= currentPage+1 %>&limit=<%= limit %>" <%= nextBtnEnabled?'':'tabindex=-1' %>>»</a>
           </li>
         </ul>
       </nav>
 
-      <form id="numberOfPage" action="/kidstalk/index" method="get">
+      <form id="numberOfPage" action="/register/enrollGarden" method="get">
         <div class="form-row">
 
           <div class="form-group col-3">
@@ -185,8 +182,9 @@
             <label>검색</label>
             <div class="input-group">
               <select style="margin-right : 7%;" name="searchType" class="custom-select">
-                <option value="title" <%= searchType=='title'?'selected':'' %>>제목</option>
-                <option value="body" <%= searchType=='body'?'selected':'' %>>본문</option>
+                <option value="gardenname" <%= searchType=='title'?'selected':'' %>>가든명</option>
+                <option value="writer" <%= searchType=='writer'?'selected':'' %>>작성자</option>
+                <option value="representative" <%= searchType=='representative'?'selected':'' %>>원장명</option>
               </select>
               <input minLength="3" type="text" name="searchText" value="">
               <div class="input-group-append">
