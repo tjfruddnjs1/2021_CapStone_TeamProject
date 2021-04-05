@@ -87,6 +87,14 @@
   <img width=100% src="https://user-images.githubusercontent.com/41010744/113551693-05830000-9630-11eb-938a-7afc2d77e70d.png">
   <br>
 
+- 메인 페이지 : 현호
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+도넛 차트 | chart.js, ajax | `구현 완료`
+통계 기능 | ajax, COUNT(*) | `구현 완료`
+전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
+`추가 개선사항 1` | `추가 시 업데이트` | `구현 중`
 
 - 유치원/어린이집 검색 : 현호
 
@@ -96,6 +104,7 @@
 검색기능| 어린이집 이름, 주소 검색, ajax 기술  | `구현 완료`
 지도 | 좌표변환 API, 지도 API | `구현 완료`
 페이징| 갯수, 리스트 | `구현 완료`
+지도 출력 | 지도 API, 마커, 인포윈도우  | `구현 완료`
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1` | `추가 시 업데이트` | `구현 중`
 
@@ -112,7 +121,9 @@
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
-지도 출력 | 지도 API, 마커, 인포윈도우  | `구현 완료`
+정보 등록 | CREATE, SELECT | `구현 완료`
+주소 찾기 | ajax, 팝업, 페이징 | `구현 완료`
+이용 약관 | 팝업 | `구현 완료`
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
@@ -184,7 +195,14 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/112770246-c1589400-9060-11eb-93d0-0db5f7895eca.png">
 
-> 나의 유치원/어린이집
+> 나의 유치원/어린이집, 주소록 팝업, 이용약관 팝업
+<br>
+<img src="https://user-images.githubusercontent.com/57825856/113578324-96bc9b80-965d-11eb-9d2f-b2a21852420a.png">
+<br>
+<img src="https://user-images.githubusercontent.com/57825856/113578946-9244b280-965e-11eb-957f-76fcc8689d03.png" style = "width : 49%; float : left; margin-top : 25px">
+
+<img src="https://user-images.githubusercontent.com/57825856/113578587-fe72e680-965d-11eb-82fa-726156ed2751.png" style = "width : 50%;">
+
 
 > 관리자 페이지 (가든 승인)
 <br>
