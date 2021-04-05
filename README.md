@@ -74,30 +74,19 @@
 기능 분리 : header navigation를 정하고 해당 기능 구현 `추가 시 업데이트`
 
 >  **header navigation 항목**  
-- `연도-월-일` : header navigation 상태 & 이미지
-- `2021-03-09` : header navigation 상태
+- header navigation 상태
   <br>
   비로그인 상태
-  <img width=100% src="https://user-images.githubusercontent.com/41010744/111044832-35eed880-848e-11eb-882c-333a730962cc.png">
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/113551575-da001580-962f-11eb-8c17-574471bc8bec.png">
   
   로그인된 상태
-  <img width=100% src="https://user-images.githubusercontent.com/41010744/111044963-f4126200-848e-11eb-8f6a-cd2595d0f4cf.png">
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/113551618-ec7a4f00-962f-11eb-8202-0424a84f1454.png">
   <br>
 
-- `2021-03-14` : header naviagtion 상태
-  <br>
-  <img width=100% src="https://user-images.githubusercontent.com/41010744/111051999-997f0300-849a-11eb-988b-aae6eb1c00f5.png">
-  <br>
-
-- `2021-03-18` : header navigation 상태
-  <br>
-  <img width=100% src="https://user-images.githubusercontent.com/41010744/111613555-fc1d2980-8821-11eb-93e0-30963a8ee42e.png">
+  관리자 로그인 상태
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/113551693-05830000-9630-11eb-938a-7afc2d77e70d.png">
   <br>
 
-- `2021-03-29` : header navigation 상태
-  <br>
-  <img src="https://user-images.githubusercontent.com/41010744/112770049-9c175600-905f-11eb-81a1-0b2d903a7f0c.png">
-  <br>
 
 - 유치원/어린이집 검색 : 현호
 
@@ -119,12 +108,20 @@
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1` | `추가 시 업데이트` | `구현 중`
 
-- 나의 유치원/어린이집
+- 나의 유치원/어린이집 : 현호
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
 지도 출력 | 지도 API, 마커, 인포윈도우  | `구현 완료`
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
+- 관리자 페이지 : 경원
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+관리자 이메일 인증 | passport, session 확인, 이외 사용자 접근 불가  | `구현완료`
+가든 요청 | CRUD 중 Read, Update  | `구현완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
 - 키즈맘TALK : 경원
@@ -171,21 +168,13 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 
 ## 개발 결과
 
-> 메인페이지 : `2021-03-14`
+> 메인페이지
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/112147506-1ee37f80-8c20-11eb-9b47-58d4efb7fef1.png">
-
-> 메인페이지 : `2021-03-29` > 글씨체 및 이미지 변경 > 전체 구조 통일 및 디자인을 위한
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/112770152-45f6e280-9060-11eb-804c-b279f997d5f6.png">
+<img src="https://user-images.githubusercontent.com/41010744/113551843-4aa73200-9630-11eb-887e-4266ae520c7d.png">
 
 > 유치원/어린이집 검색
-<br/>
-<img src = "https://user-images.githubusercontent.com/57825856/112773317-8f4f2e00-9070-11eb-809f-c5b96d014201.png">
-
-> 유치원/어린이집 검색 `2021-03-29` > 글씨체 및 이미지 변경 > 전체 구조 통일 및 디자인을 위한
 <br>
-<img src="https://user-images.githubusercontent.com/57825856/112854276-a6c9fd80-90e8-11eb-83a6-1c9e8594fd8b.png">
+<img src="https://user-images.githubusercontent.com/41010744/113551992-76c2b300-9630-11eb-8cf8-5d85e2f78f2e.png">
 
 > 유치원/어린이집 정보페이지 & 작성된 리뷰 보여주는 페이지
 <br>
@@ -197,62 +186,45 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 
 > 나의 유치원/어린이집
 
-
-> 키즈맘TALK
-
-> 게시판 index : `2021-03-19`
+> 관리자 페이지 (가든 승인)
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/111614869-74381f00-8823-11eb-8777-ed3742f824a0.png">
+<img src="https://user-images.githubusercontent.com/41010744/113553704-1c772180-9633-11eb-99ae-dabc76f50cd9.png">
 <br>
-
-> 게시판 index : `2021-03-29` > 글씨체 및 배너 추가 & color 층 생성 > 전체 구조 통일 및 디자인을 위한
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/112770280-f2d15f80-9060-11eb-93af-bf1cd0dc13c7.png">
-
-> 페이징
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/111615332-f1fc2a80-8823-11eb-8170-7af9af2f3b1f.png">
+<img src="https://user-images.githubusercontent.com/41010744/113553792-3e70a400-9633-11eb-9dcb-7c66e14227d6.png">
 <br>
 
-> 검색 결과
+
+> 키즈맘TALK > 검색 및 페이징 기능
+
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/111614984-95007480-8823-11eb-9801-8ab1471361ab.png">
-<br>
+<img src="https://user-images.githubusercontent.com/41010744/113552833-b1791b00-9631-11eb-8e61-4e4e286869ff.png">
+
 
 > CRUD + 댓글
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/111615947-a8f8a600-8824-11eb-9229-26491f9670ac.png">
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/111615591-456e7880-8824-11eb-9ef2-697699607230.png">
+
+> 로그인 + 비밀번호 찾기 
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/111615629-50c1a400-8824-11eb-8f24-9129142f9378.png">
+<img src="https://user-images.githubusercontent.com/41010744/113553070-1c2a5680-9632-11eb-9166-fe8cd007d3db.png">
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/113553117-32381700-9632-11eb-84fd-7cce2a66698b.png">
 <br>
 
-로그인
+> 회원가입
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/111050670-61bf8d80-8491-11eb-81e2-9c62e5bddadc.png">
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/111050746-ce3a8c80-8491-11eb-8f1b-d52e85c8eb65.png">
+<img src="https://user-images.githubusercontent.com/41010744/113553197-5a277a80-9632-11eb-9b69-cfa4418ad809.png">
 <br>
 
-- 회원가입
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/111050767-ef02e200-8491-11eb-850d-60ff715cf0e8.png">
-<br>
 
-- 마이페이지 : `2021-03-16`
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/111050851-65074900-8492-11eb-8fed-44e7734171c1.png">
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/111050993-45bceb80-8493-11eb-9831-0927677df228.png">
-<br>
-<img src="https://user-images.githubusercontent.com/41010744/111051001-53727100-8493-11eb-93fb-892e3541c5eb.png">
-<br>
-
-- 마이페이지 : `2021-03-29` > 글씨체  & color 층 생성 > 전체 구조 통일 및 디자인을 위한
+> 마이페이지 (계정 설정 + 비밀번호 설정 + 회원 탈퇴)
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/112770368-74c18880-9061-11eb-9192-ded2c4c7553d.png">
 <br>
+<img src="https://user-images.githubusercontent.com/41010744/113553401-af638c00-9632-11eb-819a-84fbb34454a7.png">
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/113553508-d9b54980-9632-11eb-8238-47ae4a11e690.png">
 
 ## 데이터베이스 ERD
 
