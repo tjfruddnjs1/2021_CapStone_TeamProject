@@ -15,7 +15,6 @@ const kidstalkRouter = require('./routes/kidstalk');
 const inputdata = require('./routes/inputdata');
 const RegisterRouter = require('./routes/register');
 
-const enrollGardenRouter = require('./routes/enrollGarden');
 
 
 
@@ -75,7 +74,6 @@ app.get('/', async(req,res,next)=>{
   res.redirect('/home');
 });
 
-app.use('/enrollGarden', enrollGardenRouter);
 
 
 app.use((req, res, next) => {
