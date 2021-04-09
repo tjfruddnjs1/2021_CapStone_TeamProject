@@ -11,6 +11,7 @@ const Garden = require('./garden');
 const Review = require('./review');
 
 const GardenRequest = require('./gardenRequest');
+const ParentRequest = require('./parentRequest');
 
 
 const env = process.env.NODE_ENV || "development";
@@ -35,6 +36,7 @@ db.SggCode = SggCode;
 db.Garden = Garden;
 db.Review = Review;
 db.GardenRequest = GardenRequest;
+db.ParentRequest = ParentRequest;
 
 User.init(sequelize);
 Drop.init(sequelize);
@@ -45,6 +47,7 @@ SggCode.init(sequelize);
 Garden.init(sequelize);
 Review.init(sequelize);
 GardenRequest.init(sequelize);
+ParentRequest.init(sequelize);
 
 User.associate(db);
 Drop.associate(db);
@@ -55,5 +58,6 @@ SggCode.associate(db);
 Garden.associate(db);
 Review.associate(db);
 GardenRequest.associate(db);
+ParentRequest.associate(db);
 
 module.exports = db;

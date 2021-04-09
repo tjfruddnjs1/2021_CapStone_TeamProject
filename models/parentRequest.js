@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = class GardenRequest extends Sequelize.Model {
+module.exports = class ParentRequest extends Sequelize.Model {
   static init(sequelize) {
     return super.init({      
       type: {
@@ -15,18 +15,14 @@ module.exports = class GardenRequest extends Sequelize.Model {
         type: Sequelize.STRING(50),
         allowNull: false,
       },      
-      representative : {
+      childName : {
         type: Sequelize.STRING(50),
         allowNull: false,
       },
       phone: {
         type: Sequelize.STRING(50),
         allowNull: false,
-      },
-      gardenphone: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-      },
+      },      
       isapprove: {
         type: Sequelize.BOOLEAN(50),
         allowNull: false,
@@ -35,17 +31,17 @@ module.exports = class GardenRequest extends Sequelize.Model {
       createdAt : {
         type: Sequelize.DATE,
         defaultValue : Sequelize.NOW,
-      },     
+      },      
       completedAt : {
         type: Sequelize.DATE,
         allowNull : true,
-      },   
+      },      
       }, {
       sequelize,
       timestamps: false,
       underscored: false,
-      modelName: 'GardenRequest',
-      tableName: 'gardenrequests',
+      modelName: 'ParnetRequest',
+      tableName: 'parentrequests',
       paranoid: true,
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -53,7 +49,7 @@ module.exports = class GardenRequest extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.GardenRequest.belongsTo(db.Garden, {foreignKey : 'gardencode', source : 'gardencode'});
-    db.GardenRequest.belongsTo(db.User, {foreignKey : 'userId', targetKey : 'id'});
+    db.ParentRequest.belongsTo(db.Garden, {foreignKey : 'gardencode', targetKey : 'gardencode'});
+    db.ParentRequest.belongsTo(db.User, {foreignKey : 'userId', targetKey : 'id'});
   }
 };
