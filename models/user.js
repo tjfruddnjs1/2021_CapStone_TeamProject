@@ -36,11 +36,7 @@ module.exports = class User extends Sequelize.Model {
       snsId:{
           type : Sequelize.STRING(30),
           allowNull : true,
-      } ,
-      position : {
-          type : Sequelize.STRING(30),
-          allowNull : true,
-      }
+      } ,      
     }, {
       sequelize,
       timestamps: false,
@@ -55,7 +51,6 @@ module.exports = class User extends Sequelize.Model {
 
   static associate(db) {
     db.User.hasMany(db.Post, { foreignKey : 'writer', sourceKey : 'id', onDelete: 'cascade'});
-    db.User.hasOne(db.ParentRequest, { foreignKey : 'userId', sourceKey : 'id', onDelete: 'cascade'});
-    db.User.hasOne(db.GardenRequest, { foreignKey : 'userId', sourceKey : 'id', onDelete: 'cascade'});
+    db.User.hasMany(db.Request, { foreignKey : 'userId', sourceKey : 'id', onDelete: 'cascade'});   
   }
 };

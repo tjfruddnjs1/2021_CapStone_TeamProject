@@ -4,8 +4,7 @@ const Garden = require('../models/garden');
 const SggCode = require('../models/sggcode');
 const SidoCode = require('../models/sidocode');
 const User = require('../models/user');
-const GardenRequest = require('../models/gardenRequest');
-const ParentRequest = require('../models/parentRequest');
+const Request = require('../models/request');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 
@@ -154,17 +153,16 @@ router.get('/garden',  isLoggedIn, async (req,res)=>{
   }
 });
 
-router.post('/garden',isLoggedIn,  async (req,res)=>{
+router.post('/garden', isLoggedIn,  async (req,res)=>{
   try{  
-    const {type, gardencode, address, gardenname, writer, representative, gardenphone, agree} = req.body;
+    const {type, gardencode, representative, gardenphone} = req.body;
     const user = req.user;
 
     const category = 'garden';
-    const gardenRequest = await GardenRequest.create({
-      type,
-      address,
-      gardenname,
-      writer,
+
+    const request = await Request.create({
+      gardentype : type,      
+      requesttype : 'garden',
       representative,      
       gardenphone,
       userId : user.id,
@@ -307,14 +305,12 @@ router.get('/parent', isLoggedIn, async (req,res)=>{
 
 router.post('/parent',isLoggedIn,  async (req,res)=>{
   try{  
-    const {type, gardencode, address, gardenname, writer, childName, agree} = req.body;
+    const {type, gardencode, childName} = req.body;
     const user = req.user;
     const category = 'parent';
-    const gardenRequest = await ParentRequest.create({
-      type,
-      address,
-      gardenname,
-      writer,
+    const request = await Request.create({
+      gardentype : type,
+      requesttype : 'parent',            
       childName,       
       userId : user.id,     
       gardencode,
@@ -329,15 +325,15 @@ router.post('/parent',isLoggedIn,  async (req,res)=>{
   }
 });
 
-router.post('/garden',isLoggedIn,  async (req,res)=>{
-  try{  
+// router.post('/garden',isLoggedIn,  async (req,res)=>{
+//   try{  
       
-  res.render('register/complete');
-  }catch(err){
-    console.error(err);
-    next(err);
-  }
-});
+//   res.render('register/complete');
+//   }catch(err){
+//     console.error(err);
+//     next(err);
+//   }
+// });
 
 router.get('/agree',isLoggedIn, async (req,res)=>{
   try{    

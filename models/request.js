@@ -1,24 +1,28 @@
 const Sequelize = require('sequelize');
 
-module.exports = class ParentRequest extends Sequelize.Model {
+module.exports = class Request extends Sequelize.Model {
   static init(sequelize) {
     return super.init({      
-      type: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-      },
-      address: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-      },
-      gardenname: {
+      gardentype: {
         type: Sequelize.STRING(50),
         allowNull: false,
       },      
-      childName : {
+      requesttype: {
         type: Sequelize.STRING(50),
         allowNull: false,
-      },         
+      },           
+      representative : {
+        type: Sequelize.STRING(50),
+        allowNull: true,
+      },      
+      gardenphone: {
+        type: Sequelize.STRING(50),
+        allowNull: true,
+      },   
+      childName : {
+        type: Sequelize.STRING(50),
+        allowNull: true,
+      },
       isapprove: {
         type: Sequelize.BOOLEAN(50),
         allowNull: false,
@@ -27,17 +31,17 @@ module.exports = class ParentRequest extends Sequelize.Model {
       createdAt : {
         type: Sequelize.DATE,
         defaultValue : Sequelize.NOW,
-      },      
+      },     
       completedAt : {
         type: Sequelize.DATE,
         allowNull : true,
-      },      
+      },       
       }, {
       sequelize,
       timestamps: false,
       underscored: false,
-      modelName: 'ParnetRequest',
-      tableName: 'parentrequests',
+      modelName: 'Request',
+      tableName: 'requests',
       paranoid: true,
       charset: 'utf8',
       collate: 'utf8_general_ci',
@@ -45,7 +49,7 @@ module.exports = class ParentRequest extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.ParentRequest.belongsTo(db.Garden, {foreignKey : 'gardencode', targetKey : 'gardencode'});
-    db.ParentRequest.belongsTo(db.User, {foreignKey : 'userId', targetKey : 'id'});
+    db.Request.belongsTo(db.Garden, {foreignKey : 'gardencode', source : 'gardencode'});
+    db.Request.belongsTo(db.User, {foreignKey : 'userId', targetKey : 'id'});
   }
 };
