@@ -5,6 +5,7 @@ const SggCode = require('../models/sggcode');
 const SidoCode = require('../models/sidocode');
 const User = require('../models/user');
 const GardenRequest = require('../models/gardenRequest');
+const ParentRequest = require('../models/parentRequest');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 
@@ -131,8 +132,7 @@ if(pathName){
 
 //메인 페이지
 router.get('/', async (req,res)=>{
-  try{  
-  
+  try{          
     res.render('register/');
   }catch(err){
     console.error(err);
@@ -147,7 +147,7 @@ router.get('/garden',  isLoggedIn, async (req,res)=>{
     res.send('<script>alert("핸드폰 인증이 필요합니다"); location.href = "/mypage/account";</script>')
   }
     
-  res.render('register/gardenRegister', {phone : user.phone});
+  res.render('register/gardenRegister', {phone : user.phone, nickName : user.nickname});
   }catch(err){
     console.error(err);
     next(err);
@@ -156,8 +156,8 @@ router.get('/garden',  isLoggedIn, async (req,res)=>{
 
 router.post('/garden',isLoggedIn,  async (req,res)=>{
   try{  
-    const {type, gardencode, address, gardenname, writer, representative, phone, gardenphone, agree} = req.body;
-
+    const {type, gardencode, address, gardenname, writer, representative, gardenphone, agree} = req.body;
+    const category = 'garden';
     const gardenRequest = await GardenRequest.create({
       type,
       address,
@@ -170,7 +170,7 @@ router.post('/garden',isLoggedIn,  async (req,res)=>{
     });
 
 
-  res.render('register/complete');
+  res.render('register/complete', {category : category});
   }catch(err){
     console.error(err);
     next(err);
@@ -296,7 +296,29 @@ router.get('/parent', isLoggedIn, async (req,res)=>{
     if(!user.phone){
       res.send('<script>alert("핸드폰 인증이 필요합니다"); location.href = "/mypage/account";</script>')
     }
-  res.render('register/parentRegister', {phone : user.phone});
+  res.render('register/parentRegister', {phone : user.phone, nickName : user.nickname});
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+});
+
+router.post('/parent',isLoggedIn,  async (req,res)=>{
+  try{  
+    const {type, gardencode, address, gardenname, writer, childName, agree} = req.body;
+    const category = 'parent';
+    const gardenRequest = await ParentRequest.create({
+      type,
+      address,
+      gardenname,
+      writer,
+      childName,            
+      gardencode,
+    });
+
+
+
+  res.render('register/complete', {category : category});
   }catch(err){
     console.error(err);
     next(err);

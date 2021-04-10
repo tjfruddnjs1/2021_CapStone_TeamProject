@@ -18,11 +18,7 @@ module.exports = class GardenRequest extends Sequelize.Model {
       representative : {
         type: Sequelize.STRING(50),
         allowNull: false,
-      },
-      phone: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-      },
+      },      
       gardenphone: {
         type: Sequelize.STRING(50),
         allowNull: false,

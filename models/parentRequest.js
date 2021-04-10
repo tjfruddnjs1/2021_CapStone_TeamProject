@@ -18,11 +18,7 @@ module.exports = class ParentRequest extends Sequelize.Model {
       childName : {
         type: Sequelize.STRING(50),
         allowNull: false,
-      },
-      phone: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-      },      
+      },         
       isapprove: {
         type: Sequelize.BOOLEAN(50),
         allowNull: false,

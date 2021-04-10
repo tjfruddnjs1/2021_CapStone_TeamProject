@@ -241,6 +241,9 @@ label {
   .star{
     color : #ff0000;
   }
+  #writer{
+    background-color: #80808014;
+  }
     </style>
   </head>      
   <body id="top">
@@ -275,19 +278,27 @@ label {
             <div class="item-list">
               <label class = "rightitem mul"><input type="radio" name="type"value = "어린이집" class = "type">어린이집</label> 
             </div>                                    
-          </fieldset>                            
+          </fieldset>                                      
           <fieldset>
             <label for="firm">학부모 이름<span class = "star">*</span></label>              
-            <input type="text" id="writer" name="parentname" value = "">              
+            <input type="text" id="writer" name="parentname" value = "<%= nickName %>" readonly>              
           </fieldset>
           <fieldset>
             <label for="department">원생 이름<span class = "star">*</span></label>
-            <input type="text" id="representative" name="representative" value = "">
-          </fieldset>          
+            <input type="text" id="childname" name="childName" value = "">
+          </fieldset>                    
           <fieldset>
             <label for="phone">휴대전화 번호<span class = "star">*</span></label>
             <input type="text" id="phone" name="phone" value = "<%= phone %>" readonly>
           </fieldset>          
+          <fieldset id = "margin">
+            <label for="address">기관명<span class = "star">*</span></label>  <br><br>                     
+            <a href='javascript:window.open("/register/address",
+            "", "width=700, height=600, resizable = no, scrollbars = no");'id = "addressBtn">주소찾기</a>               
+            <input type="text" id="gardencode" name="gardencode" class = "type" hidden>
+            <input type="text" id="address" name="address" class = "type" placeholder = "예) 대구광역시 중구 달구벌대로447길 10" readonly>
+            <input type="text" id="gardenname" name="gardenname" placeholder = "예) 대구삼덕초등학교병설유치원"  class = "type" readonly>                          
+          </fieldset>       
           <fieldset>
             <label for="agree">약관 동의<span class = "star">*</span></label><br><br>
             <a href='javascript:window.open("/register/agree",
@@ -306,6 +317,72 @@ label {
     <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
     <%- include('../partials/top') %>       
   
+    <script>
+      const addresBtn = document.querySelector('#addressBtn');
+        const agreeBtn = document.querySelector('#agreeBtn');
+        const submitBtn = document.getElementById('garden_submit');
+        const item = document.getElementsByClassName('item-list');
+        const type = document.getElementsByClassName('type');
+        const writer = document.getElementById('writer');
+        const representative = document.getElementById('representative');
+        const phone = document.getElementById('phone');
+        const gardenPhone = document.getElementById('gardenphone');
+        const agreeBox = document.getElementById('agree');
+        const address = document.getElementById('address');
+        const gardenName = document.getElementById('gardenname');
+        const childName = document.getElementById('childname');
+      submitBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          let flag = false;
+          for(let i =0; i<type.length; i++){
+            if(type[i].checked){                        
+               flag = true;               
+            }
+          }
+          if(!flag){
+              alert('유형을 선택해주세요');
+              return false;
+          }
+          
+          if(!childName.value){
+            alert('원생이름을 입력해주세요');
+            return false;
+          }
+
+          if(!address.value || !gardenName.value){
+            alert('주소를 입력해주세요');
+            return false;
+          }                              
+
+          if(!agree.checked){
+            alert('약관동의를 선택해주세요');
+            return false;
+          }
+          console.log(address.value);
+          console.log(gardenName.value);
+
+          gardenForm.submit();
+          
+        })
+
+        for(let i =0; i< item.length; i++){
+          item[i].addEventListener('click', () => {
+            if(i==0){
+              if(!type[0].checked){                
+                type[0].checked = true;
+                item[0].classList.add('checked');            
+                item[1].classList.remove('checked');
+              }            
+            }else{
+              if(!type[1].checked){
+                type[1].checked = true;
+                item[1].classList.add('checked');            
+                item[0].classList.remove('checked');
+              }            
+            }
+            
+          })
+        }
     </script>
   </body>  
 </html>
