@@ -241,6 +241,9 @@ label {
   .star{
     color : #ff0000;
   }
+  #writer{
+    background-color: #80808014;
+  }
     </style>
   </head>      
   <body id="top">
@@ -286,7 +289,7 @@ label {
           </fieldset>          
           <fieldset>
             <label for="firm">작성자<span class = "star">*</span></label>              
-            <input type="text" id="writer" name="writer" value = "">              
+            <input type="text" id="writer" name="writer" value = "<%= nickName %>" readonly>              
           </fieldset>
           <fieldset>
             <label for="department">원장명<span class = "star">*</span></label>
