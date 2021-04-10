@@ -157,16 +157,18 @@ router.get('/garden',  isLoggedIn, async (req,res)=>{
 router.post('/garden',isLoggedIn,  async (req,res)=>{
   try{  
     const {type, gardencode, address, gardenname, writer, representative, gardenphone, agree} = req.body;
+    const user = req.user;
+
     const category = 'garden';
     const gardenRequest = await GardenRequest.create({
       type,
       address,
       gardenname,
       writer,
-      representative,
-      phone,
+      representative,      
       gardenphone,
-      gardencode,
+      userId : user.id,
+      gardencode,      
     });
 
 
@@ -306,13 +308,15 @@ router.get('/parent', isLoggedIn, async (req,res)=>{
 router.post('/parent',isLoggedIn,  async (req,res)=>{
   try{  
     const {type, gardencode, address, gardenname, writer, childName, agree} = req.body;
+    const user = req.user;
     const category = 'parent';
     const gardenRequest = await ParentRequest.create({
       type,
       address,
       gardenname,
       writer,
-      childName,            
+      childName,       
+      userId : user.id,     
       gardencode,
     });
 
