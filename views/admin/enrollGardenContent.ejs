@@ -126,28 +126,29 @@
   <div class="wrapper row3">
     <main class="hoc container clear">
 
-     <form action="/register/enrollGarden/<%= post.id %>" method="post">
+     <form method="post" >
       <h1 style="font-family:  NotoSansKR-Regular">
-        <a href="/register/enrollGarden/<%= post.id %>"><%= post.gardenname %></a>
+        <a href="/register/enrollGarden/<%= post.id %>"><%= post.Garden.gardenname %></a>
       </h1>
 
       <hr style="margin-top:3% ;margin-bottom:3%"/>
 
-      <h5 style="font-family:  NotoSansKR-Regular; font-weight: bold; margin-top:3%"><i class="fa-pencil-alt fa-fw fas"></i><%= post.writer %> 
+      <h5 style="font-family:  NotoSansKR-Regular; font-weight: bold; margin-top:3%"><i class="fa-pencil-alt fa-fw fas"></i><%= post.User.nickname %> 
         
         <div id="date"><i class="fa-calendar fa-fw far"></i><span data-date-time="<%= post.createdAt %>"></span></div>
       </h5>
 
       <hr style="margin-top:3% ;margin-bottom:5%"/>
-      <h4 style="display: inline;font-family:  NotoSansKR-Regular;">가든 유형 :</h4> <strong style="font-size : 20px; margin-left : 1.5%;"><%= post.type %></strong><br>
-      <h4 style="display: inline;font-family:  NotoSansKR-Regular;">가든 주소 :</h4> <strong style="font-size : 20px; margin-left : 1.5%;"><%= post.address %></strong><br>
+      <h4 style="display: inline;font-family:  NotoSansKR-Regular;">가든 유형 :</h4> <strong style="font-size : 20px; margin-left : 1.5%;"><%= post.gardentype %></strong><br>
+      <h4 style="display: inline;font-family:  NotoSansKR-Regular;">가든 주소 :</h4> <strong style="font-size : 20px; margin-left : 1.5%;"><%= post.Garden.address %></strong><br>
       <h4 style="display: inline;font-family:  NotoSansKR-Regular;">원장명 :</h4> <strong style="font-size : 20px; margin-left : 1.5%;"><%= post.representative %></strong><br>
-      <h4 style="display: inline;font-family:  NotoSansKR-Regular;">핸드폰번호 :</h4> <strong style="font-size : 20px; margin-left : 1.5%;"><%= post.phone %></strong><br>
+      <h4 style="display: inline;font-family:  NotoSansKR-Regular;">핸드폰번호 :</h4> <strong style="font-size : 20px; margin-left : 1.5%;"><%= post.User.phone %></strong><br>
       <h4 style="display: inline;font-family:  NotoSansKR-Regular;">가든번호 :</h4> <strong style="font-size : 20px; margin-left : 1.5%;"><%= post.gardenphone %></strong><br>
       
       <div style="margin-top : 6%;">
         <a id="back" class="btn" href="/register/enrollGarden">뒤로가기</a>
-        <button id="update" class="btn" type="submit" onclick="confirm('승인하시겠습니까?')?this.parentElement.submit():null;">가든 승인</button>
+        <button id="update" type="submit" formaction="/register/enrollGarden/<%= post.id %>" class="btn" onclick="confirm('승인하시겠습니까?')?this.parentElement.submit():null;">가든 승인</button>
+        <button id="update" type="submit" formaction="/register/enrollGarden/<%= post.id %>/reject" class="btn" onclick="confirm('거절하시겠습니까?')?this.parentElement.submit():null;">승인 거절</button>
       </div>
       </form>
     

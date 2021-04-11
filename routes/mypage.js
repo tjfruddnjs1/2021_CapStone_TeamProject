@@ -14,6 +14,7 @@ const client = require('twilio')(accountSid, authToken);
 
 const User = require('../models/user');
 const Drop = require('../models/drop');
+const Request = require('../models/request');
 
 //session 유지를 위한 > passport module
 router.use((req,res,next)=>{
@@ -101,6 +102,38 @@ router.post('/account',isLoggedIn, upload.single('upload'), async(req,res,next)=
                 )
             }
         }        
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.get('/status',isLoggedIn, async (req,res,next)=>{
+    try{
+        if(req.user.phone){
+        const posts = await Request.findAll({
+            where : {userId : req.user.id},
+        });
+
+        const gardenApprove = await Request.findAll({
+            where : {requesttype: 'garden', isapprove : true, userId : req.user.id},
+        });
+
+        const parentApprove = await Request.findAll({
+            where : {requesttype: 'parent', isapprove : true, userId : req.user.id},
+        });
+
+        res.render('mypage/status', {
+            posts : posts, 
+            gardenApprove : gardenApprove,
+            parentApprove : parentApprove,
+        });
+    }else{
+        res.send(
+            "<script>alert('핸드폰 등록이 필요한 서비스입니다.');history.back();</script>"
+        )
+    }
+
     }catch(err){
         console.error(err);
         next(err);

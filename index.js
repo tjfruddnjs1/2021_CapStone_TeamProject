@@ -15,9 +15,6 @@ const kidstalkRouter = require('./routes/kidstalk');
 const inputdata = require('./routes/inputdata');
 const RegisterRouter = require('./routes/register');
 
-
-
-
 const passportConfig = require('./passport');
 
 const app = express();

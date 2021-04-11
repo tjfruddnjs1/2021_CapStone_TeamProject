@@ -97,7 +97,19 @@
       </h1>
 
       <h5 style="margin-bottom: 2%; font-weight: bold;">
-        전체 게시글 수 : <%= count.count %>
+        전체 게시글 수 : 
+
+        <%
+          count = 0;
+        %>
+        
+        <% posts.forEach(function(post) { %>
+          <% if(post.requesttype == 'garden') { %>
+              <% count ++%>
+          <% } %>
+        <% }) %>
+
+        <%= count %> 개
       </h5>
       
       <table class="board-table table table-sm border-bottom">
@@ -119,13 +131,15 @@
                   <td colspan="5">등록된 글이 없습니다.</td>
                 </tr>
           <% } %>
+
         <% posts.forEach(function(post) { %>
             <tr>
+              <% if(post.requesttype == 'garden') { %>
               <td><%= post.id %></td>
               <td id="post_title_content">
-                <a href="/register/enrollGarden/<%= post.id %>"><div class="post_title"><%= post.gardenname %></div></a>
+                <a href="/register/enrollGarden/<%= post.id %>"><div class="post_title"><%= post.Garden.gardenname %></div></a>
               </td>
-              <td><%= post.writer %></td>
+              <td><%= post.User.nickname %></td>
               <td><%= post.representative %></td>
               <td id="post_date">
                 <span data-date="<%= post.createdAt %>"></span>
@@ -137,6 +151,7 @@
                     <span style="color : #5172df"><%= post.isapprove %></span>
                 <% } %>
               </td>
+              <% } %>
             </tr>
         <% }) %>
         </tbody>

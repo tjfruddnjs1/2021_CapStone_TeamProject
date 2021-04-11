@@ -5,8 +5,6 @@ const SggCode = require('../models/sggcode');
 const SidoCode = require('../models/sidocode');
 const User = require('../models/user');
 const Request = require('../models/request');
-const Post = require('../models/post');
-const Comment = require('../models/comment');
 
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
@@ -195,21 +193,31 @@ router.get('/enrollGarden', isLoggedIn, async (req,res)=>{
           console.log(JSON.stringify(searchQuery));
       
           let offset = (page-1)*limit;
-          let count = await GardenRequest.findAndCountAll({where : searchQuery});
+          let count = await Request.findAndCountAll({where : searchQuery});
           //count.count 로 사용 > 전체 개시물 수
       
           console.log(searchQuery);
       
           let maxPage = Math.ceil(count.count/limit);
       
-          const posts = await GardenRequest.findAll({
+          const posts = await Request.findAll({
+              include : [
+                {
+                  model : Garden,
+                  required : true,
+                },
+                {
+                  model : User,
+                  required : true,
+                }
+              ],
               where : searchQuery,
               order : [["createdAt", "DESC"]],
               offset : offset,
               limit : limit,
           });
-      
-          let comment = await Comment.findAll({});
+
+          console.log(posts);
       
           res.render('admin/enrollGarden', {
             posts:posts, 
@@ -217,7 +225,6 @@ router.get('/enrollGarden', isLoggedIn, async (req,res)=>{
             maxPage:maxPage, 
             limit:limit, 
             count:count,
-            comment:comment,
             searchType:req.query.searchType,
             searchText:req.query.searchText
           });
@@ -256,8 +263,18 @@ router.route('/enrollGarden/:id')
               "<script>alert('해당 라우터에 접근할수 없습니다.'); window.location='/home';</script>"
           )
         }else{
-          const post = await GardenRequest.findOne(
+          const post = await Request.findOne(
             {
+              include : [
+                {
+                  model : Garden,
+                  required : true,
+                },
+                {
+                  model : User,
+                  required : true,
+                }
+              ],
               where : {id : req.params.id}
             });
 
@@ -276,11 +293,13 @@ router.post('/enrollGarden/:id', isLoggedIn, async(req,res)=>{
           "<script>alert('해당 라우터에 접근할수 없습니다.'); window.location='/home';</script>"
       )
     }else{
-      await GardenRequest.update({
+      await Request.update({
         isapprove : true,
+        completedAt : Date.now(),
       },{
         where : {id:req.params.id},
       });
+      
       res.redirect('/register/enrollGarden');
     }
   }catch(err){
@@ -288,6 +307,29 @@ router.post('/enrollGarden/:id', isLoggedIn, async(req,res)=>{
     next(err);
   }
 })
+
+router.post('/enrollGarden/:id/reject', isLoggedIn, async(req,res)=>{
+  try{
+    if(req.user.email != "tjfruddnjs12@naver.com"){
+      res.send(
+          "<script>alert('해당 라우터에 접근할수 없습니다.'); window.location='/home';</script>"
+      )
+    }else{
+      await Request.update({
+        isapprove : false,
+        completedAt : Date.now(),
+      },{
+        where : {id:req.params.id},
+      });
+      
+      res.redirect('/register/enrollGarden');
+    }
+  }catch(err){
+    console.error(err);
+    next(err);
+  }
+})
+
 
 
 router.get('/parent', isLoggedIn, async (req,res)=>{

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/kidstalk.css">
+  </head>
+
+  <style>
+    
+    #profile{
+        border : 1px solid rgba(0,0,0,.1);
+        margin-bottom : 5%;
+        padding : 4%;
+        padding-left : 8%;
+        padding-right : 8%;
+    }
+
+    #main{
+    }
+
+    label{
+        margin-right : 3%;
+    }
+
+    #parent,#garden{
+        border : 1px solid rgba(0,0,0,.1);
+        float : left;
+        margin-bottom: 4%;
+        display: inline;
+        width: 389px;
+        padding : 4%;
+    }
+
+    #Img{
+        width : 50%;
+        border-right : 2px solid rgba(0,0,0,.1);
+        padding-right : 10%;
+        float : left;
+    }
+
+    #approveStatus{
+        float : left;
+        margin-left : 3%;
+    }
+
+    #list{
+        margin-top : 10%;
+        line-height: 190%;
+        padding-left : 20%;
+    }
+
+    #post_id, #post_title{
+      text-align: center;
+      width : 15%;
+    }
+
+    #post_writer, #post_date{
+      text-align: center;
+      width : 25%;
+    }
+
+    #post_hit{
+        width : 15%;
+    }
+
+    th, td{
+      border : none;
+      font-weight: bold;
+      text-align : center;
+    }
+
+    #numOfApprove{
+        margin-left : 40%;
+        color : red;
+    }
+
+
+  </style>
+
+  <body id="top">
+    <!-- Top Background Image Wrapper -->
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    >
+      <%- include('../partials/nav') %>
+
+      <div id="breadcrumb" class="hoc clear">
+        <h6 class="heading" style="font-family: NotoSansKR-Regular;">마이 페이지</h6>
+        <br />
+        <ul>
+          <li><a href="/index">메인</a></li>
+          <li><a href="#">마이 페이지</a></li>
+          <li><a href="/mypage/status">키즈가든 신청 현황</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Background Image Wrapper -->
+    <div class="wrapper row3">
+      <main class="hoc container clear">
+        <!--네비게이션-->
+        <%- include('mypage_nav') %>
+
+        <!--본 문-->
+        <div class="content three_quarter">
+          <h2 style="font-family: NotoSansKR-Regular; margin-bottom : 5%;">
+            키즈가든 신청 현황
+          </h2>
+          <div id="profile">
+            <ul>
+              <li>닉네임 : <%= user.nickname %></li><hr>
+              <li>이메일 : <%= user.email %></li><hr>
+              <li>핸드폰번호 : <%= user.phone %></li><hr>
+              <% if(user.gender == "man") { %>
+              <li>성별 : 남자</li>
+              <% }else if(user.gender == 'woman') { %>
+              <li>성별 : 여자</li>
+              <% }else{ %>
+              <li>성별이 등록되지 않았습니다.</li>
+              <% } %>
+            </ul>
+          </div>
+
+          <div id="parent" style="margin-right : 5%;">
+            <img id="Img" src="/images/parent.png"/>
+           
+            <div id="approveStatus">
+                <h5>학부모 신청현황</h5>
+                <ul id="list">
+
+                <%
+                  parentCount = 0;
+                  parentHold = 0;
+                  parentReject = 0;
+                %>
+
+                <% posts.forEach(function(post) { %>
+                  <% if(post.requesttype == 'parent') { %>
+                    <% parentCount ++%>
+                      <% if(post.isapprove == false && post.completedAt) { %>
+                        <% parentReject ++%>
+                      <% } %>
+                  <% } %>
+                <% }) %>
+
+                <%
+                    parentHold = parentCount - (parentApprove.length + parentReject);
+                %>
+
+                  <li>전체<span id="numOfApprove"><%= parentCount %></span>건</li>
+                  <li>승인<span id="numOfApprove"><%= parentApprove.length %></span>건</li>
+                  <li>대기<span id="numOfApprove"><%= parentHold %></span>건</li>
+                  <li>거절<span id="numOfApprove"><%= parentReject %></span>건</li>
+                </ul>
+            </div>
+
+          </div>
+          <div id="garden">
+            <img id="Img" src="/images/garden.png"/>
+
+            <div id="approveStatus">
+                <h5>가든 신청현황</h5>
+                <ul id="list">
+                
+                <%
+                  gardenCount = 0;
+                  gardenHold = 0;
+                  gardenReject = 0;
+                %>
+                
+                <% posts.forEach(function(post) { %>
+                  <% if(post.requesttype == 'garden') { %>
+                    <% gardenCount ++%>
+                      <% if(post.isapprove == false && post.completedAt) { %>
+                        <% gardenReject ++%>
+                      <% } %>
+                  <% } %>
+                <% }) %>
+
+                <%
+                    gardenHold = gardenCount - (gardenApprove.length + gardenReject);
+                %>
+
+                    <li>전체<span id="numOfApprove"><%= gardenCount %></span>건</li>
+                    <li>승인<span id="numOfApprove"><%= gardenApprove.length %></span>건</li>
+                    <li>대기<span id="numOfApprove"><%= gardenHold %></span>건</li>
+                    <li>거절<span id="numOfApprove"><%= gardenReject %></span>건</li>
+                </ul>
+            </div>
+
+          </div>
+          <div id="main">
+            <table class="board-table table table-sm border-bottom">
+
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" id="post_id">신청분류</th>
+                    <th scope="col" id="post_title">가든분류</th>
+                    <th scope="col" id="post_writer">신청일</th>
+                    <th scope="col" id="post_date">승인일</th>
+                    <th scope="col" id="post_hit">신청상태</th>
+                  </tr>
+                </thead>
+        
+                <tbody>
+                  <% if(posts == null || posts.length == 0){ %>
+                        <tr>
+                          <td colspan="5">등록된 글이 없습니다.</td>
+                        </tr>
+                  <% } %>
+                  <% posts.forEach(function(post) { %>
+                        <tr>
+                          <% if(post.requesttype == "parent") { %>
+                            <td>학부모</td>
+                          <% }else{ %>
+                            <td>가든</td>
+                          <% } %>
+                          
+                           <td><%= post.gardentype %></td>
+                           <td id="post_date">
+                            <span data-date="<%= post.createdAt %>"></span>
+                           </td>
+                           <td id="post_date">
+                            <span data-date="<%= post.completedAt %>"></span>
+                           </td>
+
+                           <td>
+                             <% if(post.isapprove == true && post.completedAt) { %>
+                              <strong style="color : blue">승인완료</strong>
+                             <% }if(post.isapprove == false && !(post.completedAt)){ %>
+                              <strong style="color : green">승인대기</strong>
+                            <% }if(post.isapprove == false && post.completedAt){ %>
+                              <strong style="color : red">승인거절</strong>
+                            <% } %>
+                              
+                           </td>
+                        </tr>
+                  <% }) %>
+                </tbody>
+
+            </table>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </main>
+    </div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+  <script src="/js/kidstalk.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</html>

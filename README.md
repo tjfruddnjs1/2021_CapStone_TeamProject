@@ -170,11 +170,12 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
 로그아웃 | session 소멸, 로그아웃 전에는 session 유지 , session.destroy() | `구현 완료`
-이미지 첨부 및 미리보기 | multer, req.file.path , fs , accept="image/*", database CRUD 중 Create, Read, Upadate | `구현 완료`
+이미지 첨부 및 미리보기 | multer, req.file.path , fs , accept="image/*" | `구현 완료`
 핸드폰 인증하기 | twilio,  Token, 난수 생성 | `구현 완료`
 비밀번호 변경하기 | database CRUD 중 Read & Update , brycpt(hash 비교 및 저장) | `구현 완료`
 회원 탈퇴 | database CRUD 중 Create & Delete | `구현 완료`
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
+키즈가든 신청 현황 | 학부모, 가든 신청 현황 확인(전체, 승인, 거절, 대기) | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
 ## 개발 결과
@@ -208,7 +209,7 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/113553704-1c772180-9633-11eb-99ae-dabc76f50cd9.png">
 <br>
-<img src="https://user-images.githubusercontent.com/41010744/113553792-3e70a400-9633-11eb-9dcb-7c66e14227d6.png">
+<img src="https://user-images.githubusercontent.com/41010744/114301618-9fe7b580-9b00-11eb-828d-3d6052c61833.png">
 <br>
 
 
@@ -236,9 +237,11 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br>
 
 
-> 마이페이지 (계정 설정 + 비밀번호 설정 + 회원 탈퇴)
+> 마이페이지 (계정 설정 + 키즈가든 신청 현황 + 비밀번호 설정 + 회원 탈퇴)
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/112770368-74c18880-9061-11eb-9192-ded2c4c7553d.png">
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/114301579-6616af00-9b00-11eb-80e9-1d084b38242a.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/113553401-af638c00-9632-11eb-819a-84fbb34454a7.png">
 <br>
