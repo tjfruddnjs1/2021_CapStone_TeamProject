@@ -10,6 +10,10 @@
     margin: 0;
     background-color: #5172df;
     }
+  
+  .hoc{
+    max-width : 1550px;
+  }
 
   body{
     font-family: NotoSansKR-Regular;
@@ -34,7 +38,8 @@
     <nav id="mainav" class="fl_right">
       <ul class="clear">
         <li><a href="/garden/index">키즈가든 검색</a></li>
-        <li><a href="/register">마이 키즈가든</a></li>
+        <li><a href="/register">키즈가든 등록</a></li>
+        <li><a href="#">아이 CAM</a></li>
         <li><a href="#">이벤트</a></li>
         <li><a href="/kidstalk/index">키즈맘TALK</a></li>
         <% if(!(user && user.id)) { %>
@@ -50,6 +55,7 @@
           <li><a class="drop">마이페이지</a>
             <ul>
               <li><a href="/mypage/account">나의 계정</a></li>
+              <li><a href="/mypage/gardenManage">가든 관리</a></li>
               <li><a href="/login/logout">로그아웃</a></li>
             </ul>
           </li>

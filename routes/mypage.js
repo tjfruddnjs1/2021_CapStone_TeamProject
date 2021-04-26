@@ -263,4 +263,13 @@ router.post('/changePassword',isLoggedIn,async(req,res,next)=>{
     }
 });
 
+router.get('/gardenManage',isLoggedIn,async(req,res,next)=>{
+    try{
+        res.render('mypage/gardenManage');
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+})
+
 module.exports = router;
