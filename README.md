@@ -176,6 +176,7 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 회원 탈퇴 | database CRUD 중 Create & Delete | `구현 완료`
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 키즈가든 신청 현황 | 학부모, 가든 신청 현황 확인(전체, 승인, 거절, 대기) | `구현 완료`
+유치원 측 학부모/원생 계정 관리 | (관리) 관리자 -> 유치원/어린이집 -> 학부모/원생 | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
 ## 개발 결과
@@ -237,11 +238,13 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <br>
 
 
-> 마이페이지 (계정 설정 + 키즈가든 신청 현황 + 비밀번호 설정 + 회원 탈퇴)
+> 마이페이지 (계정 설정 + 키즈가든 신청 현황 + 유치원 측 학부모/원생 계정 관리 + 비밀번호 설정 + 회원 탈퇴)
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/112770368-74c18880-9061-11eb-9192-ded2c4c7553d.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/114301579-6616af00-9b00-11eb-80e9-1d084b38242a.png">
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/116358741-ef382080-a838-11eb-8355-aad446883dda.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/113553401-af638c00-9632-11eb-819a-84fbb34454a7.png">
 <br>
@@ -330,3 +333,8 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 > `2021-04-03` : 현호 > 상담(유치원/어린이집, 학부모)페이지, 경원 > 관리자 페이지(유치원/어린이집 승인)
 
 > `2021-04-09` : 현호 > 유치원/어린이집 등록 메인 페이지 , 학부모 등록 , 경원 > 학부모 등록시 유치원/어린이집에 이메일 발송, 마이페이지(신청현황) 추가
+
+> `2021-04-26` : 헤더 추가/수정 키즈가든 검색 키즈가든 등록	아이 CAM 이벤트 키즈맘 TALK
+기능 분리 > <br>
+현호 : 키즈 가든 관리 > select 박스 > 1. request 테이블 정보 + 사진/소개글 [수정 버튼] <br>
+경원 : 키즈 가든 관리 > select 박스 > 2. 학부모/원생 관리 , 3.  리뷰를 작성할수 있는 권한이 있는지 확인 필요 <br>		

@@ -330,8 +330,6 @@ router.post('/enrollGarden/:id/reject', isLoggedIn, async(req,res)=>{
   }
 })
 
-
-
 router.get('/parent', isLoggedIn, async (req,res)=>{
   try{  
     const user = req.user;
