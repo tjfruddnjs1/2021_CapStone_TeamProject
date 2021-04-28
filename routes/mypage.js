@@ -13,6 +13,7 @@ const authToken = process.env.TWILIO_AT;
 const client = require('twilio')(accountSid, authToken);
 
 const User = require('../models/user');
+const Garden = require('../models/garden');
 const Drop = require('../models/drop');
 const Request = require('../models/request');
 
@@ -263,6 +264,7 @@ router.post('/changePassword',isLoggedIn,async(req,res,next)=>{
     }
 });
 
+//가든 관리
 router.get('/gardenManage',isLoggedIn,async(req,res,next)=>{
     try{
         res.render('mypage/gardenManage');
@@ -271,5 +273,154 @@ router.get('/gardenManage',isLoggedIn,async(req,res,next)=>{
         next(err);
     }
 })
+
+router.get('/gardenApprove',isLoggedIn, async(req,res,next)=>{
+    try{
+        const isApprove = await Request.findAndCountAll({where : {
+            userId : req.user.id,
+            requesttype : 'garden',
+            isApprove : true,
+            }}
+        );
+
+        if(isApprove.count >= 1){
+            let page = Math.max(1, req.query.page);
+            let limit = Math.max(1, req.query.limit);
+            page = !isNaN(page)?page:1;
+            limit = !isNaN(limit)?limit:10;
+
+            let offset = (page-1)*limit;
+            let count = isApprove.count;
+            let gardencode = req.query.gardencode;
+            console.log(gardencode);
+            //count.count 로 사용 > 전체 개시물 수
+
+            let maxPage = Math.ceil(count/limit);
+
+            const posts = await Request.findAll({
+                include : [
+                    {
+                        model : User,
+                        attributes : ['nickname'],
+                        required : true,
+                    },
+                    {
+                        model : Garden,
+                        required: true,
+                    }
+                ],
+                order : [["createdAt", "DESC"]],
+                offset : offset,
+                limit : limit,
+            });
+
+            res.render('mypage/gardenApprove', {
+                posts : posts,
+                currentPage:page, 
+                maxPage:maxPage, 
+                limit:limit, 
+                count:count,
+                gardencode : gardencode,
+            });
+        }else{
+            res.send(
+                "<script>alert('유치원/어린이집 인증 후 사용가능한 페이지 입니다.'); history.back();</script>"
+            );
+        }
+
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.route('/gardenApprove/:id')
+    //게시글 show
+    .get(async(req,res,next)=>{
+    try{
+          const post = await Request.findOne(
+            {
+              include : [
+                {
+                  model : Garden,
+                  required : true,
+                },
+                {
+                  model : User,
+                  required : true,
+                }
+              ],
+              where : {id : req.params.id}
+            });
+
+          res.render('mypage/gardenApproveContent', {post:post});
+      }catch(err){
+        console.error(err);
+        next(err);
+      }
+    })
+
+    .post(async(req,res,next)=>{
+        try{
+
+            const post = await Request.findOne(
+                {
+                  include : [
+                    {
+                      model : Garden,
+                      required : true,
+                    },
+                    {
+                      model : User,
+                      required : true,
+                    }
+                  ],
+                  where : {id : req.params.id}
+                });
+
+            await Request.update({
+                isapprove : true,
+                completedAt : Date.now(),
+              },{
+                where : {id:req.params.id},
+              });
+              
+              res.redirect('/mypage/gardenApprove?gardencode='+post.gardencode);
+        }catch(err){
+            console.log(err);
+            next(err);
+        }
+    });
+
+    router.post('/gardenApprove/:id/reject', isLoggedIn, async(req,res)=>{
+        try{
+            const post = await Request.findOne(
+                {
+                  include : [
+                    {
+                      model : Garden,
+                      required : true,
+                    },
+                    {
+                      model : User,
+                      required : true,
+                    }
+                  ],
+                  where : {id : req.params.id}
+                });
+            
+            await Request.update({
+              isapprove : false,
+              completedAt : Date.now(),
+            },{
+              where : {id:req.params.id},
+            });
+            
+            res.redirect('/mypage/gardenApprove?gardencode='+post.gardencode);
+        }catch(err){
+          console.error(err);
+          next(err);
+        }
+      })    
 
 module.exports = router;

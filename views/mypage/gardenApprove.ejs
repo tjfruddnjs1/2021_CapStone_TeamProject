@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+
+  <style>
+    #email,
+    #username,
+    #phone,
+    #phoneCertified,
+    #gender {
+      font-family: NotoSansKR-Regular;
+      margin: 20px auto;
+      border: 1px solid #8080805c;
+      padding: 12px 5px 17px;
+      width: 100%;
+      float: left;
+      color: #5172df;
+      widows: 100%;
+    }
+
+    #phone{
+        width : 60%;
+    }
+
+    .info {
+      font-weight: bold;
+      font-size: 12px;
+      color: red;
+    }
+
+    label {
+      padding: 4px 2px;
+      width: 60%;
+    }
+
+    #certified{
+        margin : 20px 0px;
+        padding: 12px 5px 12px;
+    }
+
+    .content {
+      width: 66%;
+      float: left;
+    }
+    .profile {
+      width: 50%;
+      display: inline-block;
+    }
+
+    .image {
+      margin: 20px auto;
+      width: 25%;
+      height: 25%;
+      float: right;
+      margin-right: 10%;
+      margin-top : 10%;
+    }
+
+    .button {
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    #user_image {
+      height: 140px;
+    }
+
+    #btn {
+      margin-top : 5%;
+      color: white;
+      width : 93%;
+      background-color: #5172df;
+      border: 1px solid #8080805c;
+    }
+
+    h5{
+        font-weight: bold;
+    }
+
+    #username{
+      width : 70%;
+    }
+
+    #duplicated{
+      width : 20%;
+    }
+
+  </style>
+
+  <body id="top">
+    <!-- Top Background Image Wrapper -->
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    >
+      <%- include('../partials/nav') %>
+
+      <div id="breadcrumb" class="hoc clear">
+        <h6 class="heading" style="font-family: NotoSansKR-Regular;">가든 관리</h6>
+        <br />
+        <ul>
+          <li><a href="/index">메인</a></li>
+          <li><a href="#">마이 페이지</a></li>
+          <li><a href="/mypage/gardenApprove">가든 신청 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Background Image Wrapper -->
+    <div class="wrapper row3">
+      <main class="hoc container clear">
+        <!--네비게이션-->
+        <%- include('manage_nav') %>
+
+        <form id="numberOfPage" action="/mypage/gardenApprove" method="get">
+        <!--본 문-->
+        
+        <div class="content three_quarter">
+          <select style="width : 30%;" name="gardencode" class="custom-select" onchange="this.parentElement.parentElement.submit()">
+            <option value="" selected disabled>가든을 선택해주세요.</option>
+            <% posts.forEach(function(post) { %>
+                <% if(post.isapprove == true && post.requesttype == 'garden' && post.userId == user.id) { %>
+                    <option value="<%= post.gardencode %>" <%= gardencode== post.gardencode?'selected':'' %>> <%= post.Garden.gardenname %></option>
+                    
+                <% } %>
+            <% }) %>
+          </select>
+
+          <h5 style="margin-top: 5%; font-weight: bold;">
+            요청 학부모 수 : 
+    
+            <%
+              count = 0;
+            %>
+            
+            <% posts.forEach(function(post) { %>
+                <% if(post.requesttype == 'parent' && post.gardencode == gardencode) { %>
+                  <% count ++%>
+              <% } %>
+            <% }) %>
+    
+            <%= count %> 명
+          </h5>
+
+          <table class="board-table table table-sm border-bottom" style="margin-top : 6%; text-align :center;">
+
+            <thead class="thead-light">
+              <tr >
+                <th scope="col" id="post_id">번호</th>
+                <th scope="col" id="post_title">가든명</th>
+                <th scope="col" id="post_writer">학부모</th>
+                <th scope="col" id="post_gardenCaptain">원생명</th>
+                <th scope="col" id="post_date">등록일</th>
+                <th scope="col" id="post_hit">승인상태</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <% if(count == 0){ %>
+                    <tr>
+                      <td colspan="6">등록 요청한 학부모가 없습니다.</td>
+                    </tr>
+              <% } %>
+    
+            <% posts.forEach(function(post) { %>
+                <tr>
+                  <% if(post.requesttype == 'parent' && post.gardencode == gardencode ) { %>
+                  <td><%= post.id %></td>
+                  <td id="post_title_content">
+                    <a href="/mypage/gardenApprove/<%= post.id %>"><div class="post_title" style="text-align: left;"><%= post.Garden.gardenname %></div></a>
+                  </td>
+                  <td><%= post.User.nickname %></td>
+                  <td><%= post.childName %></td>
+                  <td id="post_date">
+                    <span data-date="<%= post.createdAt %>"></span>
+                  </td>
+                  <td>
+                    <% if(post.isapprove == true) {%>
+                        <span style="color : red;"><%= post.isapprove %></span>
+                    <% }else{ %>
+                        <span style="color : #5172df"><%= post.isapprove %></span>
+                    <% } %>
+                  </td>
+                  <% } %>
+                </tr>
+            <% }) %>
+            </tbody>
+          </table>
+
+          
+        </div>
+    </form>
+
+        <div class="clear"></div>
+      </main>
+    </div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+  <script src="/js/kidstalk.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</html>
