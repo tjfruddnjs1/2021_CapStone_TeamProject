@@ -28,6 +28,15 @@ module.exports = class Request extends Sequelize.Model {
         allowNull: false,
         defaultValue : false,
       },      
+
+      gardenimage: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
+      },      
+      gardenintro: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
+      },      
       createdAt : {
         type: Sequelize.DATE,
         defaultValue : Sequelize.NOW,

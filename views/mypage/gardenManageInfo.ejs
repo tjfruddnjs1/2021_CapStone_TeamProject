@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+
+  <style>    
+
+    #talk{
+      margin-top : 2.5%;
+    }           
+    .container{
+        padding : 50px 78.828px;
+    }
+    .subhead {
+  font-family: sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#updatemento {
+  width: 80%;  
+  text-align: left;
+  color: #6D6D72;
+}
+
+#updatemento input[type="text"],
+input[type="submit"],
+input[type="email"],
+#gender,
+textarea {
+  border: 1px solid #8080805c;
+  width: 100%;
+  padding: 12px 5px;
+  margin: 20px auto;
+}
+
+#updatemento input[type="submit"] {
+  cursor: pointer;
+}
+
+.container {
+  padding: 40px 0;
+}
+
+#footer {
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+  text-align: center;
+}
+
+#updatemento input[type="checkbox"] {
+  display: inline;
+  border: 1px solid #8080805c;  
+  cursor: pointer;
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+input[type="radio"] {
+  text-align: center;
+}
+
+.item-list, .lang-list {  
+  width: 30%;
+  border: 1px solid #8080805c;
+  padding: 10px 5px;  
+  display: inline-block;
+  left : 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.item-list:active {
+  background-color: #8080805c;
+  transition: 0.3s;
+}
+
+label {
+  font-size : 16px;
+  transition: 0.1s;
+  font-weight: bold;  
+  margin-top : 20px;
+}
+.ref-sort ul{ 
+    height : 50px;
+    line-height : 50px;                   
+    background : #f7f7f8;            
+  }    
+  .ref-sort a{        
+    
+    text-align : center;
+    font-weight : bold;      
+  }   
+  .ref-sort div{
+    display : inline;
+    padding : 10px 10px;
+    width : 20%;
+    text-align : center;
+  } 
+  .ref-sort li{      
+    text-align : center;
+    height : 100%;            
+    /* border-bottom : 2px solid #829DA2;       */
+  }
+  .nav {                  
+    width : 50%;      
+    margin : 0 auto;          
+  }
+  #image_section{    
+    width : 60%;            
+  }
+  .image-box{    
+  }
+  #upload{
+    display: inline-block;
+    padding: .5em .75em;
+    color: #fff;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #5172DF;
+    cursor: pointer;
+    border : 0;
+    border-radius: .25em;
+  }
+  #margin{
+    margin-top : 20px;
+  }
+  .radio{
+    display : inline;
+    margin-right : 30px;
+  }
+  
+  .item{
+    text-align: center;
+  }
+  .row3{       
+    background-color: #f8f8f8;    
+  }
+  .container{
+      padding : 6%;
+      min-width : 70%;
+    background-color : white;
+    
+  }
+  #addressBtn, #agreeBtn{
+    padding : 5px 10px;
+    border : 1px solid black;
+    background-color : #EFEFEF;
+    color : #6D6D72;
+    cursor : pointer;
+    margin-top : 20px;
+    text-decoration: none;
+  }  
+  #agreeBtn{
+    display : inline;
+  }
+  input[type = "radio"]{
+    width : 50%;    
+    border : 1px solid black;
+    display : none;
+    transition: 0.1s;
+  }
+  .item-list{
+    float: left;
+    width: 30%;
+    border: 1px solid #8080805c;
+    padding: 5px 10px;
+    margin: 5px;  
+    text-align: center;
+    cursor: pointer;
+    width : 50%;
+    text-align: center;
+    margin : 0 auto;
+    transition: 0.1s;
+  }
+  .checked{
+    background-color: #5172DF;
+    color : white;
+    transition: 0.1s;
+  }
+  #agree{
+    width : 40px;
+  }
+  .type{
+    background-color: #80808014;
+  }
+  .navigation{
+    text-align: center;
+    margin-bottom : 30px;    
+  }
+  .nav{
+    line-height: 130px;
+    display : inline-block;
+    width : 130px;
+    height : 130px;
+    border-radius: 50%;
+    background-color : #8080808c;
+    border : 2px solid gray;    
+    margin : 0 70px;
+    font-weight: bold;
+  }
+  .arrow{
+    font-size : 20px;
+  }
+  .hoc{
+    padding : 50px;
+  }
+  #garden_submit{
+    background-color : #5172DF;
+    color : #fff;
+    font-weight: bold;
+  }
+  .mul{
+    margin-top : 0;
+  }
+  #center{
+    border : 2px solid  #0a40f5;
+    background-color : #5172DF;
+    color : white;
+  }
+  .star{
+    color : #ff0000;
+  }
+  #writer{
+    background-color: #80808014;
+  }
+  select{
+       display : inline;              
+       padding : 10px 0;
+       outline : none;
+       width : 300px;
+       border : none;
+       border-bottom : 1px solid #80808033;
+       margin-right : 20px;
+       cursor : pointer;
+       font-size : 20px;
+       font-weight : bold;
+   }
+
+  </style>
+
+  <body id="top">
+    <!-- Top Background Image Wrapper -->
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    >
+      <%- include('../partials/nav') %>
+
+      <div id="breadcrumb" class="hoc clear">
+        <h6 class="heading" style="font-family: NotoSansKR-Regular;">마이 페이지</h6>
+        <br />
+        <ul>
+          <li><a href="/index">메인</a></li>
+          <li><a href="#">마이 페이지</a></li>
+          <li><a href="/mypage/account">계정 설정</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Background Image Wrapper -->
+    <div class="wrapper row3">
+      <main class="hoc container clear">
+        <!--네비게이션-->
+        <%- include('manage_nav') %>
+
+        <!--본 문-->
+        <div class="content three_quarter">
+          <h2 style="font-family: NotoSansKR-Regular">
+            <select name="" id="select">
+              <% requestInfo.forEach((garden) => { %>                
+                <option value="<%= garden.gardencode %>"><%= garden.Garden.gardenname %></option>
+              <% }) %>
+            </select>            
+          </h2>
+          <div id="updatemento">          
+            <form action="/mypage/gardenManage/info" method="post" id = "gardenForm" enctype = "multipart/form-data">              
+              <fieldset>
+                <label for="username">유형<span class = "star">*</span></label>              
+                <br>
+                <% if(requestInfo[0].gardentype == '유치원') {%>                
+                  <div class="item-list checked">
+                    <label class = "mul"><input type="radio" name="type" value = "유치원" class = "type" checked>유치원</label>                                    
+                  </div>
+                  <div class="item-list">
+                    <label class = "rightitem mul"><input type="radio" name="type"value = "어린이집" class = "type">어린이집</label> 
+                  </div>                         
+                <% } else { %>
+                  <div class="item-list">
+                    <label class = "mul"><input type="radio" name="type" value = "유치원" class = "type" >유치원</label>                                    
+                  </div>
+                  <div class="item-list checked">
+                    <label class = "rightitem mul"><input type="radio" name="type"value = "어린이집" class = "type" checked>어린이집</label> 
+                  </div>                         
+                <% } %>                           
+              </fieldset>          
+              <fieldset id = "margin">
+                <input type="hidden" id="id" name="id" class = "id" value = "<%= requestInfo[0].id %>">
+                <label for="address">기관명<span class = "star">*</span></label>  <br><br>                     
+                <a href='javascript:window.open("/register/address",
+                "", "width=700, height=600, resizable = no, scrollbars = no");'id = "addressBtn">주소찾기</a>               
+                <input type="hidden" id="gardencode" name="gardencode" class = "type" value = "<%= requestInfo[0].gardencode %>">
+                <input type="text" id="address" name="address" class = "type" value = "<%= requestInfo[0].Garden.address %>" readonly>
+                <input type="text" id="gardenname" name="gardenname" class = "type" value = "<%= requestInfo[0].Garden.gardenname %>" readonly>                          
+              </fieldset>                        
+              <fieldset>
+                <label for="department">원장명<span class = "star">*</span></label>
+                <input type="text" id="representative" name="representative" value = "<%= requestInfo[0].representative %>">
+              </fieldset>                        
+              <fieldset>
+                <label for="phone">기관 전화번호<span class = "star">*</span></label>
+                <input type="text" id="gardenphone" name="gardenphone" value = "<%= requestInfo[0].gardenphone %>">
+              </fieldset> 
+              <fieldset>              
+                <label for="name">전경 사진</label>
+                <label for="image" id = "upload">업로드</label>                              
+                <input type="file" value="업로드" name = "image" id = "image" accept="image/png, image/jpeg">
+                <br>
+                <div class="image-box">
+                  <img id="image_section" src="<%= requestInfo[0].gardenimage ?? '' %>" alt=""/>                  
+                </div>                
+                <div id="imagebox">                  
+                </div>
+              </fieldset>                              
+              <fieldset>
+                <label for="intro">유치원 및 어린이집 소개</label>              
+                <textarea name="intro" id="intro" cols="30" rows="10"><%= requestInfo[0].gardenintro ?? '' %></textarea>
+                </fieldset>
+              <fieldset>                       
+             
+              <input type="submit" value="수정하기" id = "garden_submit">
+            </form>
+          </div>
+
+        </div>
+        <div class="clear"></div>
+      </main>
+    </div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+<script>
+  console.log(`<%= requestInfo[0].intro %>`);
+</script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script>
+    const item = document.getElementsByClassName('item-list');
+    const type = document.getElementsByClassName('type');
+    const select = document.querySelector('#select');
+    const address = document.querySelector('#address');
+    const gardenname = document.querySelector('#gardenname');
+    const representative = document.querySelector('#representative');
+    const gardenPhone = document.querySelector('#gardenphone');
+    const image = document.querySelector('#image_section');
+    const intro = document.querySelector('#intro');
+    const id = document.querySelector('.id');
+    const submitBtn = document.querySelector('#garden_submit');
+    const imageBox = document.querySelector('.image-box');    
+    const gardenCode = document.querySelector('#gardencode');    
+    let gardentype;
+
+    submitBtn.addEventListener('click', (e) => {
+          e.preventDefault();  
+          let flag = false;
+          for(let i =0; i<type.length; i++){
+            if(type[i].checked){                        
+               flag = true;        
+               gardentype = type[i].value;                                       
+            }
+          }
+
+          if(!(gardenname.value.substr(-(gardentype.length), gardentype.length) == gardentype)){            
+            alert('가든이름과 유형항목의 종류가 다릅니다.');            
+            return false;
+          }
+          
+          if(!document.querySelector('#image_section')){                                    
+              alert('사진을 등록하세요');            
+              return false;            
+          }else{
+            if(document.querySelector('#image_section').src == location.href){              
+              alert('사진을 등록하세요');            
+              return false;
+            }            
+          }                           
+          if(!intro.value){
+            alert('소개글을 작성해주세요');            
+            return false;
+          }
+
+          gardenForm.submit();          
+    });
+
+    for(let i =0; i< item.length; i++){
+          item[i].addEventListener('click', () => {
+            if(i==0){
+              if(!type[0].checked){                
+                type[0].checked = true;
+                item[0].classList.add('checked');            
+                item[1].classList.remove('checked');
+              }            
+            }else{
+              if(!type[1].checked){
+                type[1].checked = true;
+                item[1].classList.add('checked');            
+                item[0].classList.remove('checked');
+              }            
+            }
+            
+          })
+        }
+
+      select.addEventListener('change', async (e) => {        
+        const result = await axios.post('/mypage/gardenManage/info/garden', {
+          gardenCode : e.target.value,          
+        });
+        console.log(result);
+        if(result.data[0].gardentype == '유치원'){
+          console.log('유치원')
+          type[0].checked = true;
+          item[0].classList.add('checked');
+          item[1].classList.remove('checked');
+        }else{
+          console.log('어린이집')
+          type[1].checked = true;
+          item[1].classList.add('checked');            
+          item[0].classList.remove('checked');
+        }
+        address.value = result.data[0].Garden.address;
+        gardenname.value = result.data[0].Garden.gardenname;
+        representative.value = result.data[0].representative;
+        gardenPhone.value = result.data[0].gardenphone;  
+        gardenCode.value = result.data[0].gardencode;
+        
+        if(result.data[0].gardenimage && result.data[0].gardenintro){          
+          $('#image_section').remove();
+          let img = document.createElement('img');                    
+          img.setAttribute('id', 'image_section');
+          img.src = result.data[0].gardenimage;
+          console.log(img.src);
+          imageBox.appendChild(img);
+          
+          
+          intro.value = result.data[0].gardenintro;
+        }else{          
+          console.log('hello world');
+          image.src = location.href;
+          $('#image_section').remove();          
+          let img = document.createElement('img');                    
+          img.setAttribute('id', 'image_section');
+          img.src = '';
+          imageBox.appendChild(img);
+          intro.value = null;
+        }        
+        id.value = result.data[0].id;
+
+        console.log(id.value);
+      })   
+      
+      function readURL(input) {
+   if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    
+    reader.onload = function (e) {
+     $('#image_section').attr('src', e.target.result);  
+    }
+    
+    reader.readAsDataURL(input.files[0]);
+    }
+  }
+  
+  $("#image").change(function(){
+     readURL(this);
+  });
+  </script>      
+  
+</html>

@@ -263,6 +263,8 @@ router.post('/changePassword',isLoggedIn,async(req,res,next)=>{
     }
 });
 
+// 현호
+
 router.get('/gardenManage',isLoggedIn,async(req,res,next)=>{
     try{
         res.render('mypage/gardenManage');
@@ -270,6 +272,6 @@ router.get('/gardenManage',isLoggedIn,async(req,res,next)=>{
         console.error(err);
         next(err);
     }
-})
+});
 
 module.exports = router;

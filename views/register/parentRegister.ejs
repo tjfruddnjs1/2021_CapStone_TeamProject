@@ -202,7 +202,7 @@ label {
   #agree{
     width : 40px;
   }
-  .type{
+  .type, .type2{
     background-color: #80808014;
   }
   .navigation{
@@ -295,9 +295,9 @@ label {
             <label for="address">기관명<span class = "star">*</span></label>  <br><br>                     
             <a href='javascript:window.open("/register/address",
             "", "width=700, height=600, resizable = no, scrollbars = no");'id = "addressBtn">주소찾기</a>               
-            <input type="text" id="gardencode" name="gardencode" class = "type" hidden>
-            <input type="text" id="address" name="address" class = "type" placeholder = "예) 대구광역시 중구 달구벌대로447길 10" readonly>
-            <input type="text" id="gardenname" name="gardenname" placeholder = "예) 대구삼덕초등학교병설유치원"  class = "type" readonly>                          
+            <input type="text" id="gardencode" name="gardencode" class = "type2"  hidden>
+            <input type="text" id="address" name="address" class = "type2" placeholder = "예) 대구광역시 중구 달구벌대로447길 10" readonly>
+            <input type="text" id="gardenname" name="gardenname" placeholder = "예) 대구삼덕초등학교병설유치원"  class = "type2" readonly>                          
           </fieldset>       
           <fieldset>
             <label for="agree">약관 동의<span class = "star">*</span></label><br><br>
@@ -331,28 +331,39 @@ label {
         const address = document.getElementById('address');
         const gardenName = document.getElementById('gardenname');
         const childName = document.getElementById('childname');
+        const field = document.getElementsByClassName('field'); 
+        let gardentype;       
+
       submitBtn.addEventListener('click', (e) => {
           e.preventDefault();
           let flag = false;
           for(let i =0; i<type.length; i++){
             if(type[i].checked){                        
-               flag = true;               
+               flag = true;       
+               gardentype = type[i].value;                                
             }
-          }
+          }                    
           if(!flag){
               alert('유형을 선택해주세요');
               return false;
           }
           
+                             
           if(!childName.value){
             alert('원생이름을 입력해주세요');
             return false;
-          }
+          }          
 
-          if(!address.value || !gardenName.value){
+          if(!address.value || !gardenName.value){                       
             alert('주소를 입력해주세요');
             return false;
-          }                              
+          }         
+                    
+          if(!(gardenName.value.substr(-(gardentype.length), gardentype.length) == gardentype)){            
+            alert('가든이름과 유형항목의 종류가 다릅니다.');            
+            return false;
+          }
+          
 
           if(!agree.checked){
             alert('약관동의를 선택해주세요');
