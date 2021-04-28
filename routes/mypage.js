@@ -264,7 +264,7 @@ router.post('/changePassword',isLoggedIn,async(req,res,next)=>{
     }
 });
 
-//가든 관리
+
 router.get('/gardenManage',isLoggedIn,async(req,res,next)=>{
     try{
         res.render('mypage/gardenManage');
@@ -272,7 +272,7 @@ router.get('/gardenManage',isLoggedIn,async(req,res,next)=>{
         console.error(err);
         next(err);
     }
-})
+});
 
 router.get('/gardenApprove',isLoggedIn, async(req,res,next)=>{
     try{

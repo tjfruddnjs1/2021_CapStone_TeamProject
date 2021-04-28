@@ -12,7 +12,6 @@ const Review = require('./review');
 
 const Request = require('./request');
 
-
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
 const db = {};

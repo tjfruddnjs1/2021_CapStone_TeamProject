@@ -17,6 +17,8 @@ const RegisterRouter = require('./routes/register');
 
 const passportConfig = require('./passport');
 
+const gardenManageInfo = require('./routes/gardenManageInfo');
+
 const app = express();
 
 dotenv.config();
@@ -59,6 +61,8 @@ app.use('/mypage', mypageRouter);
 app.use('/kidstalk', kidstalkRouter);
 app.use('/inputdata', inputdata);
 app.use('/register', RegisterRouter);
+app.use('/mypage/gardenManage/info', gardenManageInfo);
+
 
 app.get('/', async(req, res, next) => {
   res.redirect('/home');

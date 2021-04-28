@@ -64,23 +64,23 @@
         padding : 7px;       
         background-color : #80808033;
         border-radius : 50%;
-        color : #22d029bf;        
+        color : #5172df;        
         
    }
    .icon{
-       color : #22d029bf;
+       color : #5172df;
    }
    .category{
        padding : 7px 5px;
        border-radius: 50%;
-       background-color : #22d029bf;
+       background-color : #5172df;
        color : white;
        font-size : 12px;       
    }
    .field{
-       border : 1px solid #22d029bf;
+       border : 1px solid #5172df;
        padding : 4px 5px;
-       color : #22d029bf;
+       color : #5172df;
        font-size : 12px;
        font-weight : bold;
    }
@@ -208,6 +208,9 @@
     #talk{
       margin-top : 2.5%;
     }
+    .daycare{    
+      background-color : #22d029bf;
+  }
 
   </style>
 
@@ -228,7 +231,11 @@
       <div class="box">          
           <div class="left">
               <div class="head">
-                <span class="category daycare"><%= info.gardentype%></span>
+                <% if(info.gardentype == '어린이집'){ %>
+                    <span class="category daycare"><%= info.gardentype %></span>
+                <% } else { %>
+                    <span class="category"><%= info.gardentype %></span>
+                <% } %>
                 <span class="field"><%= info.gardencategory %></span>
                 <span class="name"><%= info.gardenname %></span>        
                 <span><a href="<%= info.homepage %>" class = "icon" target = '_blank' id = "homepage"><i class="fas fa-home" id = "home"></i></a></span>
