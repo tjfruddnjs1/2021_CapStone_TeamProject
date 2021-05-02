@@ -161,6 +161,16 @@
     .container{
         padding : 50px 78.828px;
     }
+    #logos{
+        width : 20px;
+        margin-right : 3px;
+    }
+    .logos{
+        width : 25px;
+    }
+    #firstdivide{
+        margin-top : 2px;
+    }
   </style>      
 </head>
 
@@ -228,10 +238,11 @@
         <span class="right">
             <span><i class="fas fa-map-marker-alt"></i>지도</span>
             <span><i class="fas fa-home"></i>홈페이지</span>
-            <span><i class="fas fa-star"></i>평점</span>          
+            <span><i class="fas fa-star"></i>평점</span>    
+            <span><img  src="/images/navi.png" id = "logos">키즈가든 이용</span>      
         </span>                          
       </div>
-      <hr>
+      <hr id = "firstdivide">
       <div class="gardenlist">
         
     <% if (result.gardens){ %>   
@@ -246,7 +257,12 @@
                 <% } %>
                 
                 <span class="field"><%= info[i].gardencategory %></span>
-                <span class="name"><a href="<%= `/garden/${info[i].gardencode}` %>" class = "name"><%= info[i].gardenname %></a></span>            
+                <span class="name"><a href="<%= `/garden/${info[i].gardencode}` %>" class = "name"><%= info[i].gardenname %></a></span>   
+                <% approveGardens.forEach((approveGarden) => {%>         
+                    <% if(info[i].gardencode == approveGarden.gardencode) { %>
+                    <span class="logo"><img src="/images/navi.png" class = "logos"></span>
+                    <% } %>
+                <% }) %>
             </div>
             <div class="icons">                    
                 <span class = "location"><a href="" class = "icon "><i class="fas fa-map-marker-alt"><input type="hidden" value = "<%= info[i].latitude %>" class = "la"><input type="hidden" value = "<%= info[i].longitude %>" class = "lo"></i></a></span>
