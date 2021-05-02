@@ -210,8 +210,52 @@
     }
     .daycare{    
       background-color : #22d029bf;
-  }
-
+    }    
+    #gardenImage{
+        border : 1px solid #0000002b;
+        width : 50%;  
+        display : inline;        
+    }
+    .introHead{
+        margin-top : 30px;
+        font-size : 18px;
+        font-weight : bold;
+    }
+    .rightIntro{        
+        float : right;
+        width : 48%;        
+    }
+    .image{
+        display : inline;
+    }
+    .gardenName{
+        font-size : 20px;
+        font-weight: bold;
+        margin-bottom : 10px;
+    }
+    .gardenIntro{
+        font-size : 16px;
+        font-weight : bold;
+        margin-top : 30px;
+    }
+    table{
+        margin-top : 60px;
+        text-align: center;
+    }
+    th{
+        width : 20%;
+        font-weight: normal;
+        background-color: #5172df;
+    }
+    #myChart{
+        height : 100px;
+        border : 1px solid #4d474724;
+    }
+    .cctv{        
+        font-size : 14px;
+        font-weight: bold;      
+        margin-bottom : 10px;  
+    }
   </style>
 
   <body id="top">
@@ -263,7 +307,35 @@
           <div class="right">
             <div id="map"></div>
           </div>
-      </div>
+      </div>      
+      <% if(gardenInfo) {%>
+        <div class="introHead">소개</div>
+        <hr>
+        <div class="intro">          
+            <div class="image"><img src="<%= gardenInfo.gardenimage %>" id = "gardenImage" alt="">
+              
+              </div>
+            <div class="rightIntro">
+                <div class="gardenName"><%= info.gardenname %></div>
+                <br>
+                <span class="cctv">CCTV 비교</span><br>                                
+                <canvas id="myChart" style = "height : 100px; width : 500px;" onload = "barChart();"></canvas>
+                <table>
+                    <tr>
+                      <th id = "leader">원장명</th>
+                      <td><%= gardenInfo.representative %></td>
+                    </tr>
+                    
+                    <th>소개글</th>
+                    <td><%= gardenInfo.gardenintro %></td>
+                </table>
+              <div class="gardenIntro"> </div>          
+            </div>
+            
+        </div>
+        <hr>
+      <% }%>
+            
       <% for(let i=0;i<review.length;i++) {%>
         <div id="review" style="margin-top : 4%; height: 280px;">
             <div class="main_1 main_common" style="border-right : 1px solid #dee4f9; padding-right: 3%;" >
@@ -317,15 +389,65 @@
       <% } %>
       <a id="btn" href="/garden/<%= info.gardencode %>/review" style="float:right; width: 20%; margin-top : 5%;" class="btn btn-outline-primary">리뷰 작성</a>
       
+
     </main>    
     </div>    
     <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
     <%- include('../partials/top') %>   
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28f2f70ef1f0ab3e87563b70d829d265"></script>
     <script src="/js/jquery.star-rating-svg.js"></script>
-    <script>
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const barChart = () => {
+        let gardenName = `<%= info.gardenname %>`;
+        let cctvNum = `<%= info.cctvnum %>`;
+        let cctvAverage = `<%= cctvAverage %>`;
+        const labels = [gardenName, "지역 평균"];
+    const data = {
+  labels: labels,
+  datasets: [{
+    axis: 'y',    
+    data: [cctvNum, cctvAverage],
+    label: [gardenName, '평균'],
+    fill: false,   
+    backgroundColor: [
+      'rgba(81,114,223,1)',
+      'rgba(94, 95, 98, 0.22)',      
+    ],
+    borderColor: [
+      'rgba(81,114,223,1)',      
+      'rgba(94, 95, 98, 0.22)',      
+    ],
+    borderWidth: 3,
+  }]
+};
 
+    var options = { indexAxis: 'y', };
+    var ctx = document.querySelector('#myChart').getContext('2d');
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+  data,
+  options: {
+    indexAxis: 'y',                
+    plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            }
+    },
+    
+  }
+    })    
+    }
+    const canvas = document.querySelector('#myChart');
+    if(canvas){
+        barChart();
+    }
+    
+    
     let la = `<%=info.latitude %>`;
     let lo = `<%=info.longitude %>`;
       var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

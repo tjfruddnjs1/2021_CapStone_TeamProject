@@ -10,6 +10,7 @@ const SggCode = require('../models/sggcode');
 const SidoCode = require('../models/sidocode');
 const User = require('../models/user');
 const Review = require('../models/review');
+const Request = require('../models/request');
 
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
@@ -113,6 +114,33 @@ const paging = async (page, sggCode = null, type = null, name = null) => {
         return result;
 }
 
+const cctvStatistic = async (gardenCode) => {
+  let cctvNum = 0;
+  let cctvAverage = 0;
+  const gardenSggCode = await Garden.findOne({
+    attributes : ['sggcode'],
+    where : {
+      gardencode : gardenCode
+    }
+  });
+
+  const gardens = await Garden.findAll({
+    attributes : ['cctvnum'],
+    where : {
+      sggCode : gardenSggCode.sggcode,
+    }
+  });
+
+  gardens.forEach((garden) => {
+    if(garden.cctvnum){
+      cctvNum += parseInt(garden.cctvnum);
+    }    
+  });
+  cctvAverage = (cctvNum / gardens.length).toFixed(1);
+
+  return cctvAverage;
+}
+
 router.get('/sido', async(req, res) => {
   try{        
     const {code} = req.query;    
@@ -153,12 +181,7 @@ router.get('/index', async (req,res)=>{
     if(type && name){      
       console.log(name);
       result = await paging(page, null , type, name);      
-      console.log(result);
-      // if(result){
-      //   res.render('garden/gardenlist', {total : result.gardens.count , info : result.gardens.rows, page : result, sidos : sidos});
-      // }else{
-      //   res.render('garden/gardenlist', {total : 0, sidos : sidos});
-      // }   
+      console.log(result);     
       
     }else if(sido && !sgg){
       const sggCode = await SggCode.findAll({        
@@ -184,7 +207,14 @@ router.get('/index', async (req,res)=>{
     }else{                  
       result = await paging(page);   
     }     
-    res.render('garden/gardenlist', {total : result.gardens.count , info : result.gardens.rows, page : result, sidos : sidos});
+    const approveGardens = await Request.findAll({
+      attributes : ['gardencode'],
+      where : {        
+        isapprove : 1,
+      }
+    });    
+
+    res.render('garden/gardenlist', {total : result.gardens.count , info : result.gardens.rows, page : result, sidos : sidos, approveGardens : approveGardens});
   }catch(err){
     console.error(err);
     next(err);
@@ -194,7 +224,8 @@ router.get('/index', async (req,res)=>{
 router.get('/:gardenCode', async(req, res) => {
   try{        
     const {gardenCode} = req.params;   
-    
+
+    const cctvAverage = await cctvStatistic(gardenCode);
     const kinderInfo = await Garden.findOne({
         where : {
           gardencode : gardenCode,
@@ -207,9 +238,13 @@ router.get('/:gardenCode', async(req, res) => {
       }
     });
 
-    console.log(review);
-          
-    res.render('garden/gardenView', {info : kinderInfo, review : review});    
+    const gardenInfo = await Request.findOne({
+      where : {
+        isapprove :  1,
+        gardencode : gardenCode,
+      }
+    })        
+    res.render('garden/gardenView', {info : kinderInfo, review : review, gardenInfo : gardenInfo, cctvAverage : cctvAverage});    
   }catch(err){
     console.error(err);
   }
