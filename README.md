@@ -116,6 +116,7 @@
 리뷰페이지 | checkbox, database CRUD 중 Create, Read | `구현 완료`
 평점(별점) | Star Rating Plugin : Raty, JQuery 통한 데이터 요청/전달 | `구현 중`
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
+**리뷰페이지** | 학부모 등록이 완료된 이용자만 리뷰 작성 가능 | `구현 완료`
 `추가 개선사항 1` | `추가 시 업데이트` | `구현 중`
 
 - 나의 유치원/어린이집 : 현호
