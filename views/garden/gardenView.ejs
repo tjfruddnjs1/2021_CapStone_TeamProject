@@ -309,15 +309,11 @@
           </div>
       </div>      
       <% if(gardenInfo) {%>
-        <div class="introHead">소개</div>
-        <hr>
-        <div class="intro">          
-            <div class="image"><img src="<%= gardenInfo.gardenimage %>" id = "gardenImage" alt="">
-              
-              </div>
-            <div class="rightIntro">
-                <div class="gardenName"><%= info.gardenname %></div>
-                <br>
+        <div class="introHead" style="margin-bottom: 3%;">가든 소개</div>
+        
+        <div class="intro" style="display : inline-block;">          
+            
+            <div class="rightIntro" style="display: block;" >
                 <span class="cctv">CCTV 비교</span><br>                                
                 <canvas id="myChart" style = "height : 100px; width : 500px;" onload = "barChart();"></canvas>
                 <table>
@@ -329,12 +325,15 @@
                     <th>소개글</th>
                     <td><%= gardenInfo.gardenintro %></td>
                 </table>
-              <div class="gardenIntro"> </div>          
+                      
             </div>
+            <div class="image"><img src="<%= gardenInfo.gardenimage %>" id = "gardenImage" alt=""></div>
             
         </div>
         <hr>
       <% }%>
+
+      <div class="introHead" style="margin-bottom: 3%;">리뷰</div>
             
       <% for(let i=0;i<review.length;i++) {%>
         <div id="review" style="margin-top : 4%; height: 280px;">

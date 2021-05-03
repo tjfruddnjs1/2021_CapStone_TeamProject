@@ -3,6 +3,8 @@ const router = express.Router();
 const Garden = require('../models/garden');
 const SggCode = require('../models/sggcode');
 const SidoCode = require('../models/sidocode');
+const Request = require('../models/request');
+const Review = require('../models/review');
 
 const sequelize = require('sequelize');
 const Op = sequelize.Op;
@@ -105,8 +107,29 @@ router.get('/', async (req,res)=>{
   try{  
   const childCountResult = await categoryCount('유치원');  
   const dayCareCountResult = await categoryCount('어린이집');  
-  const sidos = await allSido();    
-  res.render('home/index', {sidos : sidos, childCount : childCountResult, dayCareCount : dayCareCountResult});
+  const sidos = await allSido();
+
+  const approveGarden = await Request.findAll({
+    include : [
+      {
+        model : Garden,
+        required : true,
+      }
+    ],
+    where:{
+      requesttype : 'garden',
+      isApprove : true
+    },
+    limit : 4
+  });
+
+  console.log(approveGarden);
+
+  const star = await Review.findAll({});
+
+  console.log(star);
+
+  res.render('home/index', {sidos : sidos, childCount : childCountResult, dayCareCount : dayCareCountResult, approveGarden : approveGarden, star:star});
   }catch(err){
     console.error(err);
     next(err);

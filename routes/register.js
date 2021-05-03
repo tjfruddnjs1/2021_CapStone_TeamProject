@@ -365,16 +365,6 @@ router.post('/parent',isLoggedIn,  async (req,res)=>{
   }
 });
 
-// router.post('/garden',isLoggedIn,  async (req,res)=>{
-//   try{  
-      
-//   res.render('register/complete');
-//   }catch(err){
-//     console.error(err);
-//     next(err);
-//   }
-// });
-
 router.get('/agree',isLoggedIn, async (req,res)=>{
   try{    
     res.render('register/agree');

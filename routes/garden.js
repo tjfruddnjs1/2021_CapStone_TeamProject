@@ -252,15 +252,30 @@ router.get('/:gardenCode', async(req, res) => {
 
 router.get('/:gardenCode/review', isLoggedIn, async(req,res)=>{
   try{        
-    const {gardenCode} = req.params; 
+    const {gardenCode} = req.params;
+    const isApprove = await Request.findOne({
+      where:{
+        gardencode : gardenCode,
+        isapprove : true,
+        userId : req.user.id,
+      }
+    })
     
-    const kinderInfo = await Garden.findOne({
+    if(isApprove){
+      const kinderInfo = await Garden.findOne({
         where : {
           gardencode : gardenCode,
         }
-    });
+      });
           
-    res.render('garden/review', {info : kinderInfo});    
+      res.render('garden/review', {info : kinderInfo});
+    }else{
+      res.send(
+        "<script>alert('리뷰 작성을 위해서는 학부모 등록을 해야 합니다.'); window.location='/register'</script>"
+    );
+    }
+    
+        
   }catch(err){
     console.error(err);
   }
@@ -273,27 +288,11 @@ router.post('/:gardenCode/review', isLoggedIn, async(req,res,next)=>{
       const totalStar = (parseInt(reJoin) + parseInt(isCommunicate) + parseInt(isActive) + parseInt(isSafe))/4;
       const {gardenCode} = req.params;
 
+      console.log(attendTime);
+
       console.log(attendTime == "direct");
 
-      if(attendTime != "dircet"){
-          await Review.create({
-              teacherName : teacherName,
-              attendTime : attendTimeDirect,
-              reJoin : parseInt(reJoin),
-              isCommunicate : parseInt(isCommunicate),
-              isActive : parseInt(isActive),
-              isSafe : parseInt(isSafe),
-              advantage : advantage,
-              totalStar : totalStar,
-              disAdvantage : disAdvantage,
-              lineReview : lineReview,
-              userNickname : req.user.nickname,
-              gardencode : gardenCode,
-          });
-          res.send(
-              "<script>alert('리뷰가 작성되었습니다.zz'); window.location='/garden';</script>"
-          );
-      }else{
+      if(attendTime != "direct"){
           await Review.create({
               teacherName : teacherName,
               attendTime : attendTime,
@@ -306,11 +305,26 @@ router.post('/:gardenCode/review', isLoggedIn, async(req,res,next)=>{
               disAdvantage : disAdvantage,
               lineReview : lineReview,
               userNickname : req.user.nickname,
+              gardencode : gardenCode,
+          });
+
+          res.redirect('/garden/'+gardenCode);
+      }else{
+          await Review.create({
+              teacherName : teacherName,
+              attendTime : attendTimeDirect,
+              reJoin : parseInt(reJoin),
+              isCommunicate : parseInt(isCommunicate),
+              isActive : parseInt(isActive),
+              isSafe : parseInt(isSafe),
+              advantage : advantage,
+              totalStar : totalStar,
+              disAdvantage : disAdvantage,
+              lineReview : lineReview,
+              userNickname : req.user.nickname,
               gardencode : gardenCode
           });
-          res.send(
-              "<script>alert('리뷰가 작성되었습니다.'); window.location='/garden';</script>"
-          );
+          res.redirect('/garden/'+gardenCode);
       }   
   }catch(err){
       console.error(err);

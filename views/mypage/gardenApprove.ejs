@@ -88,6 +88,29 @@
       width : 20%;
     }
 
+    select{
+       display : inline;              
+       padding : 10px 0;
+       outline : none;
+       width : 300px;
+       border : none;
+       border-bottom : 1px solid #80808033;
+       margin-right : 20px;
+       cursor : pointer;
+       font-size : 20px;
+       font-weight : bold;
+   }
+   
+  .container{
+    padding : 50px;
+    min-width:  70%;
+    background-color: white;
+  }
+
+  .row3{       
+    background-color: #f8f8f8;    
+  }
+
   </style>
 
   <body id="top">
@@ -118,7 +141,7 @@
         <!--본 문-->
         
         <div class="content three_quarter">
-          <select style="width : 30%;" name="gardencode" class="custom-select" onchange="this.parentElement.parentElement.submit()">
+          <select style="width : 30%;" name="gardencode"  onchange="this.parentElement.parentElement.submit()">
             <option value="" selected disabled>가든을 선택해주세요.</option>
             <% posts.forEach(function(post) { %>
                 <% if(post.isapprove == true && post.requesttype == 'garden' && post.userId == user.id) { %>

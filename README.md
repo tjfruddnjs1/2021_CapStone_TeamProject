@@ -77,23 +77,24 @@
 - header navigation 상태
   <br>
   비로그인 상태
-  <img width=100% src="https://user-images.githubusercontent.com/41010744/113551575-da001580-962f-11eb-8c17-574471bc8bec.png">
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/116937516-51af7780-aca4-11eb-94ea-706bd617e5c0.png">
   
   로그인된 상태
-  <img width=100% src="https://user-images.githubusercontent.com/41010744/113551618-ec7a4f00-962f-11eb-8202-0424a84f1454.png">
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/116937561-61c75700-aca4-11eb-8f77-22e12216dd7a.png">
   <br>
 
   관리자 로그인 상태
-  <img width=100% src="https://user-images.githubusercontent.com/41010744/113551693-05830000-9630-11eb-938a-7afc2d77e70d.png">
+  <img width=100% src="https://user-images.githubusercontent.com/41010744/116937580-6be95580-aca4-11eb-9507-425d736fe7c9.png">
   <br>
 
-- 메인 페이지 : 현호
+- 메인 페이지 : 현호 & 경원
 
 기능명 | 주요 키워드 | 구현 상태
 -------| ------- | -------
 도넛 차트 | chart.js, ajax | `구현 완료`
 통계 기능 | ajax, COUNT(*) | `구현 완료`
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
+등록된 유치원 출력 | 승인 완료한 가든 정보/사진/평점 출력 | `구현 완료`
 `추가 개선사항 1` | `추가 시 업데이트` | `구현 중`
 
 - 유치원/어린이집 검색 : 현호
@@ -184,6 +185,9 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 > 메인페이지
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/113551843-4aa73200-9630-11eb-887e-4266ae520c7d.png">
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/116937717-9f2be480-aca4-11eb-85ea-b46034d7a891.png">
+<br>
 
 > 유치원/어린이집 검색
 <br>
@@ -338,3 +342,8 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 기능 분리 > <br>
 현호 : 키즈 가든 관리 > select 박스 > 1. request 테이블 정보 + 사진/소개글 [수정 버튼] <br>
 경원 : 키즈 가든 관리 > select 박스 > 2. 학부모/원생 관리 , 3.  리뷰를 작성할수 있는 권한이 있는지 확인 필요 <br>		
+
+> `2021-05-01` : 가든 소개글/사진 등록 후 검색창에서 볼수있게하고 메인페이지에 등록된 가든 정보/평점/사진 출력<br>
+기능 분리 > <br>
+현호 : 검색창에서 가든 소개글/사진 확인<br>
+경원 : 메인페이지에서 가든 정보 및 평점 출력 <br>

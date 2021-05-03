@@ -264,16 +264,6 @@ router.post('/changePassword',isLoggedIn,async(req,res,next)=>{
     }
 });
 
-
-router.get('/gardenManage',isLoggedIn,async(req,res,next)=>{
-    try{
-        res.render('mypage/gardenManage');
-    }catch(err){
-        console.error(err);
-        next(err);
-    }
-});
-
 router.get('/gardenApprove',isLoggedIn, async(req,res,next)=>{
     try{
         const isApprove = await Request.findAndCountAll({where : {
