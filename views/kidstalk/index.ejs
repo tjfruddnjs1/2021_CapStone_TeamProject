@@ -173,8 +173,8 @@
         <div class="form-row">
 
           <div class="form-group col-3">
-            <label>게시글 수</label>
-            <select style="width:80%" name="limit" class="custom-select" onchange="this.parentElement.parentElement.parentElement.submit()">
+            <label style="display: block;">게시글 수</label>
+            <select style="width:80%; margin-top: 2%;" name="limit" class="custom-select" onchange="this.parentElement.parentElement.parentElement.submit()">
               <option value="5" <%= limit==5?'selected':'' %>>5 개</option>
               <option value="10" <%= limit==10?'selected':'' %>>10 개</option>
               <option value="20" <%= limit==20?'selected':'' %>>20 개</option>
