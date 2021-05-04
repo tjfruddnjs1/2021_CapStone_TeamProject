@@ -209,7 +209,8 @@ router.get('/index', async (req,res)=>{
     }     
     const approveGardens = await Request.findAll({
       attributes : ['gardencode'],
-      where : {        
+      where : {       
+        requesttype : 'garden' ,
         isapprove : 1,
       }
     });    
