@@ -237,28 +237,33 @@
         font-size : 16px;
         font-weight : bold;
         margin-top : 30px;
-    }
-    table{
-        margin-top : 60px;
-        text-align: center;
-    }
-    th{
-        width : 20%;
-        font-weight: normal;
-        background-color: #5172df;
-    }
+    }    
     #myChart{
+        margin-top : 20px;  
         height : 100px;
         border : 1px solid #4d474724;
     }
     .cctv{        
-        font-size : 14px;
+        font-size : 16px;
         font-weight: bold;      
-        margin-bottom : 10px;  
+        
     }
 
     .intro{
         width : 100%;
+    }
+    #leader{                
+        margin-top : 30px;
+        font-weight : bold;
+        font-size : 16px;        
+    }
+    #ledger{
+        font-weight: normal;
+        font-size : 12px;
+        margin-left : 5px;
+    }
+    #gardenIntro{
+        margin-top : 10px;
     }
   </style>
 
@@ -301,7 +306,7 @@
                         <li class = "sub"><i><span class = "info">CCTV 개수</span></i><span id = "no">미공개</span></li>                   
                     <%  }%>
                     
-                    <li class = "sub"><i><span class = "info">홈페이지</span></i><span class="ovrf"><a href="http://cafe.daum.net/teresakids" class="underline" target="_blank">http://cafe.daum.net/teresakids</a></span></li>
+                    <li class = "sub"><i><span class = "info">홈페이지</span></i><span class="ovrf"><a href="<%= info.homepage %>" class="underline" target="_blank"><%= info.homepage %></a></span></li>
                     <li class = "sub"><i><span class = "info">평점</span></i><span>10</span></li>                   
                   </ul>
                   <div class="cont bus"><i class="fas fa-bus">통학차량</i><span class = "info"><%= info.isbus %></span></div>
@@ -319,16 +324,9 @@
             
             <div class="rightIntro" style="display: block;" >
                 <span class="cctv">CCTV 비교</span><br>                                
-                <canvas id="myChart" style = "height : 100px; width : 500px;" onload = "barChart();"></canvas>
-                <table>
-                    <tr>
-                      <th id = "leader">원장명</th>
-                      <td><%= gardenInfo.representative %></td>
-                    </tr>
-                    
-                    <th>소개글</th>
-                    <td><%= gardenInfo.gardenintro %></td>
-                </table>
+                <canvas id="myChart" style = "height : 100px; width : 500px;" onload = "barChart();"></canvas>                
+                <div id="leader"><%= gardenInfo.representative %><span id = "ledger">원장</span></div>
+                <div id="gardenIntro"><%= gardenInfo.gardenintro %></div>                
                       
             </div>
             <div class="image"><img src="<%= gardenInfo.gardenimage %>" id = "gardenImage" alt=""></div>
@@ -433,6 +431,7 @@
   data,
   options: {
     indexAxis: 'y',                
+    animation : false,
     plugins: {
             legend: {
                 display: false,
