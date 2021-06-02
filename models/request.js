@@ -60,5 +60,6 @@ module.exports = class Request extends Sequelize.Model {
   static associate(db) {
     db.Request.belongsTo(db.Garden, {foreignKey : 'gardencode', source : 'gardencode'});
     db.Request.belongsTo(db.User, {foreignKey : 'userId', targetKey : 'id'});
+    db.Request.hasOne(db.Domain, {foreignKey : 'gardencode', source : 'gardencode'});    
   }
 };
