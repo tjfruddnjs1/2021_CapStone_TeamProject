@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+
+  <style>    
+
+    #talk{
+      margin-top : 2.5%;
+    }           
+    .container{
+        padding : 50px 78.828px;
+    }
+    .subhead {
+  font-family: sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#updatemento {
+  width: 80%;  
+  text-align: left;
+  color: #6D6D72;
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="email"],
+#gender,
+textarea {
+  border: 1px solid #8080808a;  
+  padding: 12px 5px;  
+}
+
+#updatemento input[type="submit"] {
+  cursor: pointer;
+}
+
+.container {
+  padding: 40px 0;
+}
+
+#footer {
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+  text-align: center;
+}
+
+
+label {
+  font-size : 16px;
+  transition: 0.1s;
+  font-weight: bold;  
+  margin-top : 20px;
+}
+
+  .nav {                  
+    width : 50%;      
+    margin : 0 auto;          
+  }      
+  #margin{
+    margin-top : 20px;
+  }    
+  .item{
+    text-align: center;
+  }
+  .row3{       
+    background-color: #f8f8f8;    
+  }
+        
+  .navigation{
+    text-align: center;
+    margin-bottom : 30px;    
+  }
+  .nav{
+    line-height: 130px;
+    display : inline-block;
+    width : 130px;
+    height : 130px;
+    border-radius: 50%;
+    background-color : #8080808c;
+    border : 2px solid gray;    
+    margin : 0 70px;
+    font-weight: bold;
+  }
+   
+  .mul{
+    margin-top : 0;
+  }
+   
+  select{
+       display : inline;              
+       padding : 10px 0;
+       outline : none;
+       width : 300px;
+       border : none;
+       border-bottom : 1px solid #80808033;
+       margin-right : 20px;
+       cursor : pointer;
+       font-size : 20px;
+       font-weight : bold;
+   }
+   .ip{
+    display : inline-block;
+    width : 20%;
+    text-align: center;
+   }
+   .ip::placeholder, .port::placeholder{
+       color : #80808073;
+       font-weight: normal;
+   }
+   input[type="submit"]{
+       margin-top : 30px;
+       width : 82.7%;
+       background-color : #5172DF;
+       color : #fff;
+   }
+   .descript{
+       margin-top : 30px;
+   }
+   .images{
+       margin-top : 20px;
+       width : 80%;
+   }   
+   .examples{       
+       color : gray;
+   }
+   .example{
+        margin : 15px 0;
+   }
+   .head{
+       font-weight: bold;
+       font-size : 16px;
+       margin : 15px 0;
+   }
+   .right{
+       margin-left : 230px;
+   }
+   .left{
+       margin-left : 150px;
+   }
+   .image{
+       display : inline-block;
+       width : 48%;       
+       height : 300px;
+       text-align: center;
+   }
+   .sample{
+    width : 100%;       
+       height : 300px;
+   }
+   .port{
+       text-align: center;
+   }
+  </style>
+
+  <body id="top">
+    <!-- Top Background Image Wrapper -->
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    >
+      <%- include('../partials/nav') %>
+
+      <div id="breadcrumb" class="hoc clear">
+        <h6 class="heading" style="font-family: NotoSansKR-Regular;">CCTV 연결</h6>
+        <br />
+        <ul>
+          <li><a href="/index">메인</a></li>
+          <li><a href="#">마이 페이지</a></li>
+          <li><a href="/mypage/connect">cctv 연결</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Background Image Wrapper -->
+    <div class="wrapper row3">
+      <main class="hoc container clear">
+        <!--네비게이션-->
+        <%- include('manage_nav') %>
+
+        <!--본 문-->
+        <div class="content three_quarter">
+          
+          <div class="connect">
+            <form action="/mypage/connect" method="post" id = "gardenForm" >              
+              <select name="gardenCode" id="select" class = "">
+                <% gardens.forEach((garden) => { %>                
+                  <option value="<%= garden.gardencode %>"><%= garden.Garden.gardenname %></option>
+                <% }) %>
+              </select>
+                <fieldset>
+                    <label for="ip">IP<span class = "star">*</span></label>
+                    <br>
+                    <% if(domain)  {%>
+                    <input type="text" name="ip1" value = "<%= domain.ip[0] ?? '' %>" class = "ip" maxlength = '3' placeholder = "255"> .
+                    <input type="text" name="ip2" value = "<%= domain.ip[1] ?? '' %>" class = "ip" maxlength = '3' placeholder = "255"> .
+                    <input type="text" name="ip3" value = "<%= domain.ip[2] ?? '' %>" class = "ip" maxlength = '3' placeholder = "255"> .
+                    <input type="text" name="ip4" value = "<%= domain.ip[2] ?? '' %>" class = "ip" maxlength = '3' placeholder = "0">
+
+                  </fieldset>                        
+                  <fieldset>
+                    <label for="port">포트번호<span class = "star">*</span></label>
+                    <input type="text" class="port" name="port" value = "<%= domain.port ?? '' %>" placeholder = "80">
+                  </fieldset> 
+                  <% } else {%>
+                    <input type="text" name="ip1" value = "" class = "ip" maxlength = '3' placeholder = "255"> .
+                    <input type="text" name="ip2" value = "" class = "ip" maxlength = '3' placeholder = "255"> .
+                    <input type="text" name="ip3" value = "" class = "ip" maxlength = '3' placeholder = "255"> .
+                    <input type="text" name="ip4" value = "" class = "ip" maxlength = '3' placeholder = "0">                        
+                  </fieldset>                        
+                  <fieldset>
+                    <label for="port">포트번호<span class = "star">*</span></label>
+                    <input type="text" class="port" name="port" value = "" placeholder = "80">
+                  </fieldset> 
+                  <% } %>
+                  <div class="descript"><a href="" id = "port">IP나 포트 번호를 모르시나요?</a></div>
+                  <div class="description hidden">
+                    <div class="head">(1) IP 찾기</div>
+                    <div class = "example"> - CCTV의 IP를 알기 위해서는 해당 CCTV가 연결된 기기(DVR)의 IP를 알아야 합니다.</div>
+                    <span class = "examples">HikVision 예시</span>
+                    <div class="images">
+                        <div class="image">
+                            <img src="/images/description/cctv-1.png" alt="" class = "sample">
+                            <div class="contents">1. 메뉴 -> 설정 -> 버튼 클릭</div>
+                        </div>
+                        <div class="image">
+                            <img src="/images/description/cctv-2.png" alt="" class = "sample">
+                            <div class="contents">2. 네트워크 탭 -> 일반 -> TCP/IP -> IPv4주소</div>
+                        </div>                                                     
+                    </div>
+                    <div class="head">(2) 포트 번호 알기</div>
+                    <div class = "example"> - CCTV의 Port 번호를 알기 위해서는 해당 CCTV가 연결된 기기(DVR)의 Port 번호를 알아야 합니다.</div>
+                    <span class = "examples">HikVision 예시</span>                    
+                    <div class="images">
+                        <div class="image">
+                            <img src="/images/description/cctv-1.png" alt="" class = "sample">
+                            <div class="contents">1. 메뉴 -> 설정 -> 버튼 클릭</div>
+                        </div>
+                        <div class="image">
+                            <img src="/images/description/cctv-3.png" alt="" class = "sample">
+                            <div class="contents">2. 네트워크 탭 -> 일반 -> 추가 구성 -> HTTP 포트</div>
+                        </div>                                                     
+                    </div>
+
+                  </div>
+                <input type="submit" value="등록하기" id = "ip_submit">
+          </div>           
+                    
+        </div>
+        <div class="clear"></div>
+      </main>
+    </div>
+    <%- include('../partials/foot') %> <%- include('../partials/copyright') %>
+    <%- include('../partials/top') %>
+  </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+      const ips = document.getElementsByClassName('ip');
+      
+      for(let i =0; i < ips.length; i++){
+          
+          ips[i].addEventListener('input', (e) => {                          
+            if(ips[i].value.length ==3) {
+              if(i === ips.length - 1){                
+                if(!checkNum(ips[i].value)){
+                    alert('숫자만 입력 가능합니다');
+                    ips[i].value = null;
+                }                
+              }else{
+                if(checkNum(ips[i].value)){
+                  ips[i+1].focus();
+                }else{
+                    alert('숫자만 입력 가능합니다');
+                    ips[i].value = null;
+                }
+              }                            
+            }
+          })
+          
+      }
+      function checkNum (str){
+        if(str.match(/[^0-9]/gm)){
+            return false;
+        }
+        return true;
+      }
+
+      const port = document.getElementById('port');
+      const descriptTag = document.querySelector('.description');
+      const inputPort = document.querySelector('.port');
+      port.addEventListener('click', (e) => {
+          e.preventDefault();
+          descriptTag.classList.toggle('hidden');
+      });
+      
+      const submitBtn = document.getElementById('ip_submit');
+      submitBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          let flag = true;
+          for(let i  = 0; i < ips.length; i++){
+            if(!ips[i].value) {
+                flag = false;
+                break;
+            }
+          }
+          if(!flag){
+              alert('ip를 입력해주세요');
+              return;
+          }
+
+          if(!inputPort.value){
+            alert('포트 번호를 입력해주세요');
+            return;
+          }
+          
+          gardenForm.submit();          
+      })
+      const select = document.querySelector('#select');
+
+      select.addEventListener('change', async (e) => {        
+        const result = await axios.post(`/mypage/connect/${e.target.value}`);        
+        if(result.data){
+          result.data.ip.forEach((element, index) => {
+            ips[index].value = element;
+          })
+          inputPort.value = result.data.port;
+          
+        }else{
+          for(let i =0; i < ips.length; i++){
+            ips[i].value = '';
+          }
+          inputPort.value = '';
+        }
+        
+      })   
+  </script>
+  
+</html>

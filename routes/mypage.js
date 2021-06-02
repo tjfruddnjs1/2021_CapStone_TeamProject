@@ -16,6 +16,7 @@ const User = require('../models/user');
 const Garden = require('../models/garden');
 const Drop = require('../models/drop');
 const Request = require('../models/request');
+const Domain = require('../models/domain');
 
 //session 유지를 위한 > passport module
 router.use((req,res,next)=>{
@@ -46,6 +47,83 @@ const upload = multer({
     limits : {fileSize : 5 * 1024 * 1024},
 });
 
+const alert = (comment, back = false, redirect = null) => {
+    let alert = `<script>alert("${comment}")</script>`;
+    if(back){
+      alert = `<script>alert("${comment}"); history.back()</script>`;
+    }
+    if(redirect){
+      alert = `<script>alert("${comment}"); location.href = "${redirect}"</script>`;
+    }
+    
+    return alert;
+  }
+
+router.get('/connect', isLoggedIn, async (req,res,next)=>{
+    try{
+        const userId = req.user.id;
+        const gardenApprove = await Request.findAll({ // 이름           
+            include : [
+                {model : Garden, attributes : ['gardenname']},                                           
+            ],
+            where : {
+                userId : userId,
+                isapprove : 1,
+                requesttype : 'garden',
+            }
+        }); 
+        const domain = await Domain.findOne({
+            where : {gardencode : gardenApprove[0].gardencode}
+        });
+        if(domain){
+            let ip = domain.ip.split('.');        
+            domain.ip = ip;
+        }        
+        res.render('mypage/connect', {gardens : gardenApprove, domain : domain});
+        
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+});
+
+router.post('/connect', isLoggedIn, async (req,res,next) => {
+    try{
+        const {ip1, ip2, ip3, ip4, port, gardenCode} = req.body;
+        const ip = ip1 + '.' + ip2 + '.' + ip3 + '.' + ip4;
+        const findGarden = await Domain.findOne({
+            where  : {gardencode : gardenCode},
+        });
+        if(findGarden){
+            await Domain.update({
+                ip : ip,
+                port : port,                            
+            }, {where : {gardencode : gardenCode}});
+            res.send(alert('수정 되었습니다.', true));            
+        }else{
+            const result = await Domain.create({
+                ip : ip,
+                port : port,
+                gardencode : gardenCode,
+            });
+            res.send(alert('등록 되었습니다.', true));            
+        }          
+    }catch(err){
+        console.error(err);
+        next(err);
+    }   
+})
+
+
+
+// router.get('/post',isLoggedIn,(req,res,next)=>{
+//     try{
+//         res.render('mypage/connect');
+//     }catch(err){
+//         console.error(err);
+//         next(err);
+//     }
+// });
 
 //계정 설정 page get/post
 router.get('/account',isLoggedIn,(req,res,next)=>{
@@ -162,7 +240,7 @@ router.post('/duplicated', isLoggedIn, upload.single('upload'), async(req,res,ne
         )
       }
 
-      console.log(exUser);
+      
       
     }catch(error){
       console.error(error);
@@ -282,7 +360,7 @@ router.get('/gardenApprove',isLoggedIn, async(req,res,next)=>{
             let offset = (page-1)*limit;
             let count = isApprove.count;
             let gardencode = req.query.gardencode;
-            console.log(gardencode);
+            // console.log(gardencode);
             //count.count 로 사용 > 전체 개시물 수
 
             let maxPage = Math.ceil(count/limit);
@@ -412,5 +490,24 @@ router.route('/gardenApprove/:id')
           next(err);
         }
       })    
+
+      router.post('/connect/:gardenCode', isLoggedIn, async (req,res,next) => {
+        try{
+            const gardenCode = req.params.gardenCode;            
+            const domain = await Domain.findOne({
+                where  : {gardencode : gardenCode},
+            });                       
+            if(domain){
+                const ip = domain.ip.split('.');
+                domain.ip = ip;
+                console.log(domain);
+            }
+                        
+            res.send(domain);                       
+        }catch(err){
+            console.error(err);
+            next(err);
+        }   
+    })
 
 module.exports = router;
