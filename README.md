@@ -181,6 +181,15 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 유치원 측 학부모/원생 계정 관리 | (관리) 관리자 -> 유치원/어린이집 -> 학부모/원생 | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
+- 마이페이지 / CCTV 연결 : 현호
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+IP 및 port 번호 등록 | CREATE, SELECT, UPDATE | `구현 완료`
+설명 페이지 | UI, javascript  | `구현 완료`
+어린이집별 IP 출력 | ajax  | `구현 완료`
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
 ## 개발 결과
 
 > 메인페이지
@@ -254,7 +263,15 @@ local 회원가입 | passport-local, database CRUD 중 Create, 비밀번호(hash
 <img src="https://user-images.githubusercontent.com/41010744/113553401-af638c00-9632-11eb-819a-84fbb34454a7.png">
 <br>
 <img src="https://user-images.githubusercontent.com/41010744/113553508-d9b54980-9632-11eb-8238-47ae4a11e690.png">
+<br>
 
+> 마이페이지 (IP 및 port 등록, 설명서)
+<br>
+<img src="https://user-images.githubusercontent.com/57825856/120492133-c33e2b00-c3f4-11eb-8845-53a2e55aabc1.png">
+<br>
+
+<img style = "width : 100% " src="https://user-images.githubusercontent.com/57825856/120494165-8d9a4180-c3f6-11eb-836f-5a48bfdf2016.png">
+<br>
 ## 데이터베이스 ERD
 
 - `연도-월-일` : ERD 상태 
