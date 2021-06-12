@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>  
+  
   <title>Document</title>
   <style>
     video{
@@ -54,8 +55,52 @@
   display: inline-block;
   position: relative;
   width: 18px;
-  height: 19px;
+  height: 19px;  
 }
+.contain{
+      width : 270px;
+    }
+    .clock{
+      border-radius : 5px;
+      padding : 5px 10px;
+      border : 1px solid black;
+      width : 100%;
+    }
+    .date{
+      text-align : center;
+    }
+    .time{
+      display : inline-block;
+      padding : 5px 15px;      
+      border : 1px solid black;
+      font-size : 20px;
+    }
+    .fas{
+      padding : 5px 10px;
+      font-size : 20px;
+      cursor : pointer;
+    }
+    .colon{
+      margin : 0 15px;
+      font-weight : bold;
+      margin-bottom : 15px;
+    }
+    .middle{
+      margin : 0 50px;
+    }
+    .clockHead{
+      font-weight : bold;
+      font-size : 20px;
+    }
+    .button{
+      text-align :center;
+
+    }
+    button{
+      background-color : #5172DF;
+      color : #fff;
+      border : 1px solid white;
+    } 
 
   </style>
 </head>
@@ -83,9 +128,12 @@
           <div class="sidebar one_quarter first">
               <div id = "head">카메라</div>
             <nav class="sdb_holder">
-              <ul>
-                <li><a href="videos/disneyTour.mp4" class = "rooms">광개토대왕 방</a></li>        
-                <li><a href="videos/test.mp4" class = "rooms">세종대왕 방</a></li>
+              <ul>                
+                <% if(fileList.data){ %>                  
+                  <% for(let i = 0; i < fileList.data.length; i++) { %>
+                    <li><a href= "<%= fileList.data[i] %>" class = "rooms"><%= fileList.data[i]  %></a></li>        
+                  <% } %>
+                <% } %>
               </ul>
             </nav>
           </div>
@@ -93,24 +141,44 @@
           <!--본 문-->
           <div class="content three_quarter">
             <select name="" id="select" class = "">            
-                  <option value="#">테레사 유치원</option>            
-            </select>  
-          
+              <% gardens.forEach((garden) => { %>                
+                <option value="<%= garden.gardencode %>"><%= garden.Garden.gardenname %></option>
+              <% }) %>
+            </select>            
             <div class="containerBox">        
                 <div class="videoBox">
                     <span id = "rate">배속 : x<span id = "value">1.7배</span></span>                    
-                    <video id = "video1" src="videos/disneyTour.mp4" controls></video>
-                    <img src="http://211.230.118.72/stream.jpeg" alt="">
+                    <video id = "video1" src="<%= url + '/videos/2021/06/09/' + fileList.data[0] %>" controls></video>
+                    
                    
                     <div class="icons">
                         <i class="fas fa-chevron-circle-left icon" id = "slow"></i>
                         <i class="fas fa-chevron-circle-right icon" id = "fast"></i>                
                     </div>                        
                 </div>
-                <span class="datepicker-toggle">
-                    <span class="datepicker-toggle-button"></span>
-                    <input type="date" class="datepicker-input">
-                </span>      
+                <div class="contain">
+                  <div class="clock">
+                    <div class="clockHead">시간 선택</div>
+                    <hr>
+                    <div class="date">
+                      <i class="fas fa-chevron-up up"></i>
+                      <i class="fas fa-chevron-up middle up"></i>
+                      <i class="fas fa-chevron-up up"></i>
+                      <br>
+                      <div class="time" id = "hour">12</div><span class = "colon">:</span>
+                      <div class="time" id = "minute">30</div><span class = "colon">:</span>
+                      <div class="time" id = "second">38</div>
+                      <br>
+                      <i class="fas fa-chevron-down down"></i>
+                      <i class="fas fa-chevron-down middle down"></i>
+                      <i class="fas fa-chevron-down down"></i>
+                    </div>
+                  </div>
+                  <div class="button">
+                    <button id = "timeButton">적용</button>
+                  </div>
+                </div>  
+                 
             </div>   
           </div>
           <div class="clear"></div>
@@ -169,10 +237,114 @@
             e.preventDefault();
             // address = e.target.href;
             // address = address.replace('/', '');
-            video1.src = e.target.href; 
-            console.log(address);
+            video1.src = e.target.href;             
           })
       }
+
+      let upIcon = document.getElementsByClassName('up');
+    let downIcon = document.getElementsByClassName('down');
+    let hour = document.querySelector('#hour');
+    let minute = document.querySelector('#minute');
+    let second = document.querySelector('#second');
+
+
+    upIcon[0].addEventListener('click', (e) => {
+      if(hour.innerHTML == 23){
+        hour.innerHTML = 0;
+      }else{
+        hour.innerHTML = (hour.innerHTML * 1) + 1;
+      }
+    })
+
+    upIcon[1].addEventListener('click', (e) => {
+      if(minute.innerHTML == 59){
+        minute.innerHTML = 0;
+      }else{
+        minute.innerHTML = (minute.innerHTML * 1) + 1;
+      }
+    })
+
+    upIcon[2].addEventListener('click', (e) => {
+      if(second.innerHTML == 59){
+        second.innerHTML = 0;
+      }else{
+        second.innerHTML = (second.innerHTML * 1) + 1;
+      }
+    })
+
+    downIcon[0].addEventListener('click', (e) => {
+      if(hour.innerHTML == 0){
+        hour.innerHTML = 23;
+      }else{
+        hour.innerHTML = (hour.innerHTML * 1) - 1;
+      }
+    })
+
+    downIcon[1].addEventListener('click', (e) => {
+      if(minute.innerHTML == 0){
+        minute.innerHTML = 59;
+      }else{
+        minute.innerHTML = (minute.innerHTML * 1) - 1;
+      }
+    })
+
+    downIcon[2].addEventListener('click', (e) => {
+      if(second.innerHTML == 0){
+        second.innerHTML = 59;
+      }else{
+        second.innerHTML = (second.innerHTML * 1) - 1;
+      }
+    })
+
+    const cctvs = document.getElementsByClassName('rooms');
+    const video = document.getElementById('video1');
+    
+    for(let i = 0; i < cctvs.length; i++){
+      cctvs[i].addEventListener('click', (e) => {
+        e.preventDefault();             
+        let index = e.target.href.lastIndexOf('/');
+        let fileName = e.target.href.substring(index+1, e.target.href.length);                        
+        video.src = `<%= url %>` + '/videos/2021/06/09/' + fileName;                
+      })
+    }
+    let files = [];
+    let fileName = [];
+    if(roomsTag){
+      for(let i =0; i < roomsTag.length; i++){        
+        fileName = roomsTag[i].innerHTML.split('_');
+        fileName[1] = fileName[1].substring(0, fileName[1].length-4);
+        fileName[0] = fileName[0].substring(0, 4) + '-' + fileName[0].substring(4, 6) + '-' + fileName[0].substring(6, 8);
+        files.push(fileName[0] + " " +  fileName[1]);        
+      }
+          
+    }
+
+    const timeButton = document.getElementById('timeButton');
+    timeButton.addEventListener('click', (e) => {
+      
+      // let index = e.target.href.lastIndexOf('/');
+      // let fileName = e.target.href.substring(index+1, e.target.href.length);                      
+      let time = fileName[0] + ' ' + hour.innerHTML + ':' + minute.innerHTML + ':' + second.innerHTML;                    
+      let times = [];
+      let maxFile = {};
+      files.forEach((file, index) => { 
+        if((new Date(time) - new Date(file)) >= 0){          
+          maxFile.fileName = file;
+          maxFile.index = index;
+          maxFile.time = (new Date(time) - new Date(file));
+        }
+      })             
+      playFile(maxFile.index, roomsTag, maxFile);      
+    })
+
+    function playFile(index, roomsTag, maxFile){      
+      let roomsIndex = roomsTag[index].href.lastIndexOf('/');
+      let fileName = roomsTag[index].href.substring(roomsIndex+1, roomsTag[index].href.length);                        
+      video.src = `<%= url %>` + '/videos/2021/06/09/' + fileName;  
+      video.currentTime = maxFile.time / 1000;  
+      video.play()   ;
+    }
+
   </script>
 </body>
 </html>
