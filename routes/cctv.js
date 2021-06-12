@@ -30,6 +30,15 @@ const alert = (comment, back = false, redirect = null) => {
   return alert;
 }
 
+function getToday(){
+  var date = new Date();
+  var year = date.getFullYear();
+  var month = ("0" + (1 + date.getMonth())).slice(-2);
+  var day = ("0" + date.getDate()).slice(-2);
+
+  return year + "-" + month + "-" + day;
+}
+
 //session 유지를 위한 > passport module
 router.use((req,res,next)=>{
   res.locals.user = req.user;
@@ -51,35 +60,31 @@ router.get('/', isLoggedIn, async(req, res) => {
             }
 
   });
-  let domains = [];
-  console.log(typeof parentApprove)     
-  if(parentApprove){    
+  let domains = [];  
+  let fileList =  null;
+  let url = null;
+  if(parentApprove){        
     for(let i =0; i < parentApprove.length; i++){
-      let domain = await Domain.findOne({
+      let domain = await Domain.findOne({        
         where : {
           gardencode : parentApprove[i].gardencode
         }
-      })
-      console.log(domain);
+      })      
       if(domain) domains.push({ip : domain.ip, port : domain.port, gardencode : domain.gardencode})
     }    
     if(domains.length > 0){      
-      const url = domains[0].ip + ':' + domains[0].port;
-      const today = new Date();
-      const date = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
-      console.log(`http://${url}`);
-      console.log(date);
-      const result = axios.post(`http://${url}`, {
-        params : {date : date}
-      })
-      console.log(result);      
-    }
-    res.render('cctv/cctv', {domain : domains[0]});
-    // const domain = await Domain.findOne({
-    //   where : {
-    //     gardencode : parentApprove
-    //   }
-    // })
+      url = 'http://' + domains[0].ip + ':' + domains[0].port;
+      console.log(url);
+      const today = getToday();
+      console.log(`${url}/cctv`);      
+      fileList = await axios.post(`${url}/cctv`, {
+        date : today,
+      })      
+      console.log(fileList.data);
+      
+    }    
+    res.render('cctv/cctv', {url : url, fileList : fileList, gardens : parentApprove});
+
   }else{
     res.send(alert('어린이집/유치원 등록 해주시길 바랍니다.', true));
   }   
