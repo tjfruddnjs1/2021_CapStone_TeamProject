@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>  
+  
+  <title>Document</title>
+  <style>
+video{
+        width : 700px;     
+    }
+    
+    .icons{     
+        width : 700px;   
+        text-align: center;
+    }
+    .icon{                
+        font-size : 24px;        
+        margin : 0 30px;
+        margin-top : 20px;
+        cursor : pointer;
+    }
+    #rate{
+        display : none;
+        position : absolute;
+        color : yellow;
+        font-size : 16px;
+        font-weight : bold;
+        padding : 5px 10px;
+        right : 33%;
+        transition: 0.3s;
+    }
+    select{
+       display : inline;              
+       padding : 10px 0;
+       outline : none;
+       width : 300px;
+       border : none;
+       border-bottom : 1px solid #0000003b;
+       margin-right : 20px;
+       margin-bottom : 20px;
+       cursor : pointer;
+       font-size : 20px;
+       font-weight : bold;
+   }
+   .box{
+       text-align: center;
+   }
+   .gardens{            
+       margin : 0 auto;
+       width : 700px;
+       text-align: left;       
+       
+   }
+   
+   .row3{       
+    background-color: #f8f8f8;    
+  }
+  .container{
+    padding : 6%;
+    min-width : 80%;
+    background-color : white;    
+  }  
+  .video{
+      border : 1px solid black;
+      width : 700px;
+      height : 500px;
+  }
+  </style>
+</head>
+<body id = "top">
+    <div
+      class="bgded overlay"
+      style="background-image: url('/images/child.jpg')"
+    >
+      <%- include('../partials/nav') %>
+
+      <div id="breadcrumb" class="hoc clear">
+        <h6 class="heading" style="font-family: NotoSansKR-Regular;">아이 CAM</h6>
+        <br />
+        <ul>
+          <li><a href="#">아이 CAM</a></li>
+          <li><a href="cctv/realtime">실시간 영상</a></li>          
+        </ul>
+      </div>
+    </div>
+    <!-- End Top Background Image Wrapper -->
+    <div class="wrapper row3">
+        <main class="hoc container clear">
+          <div class="box">
+              <div class="gardens">
+                
+                    <select name="" id="select" class = "">            
+                        <% gardens.forEach((garden) => { %>                
+                          <option value="<%= garden.gardencode %>"><%= garden.Garden.gardenname %></option>
+                        <% }) %>
+                      </select>               
+                
+                
+              </div>
+            
+            <div class="realTime">                                     
+                 <img src="<%= url  %>" alt="" class = "video">
+            </div>   
+          </div>
+          
+            
+          
+          <div class="clear"></div>
+        </main>
+      </div>
+
+    
+    
+  
+  
+  
+</body>
+</html>
