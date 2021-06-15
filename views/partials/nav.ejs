@@ -39,7 +39,13 @@
       <ul class="clear">
         <li><a href="/garden/index">키즈가든 검색</a></li>
         <li><a href="/register">키즈가든 등록</a></li>
-        <li><a href="/cctv">아이 CAM</a></li>
+        <li><a class = "drop">아이 CAM</a>
+          <ul>
+            <li><a href="/realtime">실시간 영상</a></li>
+            <li><a href="/cctv">녹화 영상</a></li>
+          </ul>
+          
+        </li>
         <li><a href="#">이벤트</a></li>
         <li><a href="/kidstalk/index">키즈맘TALK</a></li>
         <% if(!(user && user.id)) { %>

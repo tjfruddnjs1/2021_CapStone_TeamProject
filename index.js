@@ -19,6 +19,7 @@ const passportConfig = require('./passport');
 
 const gardenManageInfo = require('./routes/gardenManageInfo');
 const cctvRouter = require('./routes/cctv');
+const realTimeRouter = require('./routes/realtime');
 
 const app = express();
 
@@ -64,6 +65,7 @@ app.use('/inputdata', inputdata);
 app.use('/register', RegisterRouter);
 app.use('/mypage/gardenManage/info', gardenManageInfo);
 app.use('/cctv', cctvRouter);
+app.use('/realtime', realTimeRouter);
 
 
 app.get('/', async(req, res, next) => {
