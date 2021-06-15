@@ -129,6 +129,15 @@
 전체적인 디자인 수정(공통) | 글씨체, 배너, background color 층 | `구현 완료`
 `추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
 
+- ICAM : 현호 , 경원
+
+기능명 | 주요 키워드 | 구현 상태
+-------| ------- | -------
+라즈베리파이 영상 재생 | 포트포워딩, rasp-streaming/recording | `구현완료`
+영상 날짜별 list 출력/재생 | get(웹페이지 서버),post(라즈베리파이 서버) | `구현완료`
+영상 시간별 재생 | get(웹페이지 서버),post(라즈베리파이 서버) | `구현완료`
+`추가 개선사항 1`| `추가 시 업데이트` | `구현 중`
+
 - 관리자 페이지 : 경원
 
 기능명 | 주요 키워드 | 구현 상태
@@ -218,6 +227,11 @@ IP 및 port 번호 등록 | CREATE, SELECT, UPDATE | `구현 완료`
 <img src="https://user-images.githubusercontent.com/57825856/113578946-9244b280-965e-11eb-957f-76fcc8689d03.png" style = "width : 49%; float : left; margin-top : 25px">
 
 <img src="https://user-images.githubusercontent.com/57825856/113578587-fe72e680-965d-11eb-82fa-726156ed2751.png" style = "width : 50%;">
+
+> ICAM (녹화 영상 출력 페이지)
+<br>
+<img src="https://user-images.githubusercontent.com/41010744/122136850-4f813100-ce7e-11eb-96a0-1fef32652677.png">
+<br>
 
 
 > 관리자 페이지 (가든 승인)
