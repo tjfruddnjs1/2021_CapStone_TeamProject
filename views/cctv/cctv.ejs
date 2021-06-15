@@ -5,14 +5,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>  
   
-  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script language="javascript" type="text/javascript">
+    var today = new Date(); // 오늘 날짜//지신의 컴퓨터를 기준으로
+    //today 에 Date객체를 넣어줌 //ex)5일  
+    function prevCalendar() {
+      today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+     buildCalendar(); // 현재 달 
+    }
+    
+    function nextCalendar() {
+      today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+      buildCalendar();
+    }
+
+    function buildCalendar() {// 현재 달fur
+     var nMonth = new Date(today.getFullYear(), today.getMonth(), 1);  // 이번 달의 첫째 날
+     var lastDate = new Date(today.getFullYear(), today.getMonth()+1, 0); // 이번 달의 마지막 날
+     var tblCalendar = document.getElementById("calendar");     // 테이블 달력을 만들 테이블
+     var tblCalendarYM = document.getElementById("calendarYM");    // yyyy년 m월 출력할 곳
+     tblCalendarYM.innerHTML = today.getFullYear() + "년 " + (today.getMonth() + 1) + "월";  // yyyy년 m월 출력
+    // 기존 테이블에 뿌려진 줄, 칸 삭제
+    while (tblCalendar.rows.length > 2) {
+      tblCalendar.deleteRow(tblCalendar.rows.length - 1);
+    }
+
+    var row = null;
+    row = tblCalendar.insertRow();
+    var cnt = 0;
+    
+    // 1일이 시작되는 칸을 맞추어 줌
+    for (i=0; i<nMonth.getDay(); i++) {
+      cell = row.insertCell();
+      cnt = cnt + 1;
+    }
+  
+    for (i=1; i<=lastDate.getDate(); i++) { 
+      cell = row.insertCell();
+
+      let month = (today.getMonth() + 1).toString();
+      if(month.length == 1) month = '0' + month.toString();
+
+      let day = i.toString();
+      if(day.length == 1) day = '0' + day.toString();
+
+      cell.className = today.getFullYear() + '-' + month + '-' + day;
+
+      let input = document.createElement('input');
+      let form = document.createElement('form');
+      form.method = 'get';
+      form.action="/cctv/";
+      input.type = 'submit';
+      input.id = 'tdCell';
+      input.value = cell.className;
+      input.name = cell.className;
+      input.value = i;
+      cell.append(form);
+      form.append(input);
+
+      console.log(cell);
+
+      cnt = cnt + 1;
+      if (cnt%7 == 0)// 1주일이 7일 이므로
+          row = calendar.insertRow();// 줄 추가
+      }
+      
+    }
+    </script>
   <style>
     video{
         width : 700px;     
     }
-    
+
     .icons{     
         width : 700px;   
         text-align: center;
@@ -23,6 +91,13 @@
         margin-top : 20px;
         cursor : pointer;
     }
+
+    #tdCell{
+      cursor : pointer;
+      border : none;
+      background-color: #FBFBFB;
+    }
+
     #rate{
         display : none;
         position : absolute;
@@ -57,17 +132,15 @@
   width: 18px;
   height: 19px;  
 }
-.contain{
-      width : 270px;
+    .contain{
+      display : inline-block;
+      margin-top : 5%;
+      width : 90%;
     }
-    .clock{
-      border-radius : 5px;
-      padding : 5px 10px;
-      border : 1px solid black;
-      width : 100%;
-    }
+
     .date{
       text-align : center;
+      margin-bottom: 7%;
     }
     .time{
       display : inline-block;
@@ -88,19 +161,81 @@
     .middle{
       margin : 0 50px;
     }
-    .clockHead{
+    .clockHead, .calHead{
       font-weight : bold;
       font-size : 20px;
     }
-    .button{
-      text-align :center;
 
-    }
     button{
-      background-color : #5172DF;
-      color : #fff;
-      border : 1px solid white;
+      width: 25%;
+      color: white;
+      background-color: #5172df;
+      border: 1px solid #8080805c;
+      padding-left : 3%;
+      padding-right : 3%;
+      margin-top : 3%;
+      font-weight: bold;
+      float : right;
+      text-align: center;
+      cursor : pointer;
+      font-family: NotoSansKR-Regular;
+    }
+
+    .timeButton{
+      margin-top : 50%;
     } 
+
+    .container{
+    padding : 50px;
+    min-width:  70%;
+    background-color: white;
+  }
+
+  .row3{       
+    background-color: #f8f8f8;    
+  }
+
+  #calendar{
+    border : none;
+    width : 70%;
+    margin-top : 4%;
+    display : inline-block;
+    cursor: pointer;
+    margin-left : 8%;
+  }
+
+  td {
+    width:430px;
+    height: 30px;
+    text-align: center;
+    font-size: 15px;
+    font-family:  NotoSansKR-Regular;
+    border : none;
+  }
+
+  .info {
+      font-weight: bold;
+      font-size: 14px;
+      color: red;
+      float : right;
+    }
+
+  video{
+        margin-top : 2%;
+        width : 90%;    
+    }
+
+  .clock{
+    margin-top : 2%;
+    float : right;
+    width : 50%;
+  }
+
+  #cal{
+    margin-top: 2%;
+    float : left;
+    width : 50%;
+  }
 
   </style>
 </head>
@@ -112,12 +247,11 @@
       <%- include('../partials/nav') %>
 
       <div id="breadcrumb" class="hoc clear">
-        <h6 class="heading" style="font-family: NotoSansKR-Regular;">가든 정보 관리</h6>
+        <h6 class="heading" style="font-family: NotoSansKR-Regular;">아이CAM</h6>
         <br />
         <ul>
-          <li><a href="/index">메인</a></li>
-          <li><a href="#">마이 페이지</a></li>
-          <li><a href="/mypage/gardenManage/info">가든 정보 관리</a></li>
+          <li><a href="/">메인</a></li>
+          <li><a href="/cctv">아이CAM</a></li>
         </ul>
       </div>
     </div>
@@ -126,12 +260,12 @@
         <main class="hoc container clear">
           <!--네비게이션-->
           <div class="sidebar one_quarter first">
-              <div id = "head">카메라</div>
-            <nav class="sdb_holder">
-              <ul>                
+              <div id = "head">CCTV 영상 List</div>
+            <nav class="sdb_holder" style="margin-top : 10%;">
+              <ul class="list-group" >                
                 <% if(fileList.data){ %>                  
                   <% for(let i = 0; i < fileList.data.length; i++) { %>
-                    <li><a href= "<%= fileList.data[i] %>" class = "rooms"><%= fileList.data[i]  %></a></li>        
+                    <li class="list-group-item d-flex" style="font-size : 17px; font-family: NotoSansKR-Regular; border:none;"><a href= "<%= fileList.data[i] %>" class = "rooms"><%= fileList.data[i]  %></a></li>        
                   <% } %>
                 <% } %>
               </ul>
@@ -141,25 +275,43 @@
           <!--본 문-->
           <div class="content three_quarter">
             <select name="" id="select" class = "">            
-              <% gardens.forEach((garden) => { %>                
+              <% gardens.forEach((garden) => { %>                 
                 <option value="<%= garden.gardencode %>"><%= garden.Garden.gardenname %></option>
               <% }) %>
             </select>            
             <div class="containerBox">        
                 <div class="videoBox">
                     <span id = "rate">배속 : x<span id = "value">1.7배</span></span>                    
-                    <video id = "video1" src="<%= url + '/videos/2021/06/09/' + fileList.data[0] %>" controls></video>
-                    
-                   
-                    <div class="icons">
-                        <i class="fas fa-chevron-circle-left icon" id = "slow"></i>
-                        <i class="fas fa-chevron-circle-right icon" id = "fast"></i>                
-                    </div>                        
+                    <video id = "video1"  src="<%= url + '/videos/' + selectDate + '/' + fileList.data[0] %>" controls></video>                       
                 </div>
                 <div class="contain">
-                  <div class="clock">
-                    <div class="clockHead">시간 선택</div>
+                  <div id="cal">
+                    <div class="clockHead">날짜 선택</div>
                     <hr>
+                    <table id="calendar" boarder="1" align="center">
+                      <tr>
+                          <td><label onclick="prevCalendar()"><</label></td>
+                            <td colspan="5" align="center" id="calendarYM">yyyy년 m월</td>
+                            <td><label onclick="nextCalendar()">>
+                                
+                            </label></td>
+                        </tr>
+                        
+                        <tr>
+                          <td align="center">일</td>
+                          <td align="center">월</td>
+                          <td align="center">화</td>
+                          <td align="center">수</td>
+                          <td align="center">목</td>
+                          <td align="center">금</td>
+                          <td align="center">토</td>
+                        </tr>
+                      </table>
+                  </div>
+
+                  <div class="clock">
+                    <div class="clockHead">시간 선택<label class="info">* 선택 후 적용 버튼을 눌러주세요</label></div>
+                    <hr style="margin-bottom : 10%;">
                     <div class="date">
                       <i class="fas fa-chevron-up up"></i>
                       <i class="fas fa-chevron-up middle up"></i>
@@ -175,7 +327,7 @@
                     </div>
                   </div>
                   <div class="button">
-                    <button id = "timeButton">적용</button>
+                    <button id = "timeButton" class="btn btn-primary">적용</button>
                   </div>
                 </div>  
                  
@@ -184,64 +336,24 @@
           <div class="clear"></div>
         </main>
       </div>
-
-    
-    
-  
-  
-  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script>
+    buildCalendar();
+  </script>
   <script>
       let video1 = document.querySelector('#video1');
       let rateTag = document.querySelector('#rate');
       let rateValueTag = document.querySelector('#value');
       let roomsTag = document.getElementsByClassName('rooms');
       let velocity = 1;
-      let address;
-
-      let fastIcon = document.querySelector('#fast');
-      let slowIcon = document.querySelector('#slow');
-      fastIcon.addEventListener('click', () => {                  
-          if(velocity == 16){
-            showEffect();
-            return;
-          };        
-          velocity *=2;
-          showEffect();
-          video1.playbackRate = velocity;                    
-          setTimeout(disappearEffect, 2000)
-          
-      })
-      slowIcon.addEventListener('click', () => {                    
-          if(velocity == 0.125){
-            showEffect();
-            return;
-          };          
-          velocity /= 2;          
-          showEffect();
-          setTimeout(disappearEffect, 2000)
-          video1.playbackRate = velocity;
-      })
-      const playRate = (tagName, value) => {                    
-          tagName.playBackRate = value;
-      }
-      const disappearEffect = () => {        
-          rateTag.style.display = 'none';          
-      }
-      const showEffect = () => {
-        rateValueTag.innerHTML = velocity;
-        rateTag.style.display = 'inline';          
-      }
 
       for(let i =0; i < roomsTag.length; i++){
           roomsTag[i].addEventListener('click', (e) => {
             e.preventDefault();
-            // address = e.target.href;
-            // address = address.replace('/', '');
             video1.src = e.target.href;             
           })
       }
 
-      let upIcon = document.getElementsByClassName('up');
+    let upIcon = document.getElementsByClassName('up');
     let downIcon = document.getElementsByClassName('down');
     let hour = document.querySelector('#hour');
     let minute = document.querySelector('#minute');
@@ -304,7 +416,7 @@
         e.preventDefault();             
         let index = e.target.href.lastIndexOf('/');
         let fileName = e.target.href.substring(index+1, e.target.href.length);                        
-        video.src = `<%= url %>` + '/videos/2021/06/09/' + fileName;                
+        video.src = `<%= url %>` + '/videos/' + `<%= selectDate %>/` + fileName;                
       })
     }
     let files = [];
@@ -320,10 +432,7 @@
     }
 
     const timeButton = document.getElementById('timeButton');
-    timeButton.addEventListener('click', (e) => {
-      
-      // let index = e.target.href.lastIndexOf('/');
-      // let fileName = e.target.href.substring(index+1, e.target.href.length);                      
+    timeButton.addEventListener('click', (e) => {                     
       let time = fileName[0] + ' ' + hour.innerHTML + ':' + minute.innerHTML + ':' + second.innerHTML;                    
       let times = [];
       let maxFile = {};
@@ -340,7 +449,7 @@
     function playFile(index, roomsTag, maxFile){      
       let roomsIndex = roomsTag[index].href.lastIndexOf('/');
       let fileName = roomsTag[index].href.substring(roomsIndex+1, roomsTag[index].href.length);                        
-      video.src = `<%= url %>` + '/videos/2021/06/09/' + fileName;  
+      video.src = `<%= url %>` + '/videos/' + `<%= selectDate %>/` + fileName;  
       video.currentTime = maxFile.time / 1000;  
       video.play()   ;
     }

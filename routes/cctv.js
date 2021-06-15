@@ -2,21 +2,14 @@ const express = require('express');
 const dotenv = require('dotenv');
 const axios = require('axios');
 dotenv.config();
+
 const router = express.Router();
 
-const apiRouter = require('./api');
 const Garden = require('../models/garden');
-const SggCode = require('../models/sggcode');
-const SidoCode = require('../models/sidocode');
-const User = require('../models/user');
-const Review = require('../models/review');
 const Request = require('../models/request');
 const Domain = require('../models/domain');
 
-const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
-
-const sequelize = require('sequelize');
-const Op = sequelize.Op;
+const { isLoggedIn } = require('./middlewares');
 
 const alert = (comment, back = false, redirect = null) => {
   let alert = `<script>alert("${comment}")</script>`;
@@ -63,6 +56,9 @@ router.get('/', isLoggedIn, async(req, res) => {
   let domains = [];  
   let fileList =  null;
   let url = null;
+  console.log(isNaN(Object.keys(req.query)[0]));
+  let selectDate = Object.keys(req.query).length == 0 ?getToday():Object.keys(req.query)[0];
+
   if(parentApprove){        
     for(let i =0; i < parentApprove.length; i++){
       let domain = await Domain.findOne({        
@@ -72,18 +68,18 @@ router.get('/', isLoggedIn, async(req, res) => {
       })      
       if(domain) domains.push({ip : domain.ip, port : domain.port, gardencode : domain.gardencode})
     }    
-    if(domains.length > 0){      
-      url = 'http://' + domains[0].ip + ':' + domains[0].port;
-      console.log(url);
-      const today = getToday();
-      console.log(`${url}/cctv`);      
-      fileList = await axios.post(`${url}/cctv`, {
-        date : today,
-      })      
-      console.log(fileList.data);
+    if(domains.length > 0){
+      url = 'http://' + domains[0].ip + ':' + domains[0].port ;
       
+      console.log(selectDate);
+      fileList = await axios.post(`${url}/cctv`, {
+        date : selectDate,
+      })
+      
+      console.log(fileList);
+      selectDate = selectDate.replace(/\D/g, '/');  
     }    
-    res.render('cctv/cctv', {url : url, fileList : fileList, gardens : parentApprove});
+    res.render('cctv/cctv', {url : url, fileList : fileList, gardens : parentApprove, selectDate : selectDate});
 
   }else{
     res.send(alert('어린이집/유치원 등록 해주시길 바랍니다.', true));
@@ -92,8 +88,5 @@ router.get('/', isLoggedIn, async(req, res) => {
     console.error(err);
   }
 });
-
-      
-
 
 module.exports = router;
